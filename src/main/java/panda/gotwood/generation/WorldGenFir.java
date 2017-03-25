@@ -3,6 +3,7 @@ package panda.gotwood.generation;
 import java.util.Random;
 
 import panda.gotwood.blocks.BlockWoodLeaves;
+import panda.gotwood.registry.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockOldLeaf;

@@ -34,7 +34,7 @@ public class ConsumedByFireListener implements IWorldEventListener {
 					.withProperty(SpecialFire.WEST, currentState.getValue(BlockFire.WEST))
 					.withProperty(SpecialFire.UPPER, currentState.getValue(BlockFire.UPPER));
 			
-			//worldIn.setBlockState(pos, newStateBlock, flags);
+			worldIn.setBlockState(pos, newStateBlock, flags);
 			
 		}
 	}

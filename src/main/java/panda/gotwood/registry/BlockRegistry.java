@@ -1,7 +1,9 @@
 package panda.gotwood.registry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import panda.gotwood.blocks.BlockDoubleSlab;
 import panda.gotwood.blocks.BlockHalfSlab;
@@ -194,5 +196,10 @@ public class BlockRegistry {
 		
 
 		return list;
+	}
+	static final Map<String, Block> blockRegistry = new HashMap<>();
+	
+	public static Block getBlockByName(String name) {
+		return blockRegistry.get(name);
 	}
 }

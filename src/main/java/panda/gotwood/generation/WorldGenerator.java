@@ -48,7 +48,7 @@ public class WorldGenerator implements IWorldGenerator{
 			WorldGenAbstractTree yew = new WorldGenYew();
 
 			// get the biome
-			Biome biome = world.getBiomeGenForCoords(new BlockPos(chunkX*16, 64, chunkZ*16));
+			Biome biome = world.getBiome(new BlockPos(chunkX*16, 64, chunkZ*16));
 
 			if(biome instanceof BiomeDesert)
 			{

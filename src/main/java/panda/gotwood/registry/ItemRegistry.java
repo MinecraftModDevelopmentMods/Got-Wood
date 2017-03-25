@@ -1,7 +1,9 @@
 package panda.gotwood.registry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import panda.gotwood.blocks.BlockPlanks;
 import panda.gotwood.items.ItemAsh;
@@ -9,6 +11,7 @@ import panda.gotwood.items.ItemSeed;
 import panda.gotwood.items.itemblocks.ItemWoodDoor;
 import panda.gotwood.items.itemblocks.ItemWoodSlab;
 import panda.gotwood.util.WoodMaterials;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class ItemRegistry {
@@ -98,5 +101,11 @@ public class ItemRegistry {
 
 
 		return list;
+	}
+	
+static final Map<String,Item> itemRegistry = new HashMap<>();
+	
+	public static Item getItemByName(String name) {
+		return itemRegistry.get(name);
 	}
 }

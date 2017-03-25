@@ -69,8 +69,12 @@ public final class MasterRegistrar {
 			Item item = null;
 			if (k instanceof Block) {
 				item = Item.getItemFromBlock((Block) k);
+				BlockRegistry.blockRegistry.put(item.getUnlocalizedName().substring(13, item.getUnlocalizedName().length()), (Block) k);
+				System.out.println(item.getUnlocalizedName().substring(13, item.getUnlocalizedName().length()));
 			} else if (k instanceof Item) {
 				item = (Item) k;
+				ItemRegistry.itemRegistry.put(item.getUnlocalizedName().substring(13, item.getUnlocalizedName().length()), item);
+				System.out.println(item.getUnlocalizedName().substring(13, item.getUnlocalizedName().length()));
 			}
 
 			if (item != null ) {
@@ -88,16 +92,15 @@ public final class MasterRegistrar {
 	public static void callRegistry(FMLPreInitializationEvent e) {
 		ConfigurationHandler.init(e);
 		
-		//MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
 		MinecraftForge.EVENT_BUS.register(new FireHandler());
 
 		WoodMaterials.init();
-		//RecipeRegistry.init();
-		
 		
 		register(e, BlockRegistry.getBlockList());
 		register(e, ItemRegistry.getItemList());
 		
+		RecipeRegistry.init();
 		
 		
 		

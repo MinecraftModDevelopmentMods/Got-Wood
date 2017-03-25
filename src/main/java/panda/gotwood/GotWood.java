@@ -34,7 +34,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class GotWood
 {
 	public static final String MODID = "gotwood";
-	public static final String VERSION = "0.10.0";
+	public static final String VERSION = "0.12.0";
 
 	public static final String NAME = "Got Wood?";
 	@SidedProxy(serverSide = "panda.gotwood.proxy.ProxyServer", clientSide = "panda.gotwood.proxy.ProxyClient")
@@ -51,7 +51,7 @@ public class GotWood
 	@EventHandler
 	public void init(FMLInitializationEvent event) throws ExistingSubstitutionException
 	{ 
-		//GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
+		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 		((SpecialFire)BlockRegistry.specialfire).init();
 	}  
 	
