@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "gotwood:yew_log" },
+        "axis=z":   { "model": "gotwood:yew_log", "x": 90 },
+        "axis=x":   { "model": "gotwood:yew_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "gotwood:yew_bark" }
+    }
+}

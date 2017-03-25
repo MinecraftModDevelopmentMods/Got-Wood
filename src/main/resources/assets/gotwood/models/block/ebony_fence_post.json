@@ -1,0 +1,6 @@
+{
+    "parent": "block/fence_post",
+    "textures": {
+        "texture": "gotwood:blocks/planks_ebony"
+    }
+}

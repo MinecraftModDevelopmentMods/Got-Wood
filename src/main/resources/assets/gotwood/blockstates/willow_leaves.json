@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "gotwood:willow_leaves" }
+,"check_decay=true,decayable=false": { "model": "gotwood:willow_leaves" },"check_decay=true,decayable=true": { "model": "gotwood:willow_leaves" },"check_decay=false,decayable=false": { "model": "gotwood:willow_leaves" },"check_decay=false,decayable=true": { "model": "gotwood:willow_leaves" }    }
+}

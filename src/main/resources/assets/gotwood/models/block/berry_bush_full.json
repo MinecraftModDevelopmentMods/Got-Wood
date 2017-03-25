@@ -1,0 +1,34 @@
+{
+"__comment": "Designed by Cleverpanda with BDcraft Cubik PRO 0.76 Beta - http://bdcraft.net",
+"ambientocclusion": false,
+"textures": {
+    "berrybushfull_opaque": "blocks/berrybushfull_opaque",
+    "log_apple": "blocks/log_apple"
+},
+"elements": [ 
+{
+    "from": [ 6, 0, 6 ],
+    "to": [ 10, 2, 10 ],
+    "faces": {
+        "down":  { "uv": [ 6, 10, 10, 6 ], "texture": "#log_apple" },
+        "up":    { "uv": [ 6, 6, 10, 10 ], "texture": "#log_apple" },
+        "north": { "uv": [ 6, 14, 10, 16 ], "texture": "#log_apple" },
+        "south": { "uv": [ 6, 14, 10, 16 ], "texture": "#log_apple" },
+        "west":  { "uv": [ 6, 14, 10, 16 ], "texture": "#log_apple" },
+        "east":  { "uv": [ 6, 14, 10, 16 ], "texture": "#log_apple" }
+    }
+},
+{
+    "from": [ 2, 2, 2 ],
+    "to": [ 14, 16, 14 ],
+    "faces": {
+        "down":  { "uv": [ 2, 14, 14, 2 ], "texture": "#berrybushfull_opaque" },
+        "up":    { "uv": [ 2, 2, 14, 14 ], "texture": "#berrybushfull_opaque" },
+        "north": { "uv": [ 2, 0, 14, 14 ], "texture": "#berrybushfull_opaque" },
+        "south": { "uv": [ 2, 0, 14, 14 ], "texture": "#berrybushfull_opaque" },
+        "west":  { "uv": [ 2, 0, 14, 14 ], "texture": "#berrybushfull_opaque" },
+        "east":  { "uv": [ 2, 0, 14, 14 ], "texture": "#berrybushfull_opaque" }
+    }
+}
+]
+}

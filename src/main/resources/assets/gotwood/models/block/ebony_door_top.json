@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top",
+    "textures": {
+        "bottom": "gotwood:blocks/door_ebony_lower",
+        "top": "gotwood:blocks/door_ebony_upper"
+    }
+}

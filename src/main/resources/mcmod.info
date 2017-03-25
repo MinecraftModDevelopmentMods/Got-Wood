@@ -1,0 +1,16 @@
+[
+{
+  "modid": "gotwood",
+  "name": "Got Wood?",
+  "description": "<Clever Tagline Here>",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Cleverpanda714, Knoxhack"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

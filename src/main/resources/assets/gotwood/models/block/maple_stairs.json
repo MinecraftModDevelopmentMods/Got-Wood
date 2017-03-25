@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "gotwood:blocks/planks_maple",
+        "top": "gotwood:blocks/planks_maple",
+        "side": "gotwood:blocks/planks_maple"
+    }
+}

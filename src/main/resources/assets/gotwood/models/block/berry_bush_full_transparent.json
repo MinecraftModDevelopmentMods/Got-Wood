@@ -1,0 +1,59 @@
+{
+"__comment": "Designed by Cleverpanda with BDcraft Cubik PRO 0.76 Beta - http://bdcraft.net",
+"textures": {
+    "texture": "blocks/berrybushfull",
+    "log_apple": "blocks/log_apple",
+    "deadbush": "blocks/deadbush"
+},
+"elements": [ 
+{
+    "from": [ 1, 2, 1 ],
+    "to": [ 15, 16, 15 ],
+    "faces": {
+        "down":  { "uv": [ 1, 15, 15, 1 ], "texture": "#texture" },
+        "up":    { "uv": [ 1, 1, 15, 15 ], "texture": "#texture" },
+        "north": { "uv": [ 1, 0, 15, 14 ], "texture": "#texture" },
+        "south": { "uv": [ 1, 0, 15, 14 ], "texture": "#texture" },
+        "west":  { "uv": [ 1, 0, 15, 14 ], "texture": "#texture" },
+        "east":  { "uv": [ 1, 0, 15, 14 ], "texture": "#texture" }
+    }
+},
+{
+    "from": [ 6, 0, 6 ],
+    "to": [ 10, 2, 10 ],
+    "faces": {
+        "down":  { "uv": [ 5.5, 10, 9.5, 6 ], "texture": "#texture", "cullface": "down" },
+        "north": { "uv": [ 0, 14, 4, 16 ], "texture": "#log_apple" },
+        "south": { "uv": [ 4, 14, 8, 16 ], "texture": "#log_apple" },
+        "west":  { "uv": [ 12, 14, 16, 16 ], "texture": "#log_apple" },
+        "east":  { "uv": [ 8, 14, 12, 16 ], "texture": "#log_apple" }
+    }
+},
+{
+    "from": [ 2, 2, 2 ],
+    "to": [ 2, 14, 19.5 ],
+    "rotation": { "origin": [ 2, 2, 2 ], "axis": "y", "angle": 45 },
+    "faces": {
+        "down":  { "uv": [ 5.5, 15.5, 6.5, 0 ], "texture": "#texture" },
+        "up":    { "uv": [ 5.5, 0, 6.5, 15.5 ], "texture": "#deadbush" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" }
+    }
+},
+{
+    "from": [ 2, 2, 14.3125 ],
+    "to": [ 19.5, 14, 14.375 ],
+    "rotation": { "origin": [ 2, 2, 14.3125 ], "axis": "y", "angle": 45 },
+    "faces": {
+        "down":  { "uv": [ 7.5, 16, 8.5, 0 ], "texture": "#texture" },
+        "up":    { "uv": [ 7.5, 0, 8.5, 16 ], "texture": "#texture" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#deadbush" }
+    }
+}
+]
+}

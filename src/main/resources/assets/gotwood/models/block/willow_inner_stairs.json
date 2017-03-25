@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "gotwood:blocks/planks_willow",
+        "top": "gotwood:blocks/planks_willow",
+        "side": "gotwood:blocks/planks_willow"
+    }
+}

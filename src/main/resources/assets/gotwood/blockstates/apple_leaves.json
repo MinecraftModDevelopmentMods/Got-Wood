@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "gotwood:apple_leaves" }
+,"check_decay=true,decayable=false": { "model": "gotwood:apple_leaves" },"check_decay=true,decayable=true": { "model": "gotwood:apple_leaves" },"check_decay=false,decayable=false": { "model": "gotwood:apple_leaves" },"check_decay=false,decayable=true": { "model": "gotwood:apple_leaves" }    }
+}

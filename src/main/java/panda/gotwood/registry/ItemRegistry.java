@@ -1,0 +1,102 @@
+package panda.gotwood.registry;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import panda.gotwood.blocks.BlockPlanks;
+import panda.gotwood.items.ItemAsh;
+import panda.gotwood.items.ItemSeed;
+import panda.gotwood.items.itemblocks.ItemWoodDoor;
+import panda.gotwood.items.itemblocks.ItemWoodSlab;
+import panda.gotwood.util.WoodMaterials;
+import net.minecraft.item.Item;
+
+public class ItemRegistry {
+	
+	public static final Item apple_door = new ItemWoodDoor(BlockRegistry.apple_door, WoodMaterials.apple);
+	public static final Item maple_door = new ItemWoodDoor(BlockRegistry.maple_door, WoodMaterials.maple);
+	public static final Item pine_door = new ItemWoodDoor(BlockRegistry.pine_door, WoodMaterials.pine);
+	public static final Item willow_door = new ItemWoodDoor(BlockRegistry.willow_door, WoodMaterials.willow);
+	public static final Item yew_door = new ItemWoodDoor(BlockRegistry.yew_door, WoodMaterials.yew);
+	public static final Item ebony_door = new ItemWoodDoor(BlockRegistry.ebony_door, WoodMaterials.ebony);
+	public static final Item fir_door = new ItemWoodDoor(BlockRegistry.fir_door, WoodMaterials.fir);
+	
+	
+	//public static final Item apple_slab = new ItemWoodSlab(WoodMaterials.apple,BlockRegistry.apple_planks,BlockRegistry.apple_slab,BlockRegistry.double_apple_slab);
+	public static final Item apple_seed = new ItemSeed(WoodMaterials.apple);
+	public static final Item maple_seed = new ItemSeed(WoodMaterials.maple);
+	public static final Item pine_seed = new ItemSeed(WoodMaterials.pine);
+	public static final Item willow_seed = new ItemSeed(WoodMaterials.willow);
+	public static final Item yew_seed = new ItemSeed(WoodMaterials.yew);
+	public static final Item ebony_seed = new ItemSeed(WoodMaterials.ebony);
+	public static final Item fir_seed = new ItemSeed(WoodMaterials.fir);
+	
+	public static final Item oak_seed = new ItemSeed(WoodMaterials.oak);
+	public static final Item birch_seed = new ItemSeed(WoodMaterials.birch);
+	public static final Item spruce_seed = new ItemSeed(WoodMaterials.spruce);
+	public static final Item dark_oak_seed = new ItemSeed(WoodMaterials.darkOak);
+	public static final Item jungle_seed = new ItemSeed(WoodMaterials.jungle);
+	public static final Item acacia_seed = new ItemSeed(WoodMaterials.acacia);
+	/*
+	public static final Item maple_slab;
+	public static final Item maple_seed;
+	
+	
+	public static final Item pine_slab;
+	public static final Item pine_seed;
+	
+	
+	public static final Item willow_slab;
+	public static final Item willow_seed;
+	
+	
+	public static final Item yew_slab;
+	public static final Item yew_seed;
+	
+	
+	public static final Item ebony_slab;
+	public static final Item ebony_seed;
+	
+	
+	public static final Item fir_slab;
+	public static final Item fir_seed;
+	
+	
+	
+	
+	*/
+	
+	public static final Item ash = new ItemAsh();
+	
+	
+	public static final List<Item> getItemList() {
+		List<Item> list = new ArrayList<Item>();
+		list.add(apple_seed);
+		list.add(maple_seed);
+		list.add(pine_seed);
+		list.add(willow_seed);
+		list.add(yew_seed);
+		list.add(fir_seed);
+		list.add(ebony_seed);
+		list.add(oak_seed);
+		list.add(birch_seed);
+		list.add(dark_oak_seed);
+		list.add(jungle_seed);
+		list.add(acacia_seed);
+		list.add(spruce_seed);
+		
+		
+		list.add(ash);
+		list.add(apple_door);
+		list.add(maple_door);
+		list.add(pine_door);
+		list.add(willow_door);
+		list.add(yew_door);
+		list.add(fir_door);
+		list.add(ebony_door);
+
+
+
+		return list;
+	}
+}

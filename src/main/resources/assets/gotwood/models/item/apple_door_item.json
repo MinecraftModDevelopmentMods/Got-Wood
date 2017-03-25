@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "bottom": "gotwood:blocks/door_apple_lower",
+        "top": "gotwood:blocks/door_apple_upper"
+    }
+}

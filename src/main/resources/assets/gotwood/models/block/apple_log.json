@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "gotwood:blocks/log_apple_top",
+        "side": "gotwood:blocks/log_apple"
+    }
+}
