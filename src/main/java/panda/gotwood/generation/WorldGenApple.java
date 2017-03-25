@@ -47,7 +47,7 @@ public class WorldGenApple extends WorldGenAbstractTree
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
-        int i = rand.nextInt(3) + this.minTreeHeight;
+        int i = 2+rand.nextInt(1) + this.minTreeHeight;
         boolean flag = true;
 
         if (position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getHeight())

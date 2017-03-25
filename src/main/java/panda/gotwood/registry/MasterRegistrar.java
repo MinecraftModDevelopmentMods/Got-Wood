@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import panda.gotwood.GotWood;
+import panda.gotwood.blocks.BlockWoodDoor;
 import panda.gotwood.blocks.SpecialFire;
 import panda.gotwood.events.BlockBreakHandler;
 import panda.gotwood.events.ConfigurationHandler;
@@ -39,7 +40,7 @@ public final class MasterRegistrar {
 			if (k instanceof Block) {
 				Block block = (Block) k;
 				GameRegistry.register(block);
-				if(!(k instanceof SpecialFire)){
+				if(!(k instanceof SpecialFire)&& !(k instanceof BlockWoodDoor)){
 					((Block) k).setCreativeTab(GotWood.TreeTab);
 				}
 				block.setUnlocalizedName(GotWood.MODID + "." + block.getRegistryName().getResourcePath());
@@ -47,9 +48,9 @@ public final class MasterRegistrar {
 					GameRegistry.register(new ItemBlock(block), block.getRegistryName());
 			} else if (k instanceof Item) {
 				GameRegistry.register((Item) k);
-				if(!(k instanceof ItemWoodDoor)){
+				
 					((Item) k).setCreativeTab(GotWood.TreeTab);
-				}
+				
 				
 				((Item) k).setUnlocalizedName(GotWood.MODID + "." + ((Item) k).getRegistryName().getResourcePath());
 			}

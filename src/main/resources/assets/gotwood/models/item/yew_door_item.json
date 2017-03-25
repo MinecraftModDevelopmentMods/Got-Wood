@@ -1,7 +1,6 @@
 {
-    "parent": "item/door_item",
+    "parent": "item/generated",
     "textures": {
-        "bottom": "gotwood:blocks/door_yew_lower",
-        "top": "gotwood:blocks/door_yew_upper"
+        "layer0": "gotwood:items/door_yew"
     }
 }
