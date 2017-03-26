@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import panda.gotwood.blocks.BlockBambooLog;
 import panda.gotwood.blocks.BlockDoubleSlab;
 import panda.gotwood.blocks.BlockHalfSlab;
 import panda.gotwood.blocks.BlockPlanks;
@@ -113,8 +114,10 @@ public class BlockRegistry {
 	public static final Block fir_fence = new BlockWoodFence(WoodMaterials.fir);
 	
 	
-	public static final Block specialfire = new SpecialFire();;
-	
+	public static final Block specialfire = new SpecialFire();
+	public static final Block bamboo_sapling = new BlockWoodSapling(WoodMaterials.bamboo);
+	public static final Block bamboo_leaves = new BlockWoodLeaves(WoodMaterials.bamboo);
+	public static final Block bamboo_log = new BlockBambooLog(WoodMaterials.bamboo);
 	
 
 	
@@ -128,6 +131,7 @@ public class BlockRegistry {
 		list.add(yew_sapling);
 		list.add(fir_sapling);
 		list.add(ebony_sapling);
+		list.add(bamboo_sapling);
 		
 		list.add(apple_log);
 		list.add(maple_log);
@@ -136,6 +140,7 @@ public class BlockRegistry {
 		list.add(yew_log);
 		list.add(fir_log);
 		list.add(ebony_log);
+		list.add(bamboo_log);
 		
 		list.add(apple_leaves);
 		list.add(maple_leaves);
@@ -144,6 +149,7 @@ public class BlockRegistry {
 		list.add(yew_leaves);
 		list.add(fir_leaves);
 		list.add(ebony_leaves);
+		list.add(bamboo_leaves);
 		
 		list.add(apple_planks);
 		list.add(maple_planks);

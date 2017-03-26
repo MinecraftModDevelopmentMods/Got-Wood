@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import panda.gotwood.generation.WorldGenApple;
+import panda.gotwood.generation.WorldGenBamboo;
 import panda.gotwood.generation.WorldGenEbony;
 import panda.gotwood.generation.WorldGenFir;
 import panda.gotwood.generation.WorldGenMaple;
@@ -153,6 +154,9 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
                 break;
 	        case "pine":
 	        	worldgenerator = new WorldGenPine(true);
+                break;
+	        case "bamboo":
+	        	worldgenerator = new WorldGenBamboo(true);
                 break;
 	            
 	            	

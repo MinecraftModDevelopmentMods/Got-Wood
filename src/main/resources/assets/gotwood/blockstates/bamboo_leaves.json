@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "gotwood:bamboo_leaves" }
+,"check_decay=true,decayable=false": { "model": "gotwood:bamboo_leaves" },"check_decay=true,decayable=true": { "model": "gotwood:bamboo_leaves" },"check_decay=false,decayable=false": { "model": "gotwood:bamboo_leaves" },"check_decay=false,decayable=true": { "model": "gotwood:bamboo_leaves" }    }
+}
