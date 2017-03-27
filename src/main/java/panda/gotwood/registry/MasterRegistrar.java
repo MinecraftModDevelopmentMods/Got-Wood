@@ -10,6 +10,7 @@ import panda.gotwood.events.BlockBreakHandler;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.events.FireHandler;
 import panda.gotwood.items.itemblocks.ItemWoodDoor;
+import panda.gotwood.util.FuelHandler;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterials;
 import net.minecraft.block.Block;
@@ -102,7 +103,7 @@ public final class MasterRegistrar {
 		register(e, ItemRegistry.getItemList());
 		
 		RecipeRegistry.init();
-		
+		GameRegistry.registerFuelHandler(new FuelHandler());
 		
 		
 		//RenderingRegistry.registerEntityRenderingHandler(MyEntityFireworkRocket.class, RenderFireworkEntity.INSTANCE);

@@ -1,6 +1,6 @@
 {
-    "parent": "block/wall_post",
+    "parent": "gotwood:block/bamboo_post",
     "textures": {
-        "wall": "gotwood:blocks/bamboo_shoot"
+        "texture": "gotwood:blocks/bamboo_shoot","top": "gotwood:blocks/bamboo_top"
     }
 }

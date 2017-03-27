@@ -11,6 +11,7 @@ import panda.gotwood.generation.WorldGenMaple;
 import panda.gotwood.generation.WorldGenPine;
 import panda.gotwood.generation.WorldGenWillow;
 import panda.gotwood.generation.WorldGenYew;
+import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 import panda.gotwood.util.WoodMaterials;
@@ -70,7 +71,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	    @Override
 	    public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	    {
-	        return Items.STICK;
+	        return wood == WoodMaterials.bamboo? Item.getItemFromBlock(BlockRegistry.bamboo_sapling):Items.STICK;
 	    }
 	    
 	    @Override
@@ -156,6 +157,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        	worldgenerator = new WorldGenPine(true);
                 break;
 	        case "bamboo":
+	        	System.out.println("doot");
 	        	worldgenerator = new WorldGenBamboo(true);
                 break;
 	            

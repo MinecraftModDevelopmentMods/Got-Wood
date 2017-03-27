@@ -12,6 +12,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 
@@ -36,21 +38,26 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 		this.setRegistryName(wood.getName()+"_log");
 		
 	}
+	@Override public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
+	{ return true; }
 	
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        state = this.getActualState(state, source, pos);
         return new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
     }
 
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
     {
-        blockState = this.getActualState(blockState, worldIn, pos);
-        return new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D).setMaxY(1.5D);
+        return new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
     }
 
-    public boolean isFullCube(IBlockState state)
+    @Override
+	public boolean canSustainLeaves(IBlockState state, IBlockAccess world,
+			BlockPos pos) {
+		return true;
+	}
+	public boolean isFullCube(IBlockState state)
     {
         return false;
     }
@@ -70,7 +77,15 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 
 
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos,
+			IBlockState state, int fortune) {
+    	List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+    	ret.add(new ItemStack(ItemRegistry.bamboo));
+		return ret;
+	}
+
+	@SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
         return side == EnumFacing.DOWN ? super.shouldSideBeRendered(blockState, blockAccess, pos, side) : true;
@@ -81,6 +96,22 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 			boolean isClient) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+		this.checkAndDropBlock(world, pos, state);
+	}
+	
+	protected final void checkAndDropBlock(World world, BlockPos pos, IBlockState state) {
+		boolean flag = true;
+		if (world.getBlockState(pos.down()).getBlock() == this || world.getBlockState(pos.down()).isNormalCube())
+			flag = false;
+		else if (flag && !world.isRemote){
+			world.destroyBlock(pos, true);
+			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+		}
+			
 	}
 
 	@Override
@@ -95,6 +126,11 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+    {
+        return true;
+    }
 
 	@Override
 	public String getOreDictionaryName() {

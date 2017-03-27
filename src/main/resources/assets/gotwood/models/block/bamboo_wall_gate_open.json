@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_gate_open",
+    "textures": {
+        "texture": "gotwood:blocks/planks_bamboo"
+    }
+}

@@ -38,6 +38,7 @@ public abstract class WoodMaterials {
 	
 	public static WoodMaterial bamboo;
 	public static WoodMaterial rubber;
+	public static WoodMaterial palm;
 	
 	
 	//Vanilla woods
@@ -70,7 +71,7 @@ public abstract class WoodMaterials {
 		
 		bamboo = addMaterial("bamboo", 3, 2);
 		rubber = addMaterial("rubber", 3, 2);
-		
+		palm = addMaterial("palm", 3, 2);
 		
 		oak = addMaterial("oak", 3,        2, 0);
 		spruce = addMaterial("spruce",3,   2, 1);

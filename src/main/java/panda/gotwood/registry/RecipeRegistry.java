@@ -27,7 +27,45 @@ public abstract class RecipeRegistry {
 	public static void init() {
 		
 		for (final WoodMaterial wood : WoodMaterials.getAllWoods()) {
+			if(wood == WoodMaterials.bamboo || wood == WoodMaterials.palm){
+				final String baseName = wood.getName() + "_";
+				final String oreDictName = wood.getCapitalizedName();
+				final Item door = ItemRegistry.getItemByName(baseName + "door_item");
+				final Item pole = ItemRegistry.getItemByName(baseName + "pole");
+				final Block planks = BlockRegistry.getBlockByName(baseName + "planks");
+				final Block log = BlockRegistry.getBlockByName(baseName + "log");
+				final Block trapdoor = BlockRegistry.getBlockByName(baseName + "trapdoor");	
+				//final Item slab = ItemRegistry.getItemByName(baseName + "_slab");
+				final Block stairs = BlockRegistry.getBlockByName(baseName + "stairs");
+				final Block fence = BlockRegistry.getBlockByName(baseName + "fence");
+				final Block gate = BlockRegistry.getBlockByName(baseName + "fence_gate");
+				
+				System.out.println(baseName+"/"+door+"/"+planks+"/"+log+"/"+trapdoor+"/"+stairs+"/"+fence+"/"+gate);
+				//
 
+				if ((log != null)&& (planks != null)){
+					GameRegistry.addRecipe(new ItemStack(planks,2), new Object[] {"##", "##", '#', new ItemStack(pole)});
+					OreDictionary.registerOre("plankWood",planks);
+					//OreDictionary.registerOre("treeLeaves",BlockRegistry.getBlockByName(baseName + "leaves"));
+				}
+
+				if ((planks != null) && (door != null)) {
+					GameRegistry.addRecipe(new ItemStack(door,3), new Object[] {"##", "##", "##", '#', new ItemStack(pole)});
+					OreDictionary.registerOre("door", door);
+				}
+				if ((planks != null) && (trapdoor != null)) {
+					GameRegistry.addRecipe(new ItemStack(trapdoor,2), new Object[] {"###", "###", '#', new ItemStack(pole)});
+					OreDictionary.registerOre("trapdoor", trapdoor);
+				}
+
+				if (planks != null){
+					//GameRegistry.addRecipe(new ItemStack(slab,6), new Object[] {"###", '#', new ItemStack(planks)});
+					//GameRegistry.addRecipe(new ItemStack(planks), new Object[] {"#","#", '#', new ItemStack(slab)});
+					GameRegistry.addRecipe(new ItemStack(stairs,ConfigurationHandler.numStairs), new Object[] {"#  ", "## ", "###", '#', new ItemStack(pole)});
+					GameRegistry.addRecipe(new ItemStack(fence,3), new Object[] {"#s#", "#s#", '#', new ItemStack(planks),'s', new ItemStack(pole)});
+					GameRegistry.addRecipe(new ItemStack(gate), new Object[] {"s#s", "s#s", '#', new ItemStack(planks),'s', new ItemStack(pole)});
+				}
+			}else{
 			final String baseName = wood.getName() + "_";
 			final String oreDictName = wood.getCapitalizedName();
 			final Item door = ItemRegistry.getItemByName(baseName + "door_item");
@@ -65,11 +103,17 @@ public abstract class RecipeRegistry {
 				GameRegistry.addRecipe(new ItemStack(fence,3), new Object[] {"#s#", "#s#", '#', new ItemStack(planks),'s', new ItemStack(Items.STICK)});
 				GameRegistry.addRecipe(new ItemStack(gate), new Object[] {"s#s", "s#s", '#', new ItemStack(planks),'s', new ItemStack(Items.STICK)});
 			}
+			}
 		}
+		
+		
+		
+		
 		
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_seed,2), new ItemStack(Items.APPLE));
 		GameRegistry.addSmelting( new ItemStack(Items.COAL,1, 1),new ItemStack(ItemRegistry.ash), 0.1f);
+		GameRegistry.addSmelting( new ItemStack(ItemRegistry.bamboo),new ItemStack(ItemRegistry.bamboo_charcoal), 0.1f);
 		if(ConfigurationHandler.retrieveSaplingsMode == 2){
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.SAPLING,1,0), new ItemStack(ItemRegistry.oak_seed));
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.SAPLING,1,1), new ItemStack(ItemRegistry.spruce_seed));

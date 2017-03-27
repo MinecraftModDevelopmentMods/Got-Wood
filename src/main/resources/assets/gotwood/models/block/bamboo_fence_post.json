@@ -1,0 +1,7 @@
+{
+    "parent": "gotwood:block/bamboo_post",
+    "textures": {
+        "texture": "gotwood:blocks/bamboo_post"
+,"top": "gotwood:blocks/bamboo_post_top"
+    }
+}

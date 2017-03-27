@@ -2,6 +2,7 @@ package panda.gotwood.blocks;
 
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -39,7 +40,7 @@ public class BlockWoodTrapdoor extends BlockTrapDoor implements IOreDictionaryEn
 			return true;
 		state = state.cycleProperty(BlockTrapDoor.OPEN);
 		world.setBlockState(coord, state, 2);
-		world.playEvent(player, ((Boolean) state.getValue(BlockTrapDoor.OPEN)) ? 1003 : 1006, coord, 0);
+		world.playEvent(player, ((Boolean) state.getValue(BlockTrapDoor.OPEN)) ? 1012 : 1006, coord, 0);;
 		return true;
 	}
 @Override

@@ -3,6 +3,7 @@ package panda.gotwood.generation;
 
 import java.util.Random;
 
+import panda.gotwood.blocks.BlockWoodLeaves;
 import panda.gotwood.registry.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
@@ -20,8 +21,8 @@ public class WorldGenBamboo extends WorldGenAbstractTree
   private final int density = 64;
   private final int minTreeHeight = 12;
   private final int maxTreeHeight = 24;
-  private final Block leaves = BlockRegistry.bamboo_leaves;
-  private final Block log = BlockRegistry.bamboo_log;
+  private final IBlockState leaves = BlockRegistry.bamboo_leaves.getDefaultState().withProperty(BlockWoodLeaves.DECAYABLE, Boolean.valueOf(true)).withProperty(BlockWoodLeaves.CHECK_DECAY, Boolean.valueOf(false));
+  private final IBlockState log = BlockRegistry.bamboo_log.getDefaultState();
   
   public WorldGenBamboo(boolean doblocknotify)
   {
@@ -90,7 +91,7 @@ public class WorldGenBamboo extends WorldGenAbstractTree
               
               Block block = world.getBlockState(new BlockPos(x,y,z)).getBlock();
               if (((Math.abs(x2) != 1) || (Math.abs(z2) != 1)) && ((block == null) || (block.canBeReplacedByLeaves(world.getBlockState(new BlockPos(x,y,z)), world, new BlockPos(x,y,z))))) {
-                setBlockAndNotifyAdequately(world, new BlockPos(x, y, z), this.leaves.getDefaultState());
+            	  world.setBlockState( new BlockPos(x, y, z), this.leaves);
               }
             }
           }
@@ -101,7 +102,7 @@ public class WorldGenBamboo extends WorldGenAbstractTree
           {
             Block block = world.getBlockState(new BlockPos(x,y,z)).getBlock();
             if ((block == null) || (block.canBeReplacedByLeaves(world.getBlockState(new BlockPos(x,y,z)),world, new BlockPos(x,y,z)))) {
-              setBlockAndNotifyAdequately(world, new BlockPos(x, y, z), this.leaves.getDefaultState());
+            	world.setBlockState( new BlockPos(x, y, z), this.leaves);
             }
           }
         }
@@ -123,19 +124,19 @@ public class WorldGenBamboo extends WorldGenAbstractTree
           }
           Block block = world.getBlockState(new BlockPos(x,y,z)).getBlock();
           if ((block == null) || (block.canBeReplacedByLeaves(world.getBlockState(new BlockPos(x,y,z)),world, new BlockPos(x, y, z)))) {
-            setBlockAndNotifyAdequately(world, new BlockPos(x, y, z), this.leaves.getDefaultState());
+        	  world.setBlockState( new BlockPos(x, y, z), this.leaves);
           }
         }
         y = j + height;
         Block block = world.getBlockState(new BlockPos(i,y,k)).getBlock();
         if ((block == null) || (block.canBeReplacedByLeaves(world.getBlockState(new BlockPos(i,y,k)),world, new BlockPos(i, y, k)))) {
-          setBlockAndNotifyAdequately(world, new BlockPos(i, y, k), this.leaves.getDefaultState());
+        	world.setBlockState( new BlockPos(i, y, k), this.leaves);
         }
         for (y = 0; y < height - 1; y++)
         {
           block = world.getBlockState(new BlockPos(i, j + y, k)).getBlock();
           if ((block.isAir(world.getBlockState(new BlockPos(i, j + y, k)),world, new BlockPos(it, j + y, k))) || (block.isLeaves(world.getBlockState(new BlockPos(i, j + y, k)),world, new BlockPos(i, j + y, k)))) {
-            setBlockAndNotifyAdequately(world, new BlockPos(i, j + y, k), this.log.getDefaultState());
+        	  world.setBlockState( new BlockPos(i, j + y, k), this.log);
           }
         }
         return true;

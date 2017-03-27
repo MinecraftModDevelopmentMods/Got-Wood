@@ -115,11 +115,15 @@ public class BlockRegistry {
 	
 	
 	public static final Block specialfire = new SpecialFire();
-	public static final Block bamboo_sapling = new BlockWoodSapling(WoodMaterials.bamboo);
+	public static final Block bamboo_sapling = new BlockWoodSapling(WoodMaterials.bamboo).setHardness(1.0F);;
 	public static final Block bamboo_leaves = new BlockWoodLeaves(WoodMaterials.bamboo);
 	public static final Block bamboo_log = new BlockBambooLog(WoodMaterials.bamboo);
-	
-
+	public static final Block bamboo_planks = new BlockPlanks(WoodMaterials.bamboo);
+	public static final BlockDoor bamboo_door = new BlockWoodDoor(WoodMaterials.bamboo);
+	public static final Block bamboo_trapdoor = new BlockWoodTrapdoor(WoodMaterials.bamboo);
+	public static final Block bamboo_stairs = new BlockWoodStairs(WoodMaterials.bamboo,bamboo_planks);
+	public static final Block bamboo_fence = new BlockWoodFence(WoodMaterials.bamboo);
+	public static final Block bamboo_gate = new BlockWoodFenceGate(WoodMaterials.bamboo);
 	
 	public static final List<Block> getBlockList() {
 		List<Block> list = new ArrayList<Block>();
@@ -158,6 +162,7 @@ public class BlockRegistry {
 		list.add(yew_planks);
 		list.add(fir_planks);
 		list.add(ebony_planks);
+		list.add(bamboo_planks);
 		
 		list.add(apple_door);
 		list.add(maple_door);
@@ -166,6 +171,7 @@ public class BlockRegistry {
 		list.add(yew_door);
 		list.add(fir_door);
 		list.add(ebony_door);
+		list.add(bamboo_door);
 		
 		list.add(apple_trapdoor);
 		list.add(maple_trapdoor);
@@ -174,6 +180,7 @@ public class BlockRegistry {
 		list.add(yew_trapdoor);
 		list.add(fir_trapdoor);
 		list.add(ebony_trapdoor);
+		list.add(bamboo_trapdoor);
 		
 		list.add(apple_gate);
 		list.add(maple_gate);
@@ -182,6 +189,7 @@ public class BlockRegistry {
 		list.add(yew_gate);
 		list.add(fir_gate);
 		list.add(ebony_gate);
+		list.add(bamboo_gate);
 		
 		list.add(apple_stairs);
 		list.add(maple_stairs);
@@ -190,6 +198,7 @@ public class BlockRegistry {
 		list.add(yew_stairs);
 		list.add(fir_stairs);
 		list.add(ebony_stairs);
+		list.add(bamboo_stairs);
 		
 		list.add(apple_fence);
 		list.add(maple_fence);
@@ -198,6 +207,7 @@ public class BlockRegistry {
 		list.add(yew_fence);
 		list.add(fir_fence);
 		list.add(ebony_fence);
+		list.add(bamboo_fence);
 
 		
 
