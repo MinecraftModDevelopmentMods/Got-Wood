@@ -1,5 +1,7 @@
 package panda.gotwood.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -7,6 +9,7 @@ import javax.annotation.Nullable;
 
 import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.registry.ItemRegistry;
+import panda.gotwood.util.IFireDrops;
 
 import com.google.common.collect.Maps;
 
@@ -343,12 +346,28 @@ public class SpecialFire extends BlockFire {
             {
             	
                 worldIn.setBlockToAir(pos);
-                if(iblockstate.getBlock() instanceof BlockLog){
+                Block block = iblockstate.getBlock();
+                if( block instanceof BlockLog && !(block instanceof IFireDrops) ){
                 	ItemStack burnitem = worldIn.rand.nextBoolean()? new ItemStack(ItemRegistry.ash): new ItemStack(Items.COAL,1,1);
                 	EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, burnitem);
 
     				worldIn.spawnEntityInWorld(entityitem);
-            	}
+            	}else
+            		if (block instanceof IFireDrops) {
+            		    IFireDrops fireDrops = (IFireDrops) block;
+            		    if (fireDrops.hasFireDrops()){
+            		    	///use NonNullList for 1.11
+            		    	//also add an event that allows the modification of that same list.
+            		        List<ItemStack> drops = new ArrayList<ItemStack>();
+            		        fireDrops.addFireDrops(drops, random);
+            		        for (ItemStack drop : drops){
+            		            EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
+            		            worldIn.spawnEntityInWorld(entityitem);
+            		        }
+            		        
+            		        
+            		    }
+            		}
             }
 
             if (iblockstate.getBlock() == Blocks.TNT)

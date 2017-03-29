@@ -6,12 +6,14 @@ import java.util.List;
 import panda.gotwood.GotWood;
 import panda.gotwood.blocks.BlockWoodDoor;
 import panda.gotwood.blocks.SpecialFire;
+import panda.gotwood.blocks.tileentities.TileTreeTap;
 import panda.gotwood.events.BlockBreakHandler;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.events.FireHandler;
 import panda.gotwood.items.itemblocks.ItemWoodDoor;
 import panda.gotwood.util.FuelHandler;
 import panda.gotwood.util.IOreDictionaryEntry;
+import panda.gotwood.util.TreeTapRenderer;
 import panda.gotwood.util.WoodMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -21,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -104,6 +107,8 @@ public final class MasterRegistrar {
 		
 		RecipeRegistry.init();
 		GameRegistry.registerFuelHandler(new FuelHandler());
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileTreeTap.class, new TreeTapRenderer());
 		
 		
 		//RenderingRegistry.registerEntityRenderingHandler(MyEntityFireworkRocket.class, RenderFireworkEntity.INSTANCE);

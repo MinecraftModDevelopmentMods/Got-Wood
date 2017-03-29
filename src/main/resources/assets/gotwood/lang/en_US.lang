@@ -83,7 +83,7 @@ item.gotwood.ebony_seed.name=Ebony Tree Seeds
 item.gotwood.yew_seed.name=Yew Tree Seeds
 item.gotwood.willow_seed.name=Willow Tree Seeds
 itemGroup.gotwood=Got Wood?
-item.gotwood.ash.name=Ash
+item.gotwood.ash.name=Wood Ash
 
 
 \ No newline at end of file

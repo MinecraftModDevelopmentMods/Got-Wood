@@ -2,6 +2,7 @@ package panda.gotwood;
 
 import panda.gotwood.blocks.BlockPlanks;
 import panda.gotwood.blocks.SpecialFire;
+import panda.gotwood.blocks.tileentities.TileTreeTap;
 import panda.gotwood.events.BlockBreakHandler;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.events.ConsumedByFireListener;
@@ -34,7 +35,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class GotWood
 {
 	public static final String MODID = "gotwood";
-	public static final String VERSION = "0.14.0";
+	public static final String VERSION = "0.15.0";
 
 	public static final String NAME = "Got Wood?";
 	@SidedProxy(serverSide = "panda.gotwood.proxy.ProxyServer", clientSide = "panda.gotwood.proxy.ProxyClient")
@@ -53,6 +54,7 @@ public class GotWood
 	{ 
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
 		((SpecialFire)BlockRegistry.specialfire).init();
+		GameRegistry.registerTileEntity(TileTreeTap.class, "gotwood:tree_tap");
 	}  
 	
 	public static final CreativeTabs TreeTab = new CreativeTabs(GotWood.MODID) {

@@ -1,6 +1,47 @@
 {
-    "parent": "block/fence_inventory",
-    "textures": {
-        "texture": "gotwood:blocks/planks_bamboo"
-    }
+	"__comment": "Designed by Cleverpanda with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"__comment": "Center post",
+			"from": [ 12, -2, 7 ],
+			"to": [ 20, 14, 15 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "down" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "up" },
+				"north": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Center post",
+			"from": [ 4, 0, 4 ],
+			"to": [ 12, 16, 12 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "down" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "up" },
+				"north": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" }
+			}
+		},
+		{
+			"__comment": "Center post",
+			"from": [ -4, -1, 1 ],
+			"to": [ 4, 15, 9 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "down" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "up" },
+				"north": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" }
+			}
+		}
+	]
 }

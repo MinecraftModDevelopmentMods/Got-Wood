@@ -6,8 +6,8 @@
 	"elements": [
 		{
 			"__comment": "Center post",
-			"from": [ 0, -1, 1 ],
-			"to": [ 4, 15, 9 ],
+			"from": [ 0, -1, 7 ],
+			"to": [ 4, 15, 15 ],
 			"faces": {
 				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#top", "cullface": "down" },
 				"up": { "uv": [ 8, 4, 12, 12 ], "texture": "#top", "cullface": "up" },

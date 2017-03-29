@@ -21,7 +21,7 @@ public class WorldGenBamboo extends WorldGenAbstractTree
   private final int density = 64;
   private final int minTreeHeight = 12;
   private final int maxTreeHeight = 24;
-  private final IBlockState leaves = BlockRegistry.bamboo_leaves.getDefaultState().withProperty(BlockWoodLeaves.DECAYABLE, Boolean.valueOf(true)).withProperty(BlockWoodLeaves.CHECK_DECAY, Boolean.valueOf(false));
+  private final IBlockState leaves = BlockRegistry.bamboo_leaves.getDefaultState().withProperty(BlockWoodLeaves.DECAYABLE, Boolean.valueOf(true)).withProperty(BlockWoodLeaves.CHECK_DECAY, Boolean.valueOf(true));
   private final IBlockState log = BlockRegistry.bamboo_log.getDefaultState();
   
   public WorldGenBamboo(boolean doblocknotify)

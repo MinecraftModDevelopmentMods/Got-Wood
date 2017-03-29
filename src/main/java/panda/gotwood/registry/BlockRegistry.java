@@ -9,6 +9,7 @@ import panda.gotwood.blocks.BlockBambooLog;
 import panda.gotwood.blocks.BlockDoubleSlab;
 import panda.gotwood.blocks.BlockHalfSlab;
 import panda.gotwood.blocks.BlockPlanks;
+import panda.gotwood.blocks.BlockTreeTap;
 import panda.gotwood.blocks.BlockWoodDoor;
 import panda.gotwood.blocks.BlockWoodFence;
 import panda.gotwood.blocks.BlockWoodFenceGate;
@@ -115,6 +116,7 @@ public class BlockRegistry {
 	
 	
 	public static final Block specialfire = new SpecialFire();
+	public static final Block treetap = new BlockTreeTap();
 	public static final Block bamboo_sapling = new BlockWoodSapling(WoodMaterials.bamboo).setHardness(1.0F);;
 	public static final Block bamboo_leaves = new BlockWoodLeaves(WoodMaterials.bamboo);
 	public static final Block bamboo_log = new BlockBambooLog(WoodMaterials.bamboo);
@@ -128,6 +130,7 @@ public class BlockRegistry {
 	public static final List<Block> getBlockList() {
 		List<Block> list = new ArrayList<Block>();
 		list.add(specialfire);
+		list.add(treetap);
 		list.add(apple_sapling);
 		list.add(maple_sapling);
 		list.add(pine_sapling);

@@ -1,5 +1,6 @@
 package panda.gotwood.blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,10 +26,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import panda.gotwood.registry.ItemRegistry;
+import panda.gotwood.util.IFireDrops;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 
-public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable{
+public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable,IFireDrops{
 
 	public BlockBambooLog(WoodMaterial wood) {
 		super(Material.WOOD);
@@ -109,10 +111,39 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 			flag = false;
 		else if (flag && !world.isRemote){
 			world.destroyBlock(pos, true);
-			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+			breakBlock(world,pos,state);
 		}
 			
 	}
+	
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        int i = 1;
+        int j = 2;
+        int k = pos.getX();
+        int l = pos.getY();
+        int i1 = pos.getZ();
+
+        if (worldIn.isAreaLoaded(new BlockPos(k - 2, l - 2, i1 - 2), new BlockPos(k + 2, l + 2, i1 + 2)))
+        {
+            for (int j1 = -1; j1 <= 1; ++j1)
+            {
+                for (int k1 = -1; k1 <= 1; ++k1)
+                {
+                    for (int l1 = -1; l1 <= 1; ++l1)
+                    {
+                        BlockPos blockpos = pos.add(j1, k1, l1);
+                        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+
+                        if (iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos))
+                        {
+                            iblockstate.getBlock().beginLeavesDecay(iblockstate, worldIn, blockpos);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	@Override
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,
@@ -136,6 +167,21 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 	public String getOreDictionaryName() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public boolean hasFireDrops() {
+		return true;
+	}
+	@Override
+	public List<ItemStack> addFireDrops(List<ItemStack> drops,Random random) {
+
+		if(random.nextBoolean()){
+			drops.add(new ItemStack(ItemRegistry.ash));
+		}else{
+			drops.add(new ItemStack(ItemRegistry.bamboo_charcoal));
+		}
+    	
+    	return drops;
 	}
 
 }
