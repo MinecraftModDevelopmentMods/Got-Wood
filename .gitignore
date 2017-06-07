@@ -20,22 +20,10 @@ build
 # other
 eclipse
 run
-
 CREDITS-fml.txt
-Paulscode SoundSystem CodecIBXM License.txt
 LICENSE-new.txt
-forge-1.10.2-12.18.3.2221-changelog.txt
-gradle/wrapper/gradle-wrapper.jar
-gradle/wrapper/gradle-wrapper.properties
-Paulscode IBXM Library License.txt
 MinecraftForge-Credits.txt
-gradlew.bat
-gradlew
-gradle.properties
-.gradle.zip
-shoots.png
-dates.1.png
-dates.0.png
-palm.png
-palette.png
-dates.2.png
+Paulscode IBXM Library License.txt
+Paulscode SoundSystem CodecIBXM License.txt
+README.txt
+forge-1.10.2-12.18.3.2297-changelog.txt
