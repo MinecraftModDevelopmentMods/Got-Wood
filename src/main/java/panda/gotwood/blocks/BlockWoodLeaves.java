@@ -60,7 +60,7 @@ public class BlockWoodLeaves extends BlockLeaves implements IOreDictionaryEntry{
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-		return GameRegistry.findItem("varietytrees", wood+"_seed");
+		return GameRegistry.findItem("gotwood", wood+"_seed");
     }
 
 
@@ -116,8 +116,8 @@ public class BlockWoodLeaves extends BlockLeaves implements IOreDictionaryEntry{
 				ch = ConfigurationHandler.ebonyChance;
 			case "fir":
 				ch = ConfigurationHandler.firChance;
-
-
+			case "bamboo":
+				ch = ConfigurationHandler.bambooChance;
 		
 		}
 		return getModifiedChance(ch, fortune,dec,min);

@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Cleverpanda with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"walltexture": "gotwood:blocks/planks_bamboo",
+		"particle": "#walltexture"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 0, 0, 6 ],
+			"to": [ 8, 13, 10 ],
+			"faces": {
+				"down": { "uv": [ 0, 6, 8, 10 ], "texture": "#walltexture" },
+				"up": { "uv": [ 0, 6, 8, 10 ], "texture": "#walltexture" },
+				"north": { "uv": [ 8, 3, 16, 16 ], "texture": "#walltexture" },
+				"south": { "uv": [ 0, 3, 8, 16 ], "texture": "#walltexture" },
+				"west": { "uv": [ 6, 3, 10, 16 ], "texture": "#walltexture" },
+				"east": { "uv": [ 6, 3, 10, 16 ], "texture": "#walltexture" }
+			}
+		}
+	]
+}

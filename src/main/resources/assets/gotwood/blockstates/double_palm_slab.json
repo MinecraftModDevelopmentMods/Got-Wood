@@ -1,0 +1,9 @@
+{
+    "variants": {
+
+        "normal": { "model": "gotwood:palm_planks" },
+	"variant=default": { "model": "gotwood:palm_planks" }
+
+    }
+
+}

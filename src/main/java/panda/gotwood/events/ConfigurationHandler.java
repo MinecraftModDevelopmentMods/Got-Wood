@@ -43,6 +43,9 @@ public class ConfigurationHandler {
 	
 	public static String[] mega;
 	public static String dL = "";
+
+	public static int bambooChance;
+
 	
 	
 	
@@ -66,6 +69,7 @@ public class ConfigurationHandler {
 			yewChance = config.getInt("yewSeedChance", "Drops", 24, 1, 32767, "");
 			ebonyChance = config.getInt("ebonySeedChance", "Drops", 27, 1, 32767, "");
 			firChance = config.getInt("firSeedChance", "Drops", 34, 1, 32767, "");
+			bambooChance = config.getInt("bambooSeedChance", "Drops", 10, 1, 32767, "");
 			goldenDropChance = config.getInt("goldenAppleChance", "Drops", 1600, 1, 32767, "");
 			goldenDropFortuneDecrement = config.getInt("goldenAppleFortuneDecrement", "Drops", 60, 1, 32767, "Must be less than the chance");
 			goldenDropMinChance = config.getInt("goldenAppleMinChance", "Drops", 400, 1, 32767, "Must be less than the chance");

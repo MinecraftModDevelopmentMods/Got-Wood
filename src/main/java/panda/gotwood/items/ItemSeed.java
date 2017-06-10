@@ -12,12 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import panda.gotwood.GotWood;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 import panda.gotwood.util.WoodMaterials;
@@ -58,7 +60,7 @@ public class ItemSeed extends Item implements IOreDictionaryEntry, IPlantable{
 		if(wood ==WoodMaterials.acacia || wood ==WoodMaterials.birch || wood ==WoodMaterials.darkOak || wood ==WoodMaterials.jungle || wood ==WoodMaterials.oak || wood ==WoodMaterials.spruce){
 			return Blocks.SAPLING.getStateFromMeta(wood.getMeta());
 		}else
-			return GameRegistry.findBlock("varietytrees", wood+"_sapling").getDefaultState();		
+			return Block.REGISTRY.getObject(new ResourceLocation(GotWood.MODID, wood+"_sapling")).getDefaultState();
 	}
 
 	@Override

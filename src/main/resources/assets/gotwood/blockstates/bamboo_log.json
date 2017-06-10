@@ -1,7 +1,10 @@
 {
-    "variants": {"normal": { "model": "gotwood:bamboo_log" }
-   
-
-
-}
+  	"defaults": {
+	},
+    "multipart": [
+        {   "apply": { "model": "gotwood:bamboo_log" }},
+        {   "when": { "leaves": "true" },
+            "apply": { "model": "gotwood:bamboo_leaves"}
+        }
+    ]
 }

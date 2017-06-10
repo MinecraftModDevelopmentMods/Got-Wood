@@ -27,7 +27,7 @@ public abstract class RecipeRegistry {
 	public static void init() {
 		
 		for (final WoodMaterial wood : WoodMaterials.getAllWoods()) {
-			if(wood == WoodMaterials.bamboo || wood == WoodMaterials.palm){
+			if(wood == WoodMaterials.bamboo ){
 				final String baseName = wood.getName() + "_";
 				final String oreDictName = wood.getCapitalizedName();
 				final Item door = ItemRegistry.getItemByName(baseName + "door_item");
@@ -113,7 +113,7 @@ public abstract class RecipeRegistry {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_seed,2), new ItemStack(Items.APPLE));
 		GameRegistry.addSmelting( new ItemStack(Items.COAL,1, 1),new ItemStack(ItemRegistry.ash), 0.1f);
-		GameRegistry.addSmelting( new ItemStack(ItemRegistry.bamboo),new ItemStack(ItemRegistry.bamboo_charcoal), 0.1f);
+		GameRegistry.addSmelting( new ItemStack(ItemRegistry.bamboo_pole),new ItemStack(ItemRegistry.bamboo_charcoal), 0.1f);
 		if(ConfigurationHandler.retrieveSaplingsMode == 2){
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.SAPLING,1,0), new ItemStack(ItemRegistry.oak_seed));
 			GameRegistry.addShapelessRecipe(new ItemStack(Blocks.SAPLING,1,1), new ItemStack(ItemRegistry.spruce_seed));

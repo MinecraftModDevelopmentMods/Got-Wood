@@ -11,12 +11,17 @@ import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +30,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.util.IFireDrops;
 import panda.gotwood.util.IOreDictionaryEntry;
@@ -32,26 +38,37 @@ import panda.gotwood.util.WoodMaterial;
 
 public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable,IFireDrops{
 
+	public static final PropertyBool LEAVES = PropertyBool.create("leaves");
+	
 	public BlockBambooLog(WoodMaterial wood) {
 		super(Material.WOOD);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(LEAVES, Boolean.valueOf(false)));
 		this.blockHardness = wood.getPlankBlockHardness();
 		this.blockResistance = wood.getBlastResistance();
 		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
 		this.setRegistryName(wood.getName()+"_log");
 		
 	}
+	
+	@SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT_MIPPED ;
+    }
+	
 	@Override public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
 	{ return true; }
 	
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
+        return state == this.getDefaultState()? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D):new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
     }
 
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
     {
-        return new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D);
+    	 return blockState == this.getDefaultState()? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D):new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
     }
 
     @Override
@@ -83,7 +100,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos,
 			IBlockState state, int fortune) {
     	List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
-    	ret.add(new ItemStack(ItemRegistry.bamboo));
+    	ret.add(new ItemStack(ItemRegistry.bamboo_pole));
 		return ret;
 	}
 
@@ -102,7 +119,16 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 	
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+		
+		
+		if(world.getBlockState(pos.north()).getBlock() == BlockRegistry.bamboo_leaves ||world.getBlockState(pos.west()).getBlock() == BlockRegistry.bamboo_leaves||world.getBlockState(pos.east()).getBlock() == BlockRegistry.bamboo_leaves|| world.getBlockState(pos.south()).getBlock() == BlockRegistry.bamboo_leaves){
+			world.setBlockState(pos, this.getDefaultState().withProperty(LEAVES, true),2);
+		}else{
+			world.setBlockState(pos, this.getDefaultState().withProperty(LEAVES, false),2);
+		}
+		
 		this.checkAndDropBlock(world, pos, state);
+		
 	}
 	
 	protected final void checkAndDropBlock(World world, BlockPos pos, IBlockState state) {
@@ -183,5 +209,23 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
     	
     	return drops;
 	}
+	
+	public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(LEAVES, Boolean.valueOf(meta == 1));
+    }
+    
+    /**
+     * Convert the BlockState into the correct metadata value
+     */
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(LEAVES)==true?1:0;
+    }
+    
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, new IProperty[] {LEAVES});
+    }
 
 }

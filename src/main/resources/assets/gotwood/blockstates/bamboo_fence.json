@@ -2,22 +2,23 @@
   	"defaults": {
         "textures": {
           "top": "gotwood:blocks/bamboo_post_top",
-		  "texture": "gotwood:blocks/bamboo_post"
+		  "texture": "gotwood:blocks/bamboo_post",
+		  "walltexture": "gotwood:blocks/planks_bamboo"
         }
 	},
     "multipart": [
         {   "apply": { "model": "gotwood:bamboo_fence_post" }},
         {   "when": { "north": "true" },
-            "apply": { "model": "gotwood:bamboo_fence_side", "y": 90, "uvlock": true }
+            "apply": { "model": "gotwood:bamboo_wall_part", "y": 90, "uvlock": true }
         },
         {   "when": { "east": "true" },
-            "apply": { "model": "gotwood:bamboo_fence_side", "y": 180, "uvlock": true }
+            "apply": { "model": "gotwood:bamboo_wall_part", "y": 180, "uvlock": true }
         },
         {   "when": { "south": "true" },
-            "apply": { "model": "gotwood:bamboo_fence_side_other", "y": 270, "uvlock": true }
+            "apply": { "model": "gotwood:bamboo_wall_part", "y": 270, "uvlock": true }
         },
         {   "when": { "west": "true" },
-            "apply": { "model": "gotwood:bamboo_fence_side_other", "uvlock": true }
+            "apply": { "model": "gotwood:bamboo_wall_part", "uvlock": true }
         }
     ]
 }

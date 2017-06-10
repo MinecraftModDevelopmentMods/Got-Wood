@@ -15,14 +15,6 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.FMLLog;
 
-/**
- * This class initializes all of the metal materials in Base Metals. It also
- * contains utility methods for looking up materials by name and finding the
- * tool and armor material equivalents for a given metal.
- *
- * @author DrCyano
- *
- */
 public abstract class WoodMaterials {
 
 	private static Map<String, WoodMaterial> allMaterials = new HashMap<>();

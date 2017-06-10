@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=default": { "model": "gotwood:half_slab_palm" },
+        "half=top,variant=default": { "model": "gotwood:upper_slab_palm" }
+    }
+}

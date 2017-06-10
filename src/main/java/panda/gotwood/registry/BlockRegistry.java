@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import panda.gotwood.blocks.BlockBambooFence;
 import panda.gotwood.blocks.BlockBambooLog;
+import panda.gotwood.blocks.BlockDates;
 import panda.gotwood.blocks.BlockDoubleSlab;
 import panda.gotwood.blocks.BlockHalfSlab;
+import panda.gotwood.blocks.BlockPalmLeaves;
 import panda.gotwood.blocks.BlockPlanks;
 import panda.gotwood.blocks.BlockTreeTap;
 import panda.gotwood.blocks.BlockWoodDoor;
@@ -124,13 +127,26 @@ public class BlockRegistry {
 	public static final BlockDoor bamboo_door = new BlockWoodDoor(WoodMaterials.bamboo);
 	public static final Block bamboo_trapdoor = new BlockWoodTrapdoor(WoodMaterials.bamboo);
 	public static final Block bamboo_stairs = new BlockWoodStairs(WoodMaterials.bamboo,bamboo_planks);
-	public static final Block bamboo_fence = new BlockWoodFence(WoodMaterials.bamboo);
+	public static final Block bamboo_fence = new BlockBambooFence(WoodMaterials.bamboo);
 	public static final Block bamboo_gate = new BlockWoodFenceGate(WoodMaterials.bamboo);
+	
+	public static final Block palm_log = new BlockWoodLog(WoodMaterials.palm);
+	public static final Block palm_planks = new BlockPlanks(WoodMaterials.palm);
+	public static final BlockDoor palm_door = new BlockWoodDoor(WoodMaterials.palm);
+	public static final Block palm_trapdoor = new BlockWoodTrapdoor(WoodMaterials.palm);
+	public static final Block palm_leaves = new BlockPalmLeaves(WoodMaterials.palm);
+	public static final Block palm_sapling = new BlockWoodSapling(WoodMaterials.palm);
+	public static final Block palm_gate = new BlockWoodFenceGate(WoodMaterials.palm);
+	//public static final BlockSlab palm_slab;
+	//public static final BlockSlab double_palm_slab;
+	public static final Block palm_stairs = new BlockWoodStairs(WoodMaterials.palm,palm_planks);
+	public static final Block palm_fence = new BlockWoodFence(WoodMaterials.palm);
+	public static final Block dates_block = new BlockDates();
 	
 	public static final List<Block> getBlockList() {
 		List<Block> list = new ArrayList<Block>();
 		list.add(specialfire);
-		list.add(treetap);
+
 		list.add(apple_sapling);
 		list.add(maple_sapling);
 		list.add(pine_sapling);
@@ -139,6 +155,7 @@ public class BlockRegistry {
 		list.add(fir_sapling);
 		list.add(ebony_sapling);
 		list.add(bamboo_sapling);
+		list.add(palm_sapling);
 		
 		list.add(apple_log);
 		list.add(maple_log);
@@ -148,6 +165,7 @@ public class BlockRegistry {
 		list.add(fir_log);
 		list.add(ebony_log);
 		list.add(bamboo_log);
+		list.add(palm_log);
 		
 		list.add(apple_leaves);
 		list.add(maple_leaves);
@@ -157,6 +175,7 @@ public class BlockRegistry {
 		list.add(fir_leaves);
 		list.add(ebony_leaves);
 		list.add(bamboo_leaves);
+		list.add(palm_leaves);
 		
 		list.add(apple_planks);
 		list.add(maple_planks);
@@ -166,6 +185,7 @@ public class BlockRegistry {
 		list.add(fir_planks);
 		list.add(ebony_planks);
 		list.add(bamboo_planks);
+		list.add(palm_planks);
 		
 		list.add(apple_door);
 		list.add(maple_door);
@@ -175,6 +195,7 @@ public class BlockRegistry {
 		list.add(fir_door);
 		list.add(ebony_door);
 		list.add(bamboo_door);
+		list.add(palm_door);
 		
 		list.add(apple_trapdoor);
 		list.add(maple_trapdoor);
@@ -184,6 +205,7 @@ public class BlockRegistry {
 		list.add(fir_trapdoor);
 		list.add(ebony_trapdoor);
 		list.add(bamboo_trapdoor);
+		list.add(palm_trapdoor);
 		
 		list.add(apple_gate);
 		list.add(maple_gate);
@@ -193,6 +215,7 @@ public class BlockRegistry {
 		list.add(fir_gate);
 		list.add(ebony_gate);
 		list.add(bamboo_gate);
+		list.add(palm_gate);
 		
 		list.add(apple_stairs);
 		list.add(maple_stairs);
@@ -202,6 +225,7 @@ public class BlockRegistry {
 		list.add(fir_stairs);
 		list.add(ebony_stairs);
 		list.add(bamboo_stairs);
+		list.add(palm_stairs);
 		
 		list.add(apple_fence);
 		list.add(maple_fence);
@@ -211,6 +235,13 @@ public class BlockRegistry {
 		list.add(fir_fence);
 		list.add(ebony_fence);
 		list.add(bamboo_fence);
+		list.add(palm_fence);
+		
+		
+		list.add(dates_block);
+		
+		
+		list.add(treetap);
 
 		
 

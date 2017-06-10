@@ -8,6 +8,7 @@ import panda.gotwood.generation.WorldGenBamboo;
 import panda.gotwood.generation.WorldGenEbony;
 import panda.gotwood.generation.WorldGenFir;
 import panda.gotwood.generation.WorldGenMaple;
+import panda.gotwood.generation.WorldGenPalm;
 import panda.gotwood.generation.WorldGenPine;
 import panda.gotwood.generation.WorldGenWillow;
 import panda.gotwood.generation.WorldGenYew;
@@ -157,8 +158,13 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        	worldgenerator = new WorldGenPine(true);
                 break;
 	        case "bamboo":
-	        	System.out.println("doot");
 	        	worldgenerator = new WorldGenBamboo(true);
+                break;
+	        case "palm":
+	        	worldgenerator = new WorldGenPalm(true);
+                break;
+	        case "rubber":
+	        	//worldgenerator = new WorldGenPalm(true);
                 break;
 	            
 	            	
@@ -207,7 +213,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	    
 	    @Override
 	    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-	        return EnumPlantType.Plains;
+	        return wood.getName()=="palm"?EnumPlantType.Desert:EnumPlantType.Plains;
 	    }
 
 	    @Override
