@@ -78,6 +78,9 @@ public class ItemRegistry {
 	public static final Item bamboo_charcoal = new ItemBase().setRegistryName("bamboo_charcoal");
 	public static final Item dates = new ItemDates();
 	
+	public static final Item maple_sap = new ItemBase().setRegistryName("maple_sap").setMaxStackSize(1);
+	public static final Item rubber_sap = new ItemBase().setRegistryName("rubber_sap").setMaxStackSize(1);
+	
 	
 	public static final List<Item> getItemList() {
 		List<Item> list = new ArrayList<Item>();
@@ -90,8 +93,8 @@ public class ItemRegistry {
 		list.add(ebony_seed);
 		list.add(dates);
 		list.add(bamboo_seed);
-		
-		
+		list.add(maple_sap);
+		list.add(rubber_sap);
 		
 		
 		list.add(apple_door);

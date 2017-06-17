@@ -21,6 +21,7 @@ import panda.gotwood.blocks.BlockWoodLog;
 import panda.gotwood.blocks.BlockWoodSapling;
 import panda.gotwood.blocks.BlockWoodStairs;
 import panda.gotwood.blocks.BlockWoodTrapdoor;
+import panda.gotwood.blocks.SappyLog;
 import panda.gotwood.blocks.SpecialFire;
 import panda.gotwood.util.WoodMaterials;
 import net.minecraft.block.Block;
@@ -143,6 +144,10 @@ public class BlockRegistry {
 	public static final Block palm_fence = new BlockWoodFence(WoodMaterials.palm);
 	public static final Block dates_block = new BlockDates();
 	
+	
+	public static final Block rubber_log = new SappyLog(WoodMaterials.rubber);
+	public static final Block rubber_leaves = new BlockWoodLeaves(WoodMaterials.rubber);
+	public static final Block rubber_sapling = new BlockWoodSapling(WoodMaterials.rubber);
 	public static final List<Block> getBlockList() {
 		List<Block> list = new ArrayList<Block>();
 		list.add(specialfire);
@@ -236,6 +241,9 @@ public class BlockRegistry {
 		list.add(ebony_fence);
 		list.add(bamboo_fence);
 		list.add(palm_fence);
+		list.add(rubber_log);
+		list.add(rubber_leaves);
+		list.add(rubber_sapling);
 		
 		
 		list.add(dates_block);
