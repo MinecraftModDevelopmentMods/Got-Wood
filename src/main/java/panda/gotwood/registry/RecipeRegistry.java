@@ -132,33 +132,21 @@ public abstract class RecipeRegistry {
 		}
 	}
 
-	/**
-	 *
-	 * @param oreDictEntries
-	 * @param name
-	 */
+
 	public static void addOredicts(String[] oreDictEntries, Block name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
-	/**
-	 *
-	 * @param oreDictEntries
-	 * @param name
-	 */
+
 	public static void addOredicts(String[] oreDictEntries, Item name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
-	/**
-	 *
-	 * @param oreDictEntries
-	 * @param itemStackName
-	 */
+
 	public static void addOredicts(String[] oreDictEntries, ItemStack itemStackName) {
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], itemStackName);
