@@ -109,7 +109,7 @@ public abstract class RecipeRegistry {
 		
 		
 		
-		
+		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.PLANKS,3,4), new ItemStack(BlockRegistry.rubber_log));
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_seed,2), new ItemStack(Items.APPLE));
 		GameRegistry.addSmelting( new ItemStack(Items.COAL,1, 1),new ItemStack(ItemRegistry.ash), 0.1f);

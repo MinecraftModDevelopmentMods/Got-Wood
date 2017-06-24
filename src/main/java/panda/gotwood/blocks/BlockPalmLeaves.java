@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import panda.gotwood.GotWood;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.util.IOreDictionaryEntry;
@@ -33,9 +34,11 @@ import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -103,7 +106,7 @@ public class BlockPalmLeaves extends BlockLeaves implements IOreDictionaryEntry{
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-		return GameRegistry.findItem("varietytrees", wood+"_seed");
+		return ForgeRegistries.ITEMS.getValue(new ResourceLocation(GotWood.MODID, wood+"_seed"));
     }
    
     

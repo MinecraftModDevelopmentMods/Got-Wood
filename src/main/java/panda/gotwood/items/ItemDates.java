@@ -1,6 +1,7 @@
 package panda.gotwood.items;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -11,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import panda.gotwood.GotWood;
+import panda.gotwood.registry.BlockRegistry;
 
 public class ItemDates extends ItemFood{
 
@@ -21,14 +23,18 @@ public class ItemDates extends ItemFood{
 	
 	
 	@Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
-
-        if (facing == EnumFacing.UP && playerIn.canPlayerEdit(pos.offset(facing), facing, stack) && (state.getBlock()== net.minecraft.init.Blocks.GRASS ||state.getBlock()==net.minecraft.init.Blocks.DIRT|| state.getBlock()==net.minecraft.init.Blocks.SAND) && worldIn.isAirBlock(pos.up()))
+        IBlockState state = worldIn.getBlockState(pos);
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+		
+		if(heldItem.isEmpty()){
+			return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+		}
+        if (facing == EnumFacing.UP && playerIn.canPlayerEdit(pos.offset(facing), facing, heldItem) && (state.getBlock()== net.minecraft.init.Blocks.GRASS ||state.getBlock()==net.minecraft.init.Blocks.DIRT|| state.getBlock()==net.minecraft.init.Blocks.SAND) && worldIn.isAirBlock(pos.up()))
         {
-        	worldIn.setBlockState(pos.up(), Block.REGISTRY.getObject(new ResourceLocation(GotWood.MODID, "palm_sapling")).getDefaultState());
-            --stack.stackSize;
+        	worldIn.setBlockState(pos.up(), BlockRegistry.palm_sapling.getDefaultState());
+        	heldItem.shrink(1);
             return EnumActionResult.SUCCESS;
         }
         else

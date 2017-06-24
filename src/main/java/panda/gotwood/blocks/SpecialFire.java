@@ -351,7 +351,7 @@ public class SpecialFire extends BlockFire {
                 	ItemStack burnitem = worldIn.rand.nextBoolean()? new ItemStack(ItemRegistry.ash): new ItemStack(Items.COAL,1,1);
                 	EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, burnitem);
 
-    				worldIn.spawnEntityInWorld(entityitem);
+    				worldIn.spawnEntity(entityitem);
             	}else
             		if (block instanceof IFireDrops) {
             		    IFireDrops fireDrops = (IFireDrops) block;
@@ -362,7 +362,7 @@ public class SpecialFire extends BlockFire {
             		        fireDrops.addFireDrops(drops, random);
             		        for (ItemStack drop : drops){
             		            EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
-            		            worldIn.spawnEntityInWorld(entityitem);
+            		            worldIn.spawnEntity(entityitem);
             		        }
             		        
             		        

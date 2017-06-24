@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "axis=y,generated=0":  { "model": "gotwood:rubber_log" },
+        "axis=z,generated=0":   { "model": "gotwood:rubber_log", "x": 90 },
+        "axis=x,generated=0":   { "model": "gotwood:rubber_log", "x": 90, "y": 90 },
+        "axis=none,generated=0": { "model": "gotwood:rubber_bark" },
+	"axis=y,generated=1":  { "model": "gotwood:rubber_log" },
+        "axis=z,generated=1":   { "model": "gotwood:rubber_log", "x": 90 },
+        "axis=x,generated=1":   { "model": "gotwood:rubber_log", "x": 90, "y": 90 },
+        "axis=none,generated=1": { "model": "gotwood:rubber_bark" }
+    }
+}

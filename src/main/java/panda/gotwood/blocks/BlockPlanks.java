@@ -59,11 +59,6 @@ public class BlockPlanks extends Block implements IOreDictionaryEntry{
 	}
 
 	@Override
-	public boolean isVisuallyOpaque() {
-		return true;
-	}
-
-	@Override
 	public boolean isFullCube(IBlockState bs) {
 		return true;
 	}

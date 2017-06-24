@@ -40,14 +40,18 @@ public class ItemSeed extends Item implements IOreDictionaryEntry, IPlantable{
      * Called when a Block is right-clicked with this Item
      */
 	@Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
-
-        if (facing == EnumFacing.UP && playerIn.canPlayerEdit(pos.offset(facing), facing, stack) && (state.getBlock()== net.minecraft.init.Blocks.GRASS ||state.getBlock()==net.minecraft.init.Blocks.DIRT|| state.getBlock()==net.minecraft.init.Blocks.FARMLAND) && worldIn.isAirBlock(pos.up()))
+        IBlockState state = worldIn.getBlockState(pos);
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+		
+		if(heldItem.isEmpty()){
+			return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+		}
+        if (facing == EnumFacing.UP && playerIn.canPlayerEdit(pos.offset(facing), facing, heldItem) && (state.getBlock()== net.minecraft.init.Blocks.GRASS ||state.getBlock()==net.minecraft.init.Blocks.DIRT|| state.getBlock()==net.minecraft.init.Blocks.FARMLAND) && worldIn.isAirBlock(pos.up()))
         {
         	worldIn.setBlockState(pos.up(), this.getSaplingState());
-            --stack.stackSize;
+        	heldItem.shrink(1);
             return EnumActionResult.SUCCESS;
         }
         else

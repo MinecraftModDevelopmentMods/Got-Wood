@@ -35,6 +35,7 @@ import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.util.IFireDrops;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
+import panda.gotwood.util.WoodMaterials;
 
 public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable,IFireDrops{
 
@@ -118,7 +119,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 	}
 	
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos frompos) {
 		
 		
 		if(world.getBlockState(pos.north()).getBlock() == BlockRegistry.bamboo_leaves ||world.getBlockState(pos.west()).getBlock() == BlockRegistry.bamboo_leaves||world.getBlockState(pos.east()).getBlock() == BlockRegistry.bamboo_leaves|| world.getBlockState(pos.south()).getBlock() == BlockRegistry.bamboo_leaves){
@@ -191,8 +192,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 
 	@Override
 	public String getOreDictionaryName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "log" + WoodMaterials.bamboo.getCapitalizedName();
 	}
 	@Override
 	public boolean hasFireDrops() {
