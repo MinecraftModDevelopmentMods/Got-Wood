@@ -16,12 +16,7 @@ def mod_file = getModFile()
 def mc_version = "1.11.2"
 def short_version = getVersion("VERSION", mod_file)
 version = mc_version + "-" + short_version
-if (System.getenv().BUILD_NUMBER) {
-    version += "." + System.getenv().BUILD_NUMBER
-}
-if (System.getenv().BUILD_NUMBER) {
-    version += "." + System.getenv().BUILD_NUMBER
-}
+
 group = "panda.gotwood" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "GotWood"
 
