@@ -13,11 +13,7 @@ public class ItemWoodDoor extends ItemDoor implements IOreDictionaryEntry{
 	private final WoodMaterial wood;
 	private final String oreDict;
 
-	/**
-	 *
-	 * @param block
-	 * @param metal
-	 */
+
 	public ItemWoodDoor(BlockDoor block, WoodMaterial wood) {
 		super(block);
 		this.wood = wood;

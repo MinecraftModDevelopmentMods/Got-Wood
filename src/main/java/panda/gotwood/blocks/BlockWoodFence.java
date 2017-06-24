@@ -17,11 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- *
- * @author Jasmine Iwanek
- *
- */
+
 public class BlockWoodFence extends BlockFence implements IOreDictionaryEntry{
 
 	final WoodMaterial wood;

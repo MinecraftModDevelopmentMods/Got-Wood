@@ -30,10 +30,7 @@ public class BlockWoodDoor extends BlockDoor  {
 
 	public Item doorItem;
 
-	/**
-	 *
-	 * @param metal
-	 */
+
 	public BlockWoodDoor(WoodMaterial wood) {
 		super(Material.WOOD);
 		this.setSoundType(SoundType.WOOD);
