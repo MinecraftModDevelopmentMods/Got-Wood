@@ -50,8 +50,8 @@ public class BlockTreeTap extends BlockContainer {
   });
 
   @Override
-public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-	super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state,EntityPlayer playerIn, EnumHand hand, ItemStack heldItem,EnumFacing side, float hitX, float hitY, float hitZ) {
+	super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem,side, hitX, hitY, hitZ);
 	if(worldIn.isRemote) {
 	      return false;
 	    }
@@ -61,8 +61,8 @@ public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, 
 		if(stack != null){
 			System.out.println("yep");
 			if(stack.getItem() == Items.BUCKET){
-				if(!stack.isEmpty()){
-					stack.shrink(1);
+				if(stack.stackSize > 0){
+					--stack.stackSize;
 
 					TileEntity te = worldIn.getTileEntity(pos);
 					if(te instanceof TileTreeTap){
@@ -124,7 +124,7 @@ public BlockTreeTap() {
   }
   
   @Override
-  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,BlockPos frompos) {
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn) {
     if(worldIn.isRemote) {
       return;
     }
@@ -213,14 +213,14 @@ public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 	super.onBlockAdded(worldIn, pos, state);
 }
 
-  //@Override
-  //public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, ItemStack stack) {
-   // EnumFacing enumfacing = facing.getOpposite();
+  @Override
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, ItemStack stack) {
+    EnumFacing enumfacing = facing.getOpposite();
 
-  //  if(enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
-   //   enumfacing = placer.getHorizontalFacing().getOpposite();
-   // }
+    if(enumfacing == EnumFacing.DOWN || enumfacing == EnumFacing.UP) {
+      enumfacing = placer.getHorizontalFacing().getOpposite();
+    }
     
-  //  return this.getDefaultState().withProperty(FACING, enumfacing);
-  //}
+    return this.getDefaultState().withProperty(FACING, enumfacing);
+  }
 }

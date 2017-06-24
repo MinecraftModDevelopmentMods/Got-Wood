@@ -37,9 +37,9 @@ public class BlockBerryBush extends BlockBush{
         return false;
     }
     
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn,BlockPos fromPos)
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn)
     {
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        super.neighborChanged(state, worldIn, pos, blockIn);
         this.checkAndDropBlock(worldIn, pos, state);
     }
 

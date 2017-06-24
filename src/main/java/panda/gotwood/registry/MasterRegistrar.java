@@ -15,11 +15,8 @@ import panda.gotwood.util.FuelHandler;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.TreeTapRenderer;
 import panda.gotwood.util.WoodMaterials;
-import panda.gotwood.util.renderProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -47,18 +44,14 @@ public final class MasterRegistrar {
 			if (k instanceof Block) {
 				Block block = (Block) k;
 				GameRegistry.register(block);
-				BlockRegistry.blockRegistry.put(block.getRegistryName().getResourcePath(), block);
 				if(!(k instanceof SpecialFire)&& !(k instanceof BlockWoodDoor)){
 					((Block) k).setCreativeTab(GotWood.TreeTab);
 				}
 				block.setUnlocalizedName(GotWood.MODID + "." + block.getRegistryName().getResourcePath());
-				if (Item.getItemFromBlock(block).equals(Items.AIR)){
+				if (Item.getItemFromBlock(block) == null)
 					GameRegistry.register(new ItemBlock(block), block.getRegistryName());
-				}
 			} else if (k instanceof Item) {
-				Item item = (Item) k;
 				GameRegistry.register((Item) k);
-				ItemRegistry.itemRegistry.put(item.getRegistryName().getResourcePath(), item);
 				((Item) k).setCreativeTab(GotWood.TreeTab);		
 				((Item) k).setUnlocalizedName(GotWood.MODID + "." + ((Item) k).getRegistryName().getResourcePath());
 			}
@@ -78,15 +71,16 @@ public final class MasterRegistrar {
 			Item item = null;
 			if (k instanceof Block) {
 				item = Item.getItemFromBlock((Block) k);
-				
+				BlockRegistry.blockRegistry.put(item.getRegistryName().getResourcePath(), (Block) k);
 				System.out.println(item.getRegistryName().getResourcePath());
 			} else if (k instanceof Item) {
 				item = (Item) k;
-				
+				ItemRegistry.itemRegistry.put(item.getRegistryName().getResourcePath(), item);
 				System.out.println(item.getRegistryName().getResourcePath());
 			}
 
 			if (item != null ) {
+				
 				ModelLoader.setCustomModelResourceLocation(item, 0,new ModelResourceLocation(item.getRegistryName(), "inventory"));
 				if (item instanceof IOreDictionaryEntry){
 					OreDictionary.registerOre(((IOreDictionaryEntry) item).getOreDictionaryName(), item);
@@ -108,8 +102,7 @@ public final class MasterRegistrar {
 		
 		RecipeRegistry.init();
 		GameRegistry.registerFuelHandler(new FuelHandler());
-		if(e.getSide() == Side.CLIENT){
-			renderProxy.init();
-		}
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileTreeTap.class, new TreeTapRenderer());
 	}
 }

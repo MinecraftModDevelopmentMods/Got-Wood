@@ -109,7 +109,7 @@ public abstract class RecipeRegistry {
 		
 		
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(Blocks.PLANKS,3,4), new ItemStack(BlockRegistry.rubber_log));
+		
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_seed,2), new ItemStack(Items.APPLE));
 		GameRegistry.addSmelting( new ItemStack(Items.COAL,1, 1),new ItemStack(ItemRegistry.ash), 0.1f);
@@ -132,21 +132,33 @@ public abstract class RecipeRegistry {
 		}
 	}
 
-
+	/**
+	 *
+	 * @param oreDictEntries
+	 * @param name
+	 */
 	public static void addOredicts(String[] oreDictEntries, Block name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
-
+	/**
+	 *
+	 * @param oreDictEntries
+	 * @param name
+	 */
 	public static void addOredicts(String[] oreDictEntries, Item name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
-
+	/**
+	 *
+	 * @param oreDictEntries
+	 * @param itemStackName
+	 */
 	public static void addOredicts(String[] oreDictEntries, ItemStack itemStackName) {
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], itemStackName);

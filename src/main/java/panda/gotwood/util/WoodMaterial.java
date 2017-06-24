@@ -60,14 +60,14 @@ public class WoodMaterial {
 
 
 	/**
-	 * name
+	 * @param name
 	 *            String used to identify items and blocks using this material
-	 * ardness
+	 * @param hardness
 	 *            hardness on a scale from 0 to 10 (or more), where 0 is
 	 *            non-solid and diamond is 10. For reference, wood is 3, stone
 	 *            is 5, iron is 8, diamond is 10. Used for damage, armor
 	 *            protection, and tool effectiveness calculations
-	 * strength
+	 * @param strength
 	 *            durability on a scale from 0 to 10 (or more). For reference,
 	 *            leather is 2.5, gold is 3, wood is 2, stone is 4, iron is 8,
 	 *            minecraft diamond is 10. Used for item durability calculations
@@ -125,7 +125,7 @@ public class WoodMaterial {
 	/**
 	 * Gets the tool harvest level
 	 * 
-	 * an integer from -1 (equivalent to no tool) to 3 (diamond tool
+	 * @return an integer from -1 (equivalent to no tool) to 3 (diamond tool
 	 *         equivalent)
 	 */
 	public int getToolHarvestLevel() {
@@ -136,7 +136,7 @@ public class WoodMaterial {
 	 * Gets the tool harvest level needed from a tool trying to mine this
 	 * metal's ore and other blocks
 	 * 
-	 * an integer from -1 (equivalent to no tool) to 3 (diamond tool
+	 * @return an integer from -1 (equivalent to no tool) to 3 (diamond tool
 	 *         equivalent)
 	 */
 	public int getRequiredHarvestLevel() {
@@ -170,7 +170,7 @@ public class WoodMaterial {
 	/**
 	 * Gets the resistance of blocks made from this material to explosions
 	 * 
-	 *  the blast resistance score
+	 * @return the blast resistance score
 	 */
 	public float getBlastResistance() {
 		return this.blastResistance;
@@ -180,7 +180,7 @@ public class WoodMaterial {
 	 * Gets the number used to determine how quickly a block is mined with a
 	 * tool made from this material
 	 * 
-	 * the number used to determine how quickly a block is mined
+	 * @return the number used to determine how quickly a block is mined
 	 */
 	public float getToolEfficiency() {
 		return this.hardness;
@@ -189,7 +189,7 @@ public class WoodMaterial {
 	/**
 	 * Gets the hardness of the log block for this material
 	 * 
-	 *  the hardness of the log block for this material
+	 * @return the hardness of the log block for this material
 	 */
 	public float getLogBlockHardness() {
 		return 2.0f * this.hardness;
@@ -198,7 +198,7 @@ public class WoodMaterial {
 	/**
 	 * Gets the hardness for planks made from this material
 	 * 
-	 *  the hardness for planks made from this material
+	 * @return the hardness for planks made from this material
 	 */
 	public float getPlankBlockHardness() {
 		return 0.5f * this.hardness;
@@ -221,9 +221,9 @@ public class WoodMaterial {
 	 * Sets the blast resistance of the material. Should only be used as a
 	 * builder method.
 	 * 
-	 *  resistance
+	 * @param resistance
 	 *            The resistance for the material.
-	 *  An instance of the material, for quality of life.
+	 * @return An instance of the material, for quality of life.
 	 */
 	public WoodMaterial setBlastResistance(float resistance) {
 		this.blastResistance = resistance;

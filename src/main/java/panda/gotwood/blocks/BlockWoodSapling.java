@@ -10,7 +10,6 @@ import panda.gotwood.generation.WorldGenFir;
 import panda.gotwood.generation.WorldGenMaple;
 import panda.gotwood.generation.WorldGenPalm;
 import panda.gotwood.generation.WorldGenPine;
-import panda.gotwood.generation.WorldGenRubber;
 import panda.gotwood.generation.WorldGenWillow;
 import panda.gotwood.generation.WorldGenYew;
 import panda.gotwood.registry.BlockRegistry;
@@ -165,7 +164,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        	worldgenerator = new WorldGenPalm(true);
                 break;
 	        case "rubber":
-	        	worldgenerator = new WorldGenRubber(true);
+	        	//worldgenerator = new WorldGenPalm(true);
                 break;
 	            
 	            	

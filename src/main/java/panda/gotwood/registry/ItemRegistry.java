@@ -97,8 +97,6 @@ public class ItemRegistry {
 		list.add(rubber_sap);
 		
 		
-		
-		
 		list.add(apple_door);
 		list.add(maple_door);
 		list.add(pine_door);

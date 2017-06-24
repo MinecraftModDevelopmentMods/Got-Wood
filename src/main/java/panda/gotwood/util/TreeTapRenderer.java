@@ -16,12 +16,9 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class TreeTapRenderer extends TileEntitySpecialRenderer<TileTreeTap> {
 //FROM TIC
-	
-	
 	  @Override
 	  public void renderTileEntityAt(@Nonnull TileTreeTap te, double x, double y, double z, float partialTicks, int destroyStage) {
 

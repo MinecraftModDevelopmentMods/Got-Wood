@@ -245,9 +245,13 @@ public class BlockRegistry {
 		list.add(rubber_leaves);
 		list.add(rubber_sapling);
 		
+		
 		list.add(dates_block);
 		
-		//list.add(treetap);		
+		
+		list.add(treetap);
+
+		
 
 		return list;
 	}

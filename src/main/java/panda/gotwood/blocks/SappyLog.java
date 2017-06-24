@@ -89,19 +89,17 @@ public class SappyLog extends BlockWoodLog {
 	    }
 
 		@Override //&& state.getValue(GENERATED)==1
-		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-			ItemStack heldItem = playerIn.getHeldItem(hand);
-			
-			if(heldItem.isEmpty()){
-				return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+		public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+				EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+			if(heldItem == null){
+				return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 			}
 			
-			if( !worldIn.isRemote  && heldItem.getItem() == Items.BOWL && facing != EnumFacing.UP && facing != EnumFacing.DOWN){
+			if( !worldIn.isRemote  && heldItem.getItem() == Items.BOWL && side != EnumFacing.UP && side != EnumFacing.DOWN){
 				
                     ItemStack itemstack1 = new ItemStack(ItemRegistry.rubber_sap);
 
-                    heldItem.shrink(1);
-                    if (heldItem.isEmpty())
+                    if (--heldItem.stackSize == 0)
                     {
                         playerIn.setHeldItem(hand, itemstack1);
                     }
@@ -110,7 +108,7 @@ public class SappyLog extends BlockWoodLog {
                         playerIn.dropItem(itemstack1, false);
                     }
 			}
-			return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+			return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
 			
 		}
 

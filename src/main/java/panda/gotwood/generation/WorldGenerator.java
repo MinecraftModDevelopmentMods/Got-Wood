@@ -9,7 +9,6 @@ import net.minecraft.world.biome.BiomeDesert;
 import net.minecraft.world.biome.BiomeForest;
 import net.minecraft.world.biome.BiomeForestMutated;
 import net.minecraft.world.biome.BiomeHills;
-import net.minecraft.world.biome.BiomeJungle;
 import net.minecraft.world.biome.BiomeMesa;
 import net.minecraft.world.biome.BiomePlains;
 import net.minecraft.world.biome.BiomeRiver;
@@ -29,14 +28,15 @@ public class WorldGenerator implements IWorldGenerator{
 		int num = min + random.nextInt(max - min);
 		for(int i = 0; i < num; i++)
 		{
-			randX = chunkX*16 +8+ random.nextInt(16);
-			randZ = chunkZ*16 +8+ random.nextInt(16);
+			randX = chunkX*16 + random.nextInt(16);
+			randZ = chunkZ*16 + random.nextInt(16);
 			tree.generate(world, random, world.getHeight(new BlockPos(randX,0,randZ)));
 		}
 	}
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+		
 		if(world.provider.getDimension()==0){
 
 			WorldGenAbstractTree apple = new WorldGenApple(false);
@@ -46,9 +46,6 @@ public class WorldGenerator implements IWorldGenerator{
 			WorldGenAbstractTree pine = new WorldGenPine(false);
 			WorldGenAbstractTree willow = new WorldGenWillow();
 			WorldGenAbstractTree yew = new WorldGenYew();
-			WorldGenAbstractTree palm = new WorldGenPalm(false);
-			WorldGenAbstractTree rubber = new WorldGenRubber(false);
-			WorldGenAbstractTree bamboo = new WorldGenBamboo(false);
 
 			// get the biome
 			Biome biome = world.getBiome(new BlockPos(chunkX*16, 64, chunkZ*16));
@@ -115,10 +112,6 @@ public class WorldGenerator implements IWorldGenerator{
 			{
 				makeTree(pine,chunkX,chunkZ,random, world,0,3);
 				makeTree(fir,chunkX,chunkZ,random, world,1,4);
-			}
-			if(biome instanceof BiomeJungle)
-			{
-				makeTree(rubber,chunkX,chunkZ,random, world,0,3);
 			}
 		}
 	}

@@ -33,12 +33,14 @@ public class BlockWoodTrapdoor extends BlockTrapDoor implements IOreDictionaryEn
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final BlockPos coord, IBlockState state,
+									final EntityPlayer player, EnumHand hand, ItemStack heldItem, final EnumFacing facing,
+									final float partialX, final float partialY, final float partialZ) {
 		if (this.wood.getToolHarvestLevel() > 1)
 			return true;
 		state = state.cycleProperty(BlockTrapDoor.OPEN);
-		worldIn.setBlockState(pos, state, 2);
-		worldIn.playEvent(playerIn, ((Boolean) state.getValue(BlockTrapDoor.OPEN)) ? 1012 : 1006, pos, 0);;
+		world.setBlockState(coord, state, 2);
+		world.playEvent(player, ((Boolean) state.getValue(BlockTrapDoor.OPEN)) ? 1012 : 1006, coord, 0);;
 		return true;
 	}
 @Override

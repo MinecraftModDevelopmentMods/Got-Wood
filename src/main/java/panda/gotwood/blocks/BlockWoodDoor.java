@@ -30,7 +30,10 @@ public class BlockWoodDoor extends BlockDoor  {
 
 	public Item doorItem;
 
-
+	/**
+	 *
+	 * @param metal
+	 */
 	public BlockWoodDoor(WoodMaterial wood) {
 		super(Material.WOOD);
 		this.setSoundType(SoundType.WOOD);
@@ -79,21 +82,21 @@ public class BlockWoodDoor extends BlockDoor  {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(final World world, final BlockPos coord, IBlockState blockstate,
+									final EntityPlayer player,
+									final EnumHand hand, ItemStack heldItem,
+									final EnumFacing face,
+									final float partialX, final float partialY, final float partialZ) {
 
-		BlockPos blockpos = state.getValue(HALF) == BlockDoor.EnumDoorHalf.LOWER ? pos : pos.down();
-        IBlockState iblockstate = pos.equals(blockpos) ? state : worldIn.getBlockState(blockpos);
-
-        if (iblockstate.getBlock() != this)
-        {
-            return false;
-        }
-            state = iblockstate.cycleProperty(OPEN);
-            worldIn.setBlockState(blockpos, state, 10);
-            worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-            worldIn.playEvent(playerIn, ((Boolean)state.getValue(OPEN)).booleanValue() ? 1012 : 1006, pos, 0);
-            return true;
-        
+		final BlockPos pos = (blockstate.getValue(BlockDoor.HALF) == EnumDoorHalf.LOWER) ? coord : coord.down();
+		final IBlockState bs = coord.equals(pos) ? blockstate : world.getBlockState(pos);
+		if (bs.getBlock() != this)
+			return false;
+		blockstate = bs.cycleProperty(BlockDoor.OPEN);
+		world.setBlockState(pos, blockstate, 2);
+		world.markBlockRangeForRenderUpdate(pos, coord);
+		world.playEvent(player, ((Boolean) blockstate.getValue(BlockDoor.OPEN)) ? 1012 : 1006, coord, 0);
+		return true;
 	}
 
 	public WoodMaterial getWoodMaterial() {

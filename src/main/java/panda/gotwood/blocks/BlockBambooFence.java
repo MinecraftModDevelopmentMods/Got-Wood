@@ -26,7 +26,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-
+/**
+ *
+ * @author Jasmine Iwanek
+ *
+ */
 public class BlockBambooFence extends BlockFence implements IOreDictionaryEntry{
 
 	final WoodMaterial wood;
