@@ -15,6 +15,7 @@ import panda.gotwood.util.FuelHandler;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.TreeTapRenderer;
 import panda.gotwood.util.WoodMaterials;
+import panda.gotwood.util.renderProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -46,6 +47,7 @@ public final class MasterRegistrar {
 			if (k instanceof Block) {
 				Block block = (Block) k;
 				GameRegistry.register(block);
+				BlockRegistry.blockRegistry.put(block.getRegistryName().getResourcePath(), block);
 				if(!(k instanceof SpecialFire)&& !(k instanceof BlockWoodDoor)){
 					((Block) k).setCreativeTab(GotWood.TreeTab);
 				}
@@ -54,7 +56,9 @@ public final class MasterRegistrar {
 					GameRegistry.register(new ItemBlock(block), block.getRegistryName());
 				}
 			} else if (k instanceof Item) {
+				Item item = (Item) k;
 				GameRegistry.register((Item) k);
+				ItemRegistry.itemRegistry.put(item.getRegistryName().getResourcePath(), item);
 				((Item) k).setCreativeTab(GotWood.TreeTab);		
 				((Item) k).setUnlocalizedName(GotWood.MODID + "." + ((Item) k).getRegistryName().getResourcePath());
 			}
@@ -74,11 +78,11 @@ public final class MasterRegistrar {
 			Item item = null;
 			if (k instanceof Block) {
 				item = Item.getItemFromBlock((Block) k);
-				BlockRegistry.blockRegistry.put(item.getRegistryName().getResourcePath(), (Block) k);
+				
 				System.out.println(item.getRegistryName().getResourcePath());
 			} else if (k instanceof Item) {
 				item = (Item) k;
-				ItemRegistry.itemRegistry.put(item.getRegistryName().getResourcePath(), item);
+				
 				System.out.println(item.getRegistryName().getResourcePath());
 			}
 
@@ -104,7 +108,8 @@ public final class MasterRegistrar {
 		
 		RecipeRegistry.init();
 		GameRegistry.registerFuelHandler(new FuelHandler());
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileTreeTap.class, new TreeTapRenderer());
+		if(e.getSide() == Side.CLIENT){
+			renderProxy.init();
+		}
 	}
 }
