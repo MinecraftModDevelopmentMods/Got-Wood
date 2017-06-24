@@ -20,7 +20,7 @@ sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse t
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }
-
+import groovy.json.JsonSlurper
 def secretFile
 if (System.getenv().SECRET_FILE) {
     secretFile = file System.getenv().SECRET_FILE
