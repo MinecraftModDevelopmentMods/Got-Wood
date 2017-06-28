@@ -24,6 +24,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -33,6 +34,7 @@ import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -42,29 +44,75 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockWoodLeaves extends BlockLeaves implements IOreDictionaryEntry{
+public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEntry{
 	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
     public static final PropertyBool CHECK_DECAY = PropertyBool.create("check_decay");
+    public static final PropertyBool FRUITING = PropertyBool.create("fruit");
 	final WoodMaterial wood;
 	
-	public BlockWoodLeaves( WoodMaterial wood){
+	public BlockFruitingLeaves( WoodMaterial wood){
 		this.wood = wood;
 		Blocks.FIRE.setFireInfo(this, 30, 60);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false).withProperty(FRUITING, false));
 		this.setRegistryName(wood.getName()+"_leaves");
+		this.setTickRandomly(true);
 	}
 	
-	//protected int getSaplingDropChance(IBlockState state)
-    //{
-    //    return state.getValue(VARIANT) == BlockPlanks.EnumType.JUNGLE ? 40 : super.getSaplingDropChance(state);
-    //}
-	
-	//Should never be called for apple trees
+
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-		return ForgeRegistries.ITEMS.getValue(new ResourceLocation(GotWood.MODID, wood+"_seed"));
+		return Items.AIR;
     }
+
+
+	@Override
+	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+		// TODO Auto-generated method stub
+		super.randomTick(worldIn, pos, state, random);
+		if(state.getValue(FRUITING)){
+			return;
+		}
+		
+		if(state.getValue(DECAYABLE) && random.nextInt(ConfigurationHandler.appleFruitingChance)==0){
+			int adjacent = 0;
+			if(worldIn.getBlockState(pos.up()).getBlock()== this){
+				if(worldIn.getBlockState(pos.up()).getValue(FRUITING)){
+					adjacent++;
+				}
+			}
+			if(worldIn.getBlockState(pos.down()).getBlock()== this){
+				if(worldIn.getBlockState(pos.down()).getValue(FRUITING)){
+					adjacent++;
+				}
+			}
+			if(worldIn.getBlockState(pos.east()).getBlock()== this){
+				if(worldIn.getBlockState(pos.east()).getValue(FRUITING)){
+					adjacent++;
+				}
+			}
+			if(worldIn.getBlockState(pos.south()).getBlock()== this){
+				if(worldIn.getBlockState(pos.south()).getValue(FRUITING)){
+					adjacent++;
+				}
+			}
+			if(worldIn.getBlockState(pos.north()).getBlock()== this){
+				if(worldIn.getBlockState(pos.north()).getValue(FRUITING)){
+					adjacent++;
+				}
+			}
+			if(worldIn.getBlockState(pos.west()).getBlock()== this){
+				if(worldIn.getBlockState(pos.west()).getValue(FRUITING)){
+					adjacent++;
+				}
+			}
+
+			if(adjacent<=2){
+				worldIn.setBlockState(pos, state.withProperty(FRUITING, true), 2);
+			}
+		}
+		
+	}
 
 
 	@Override
@@ -73,44 +121,45 @@ public class BlockWoodLeaves extends BlockLeaves implements IOreDictionaryEntry{
         java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
         Random rand = world instanceof World ? ((World)world).rand : new Random();
         int chance = -1;									
-        	//20,2,10
-        	chance = getModifiedSeedChance(this.wood,fortune);
-            if (rand.nextInt(chance) == 0){
-                ret.add(new ItemStack(getItemDropped(state, rand, fortune), 1, damageDropped(state)));    
-            }
+        if(state.getValue(FRUITING)){
+	        if(wood == WoodMaterials.apple){    		
+	        	chance = getModifiedChance(ConfigurationHandler.appleChance, fortune, ConfigurationHandler.appleDropFortuneDecrement,ConfigurationHandler.appleDropMinChance);
+
+
+	        	ret.add(new ItemStack(Items.APPLE));
+	        	
+	        	if (rand.nextInt(chance) == 0){
+	        		ret.add(new ItemStack(Items.APPLE));
+	        	}
+									
+	        	chance = getModifiedChance(ConfigurationHandler.goldenDropChance, fortune, ConfigurationHandler.goldenDropFortuneDecrement,ConfigurationHandler.goldenDropMinChance);
+	            if (rand.nextInt(chance) == 0){
+	            	ret.add(new ItemStack(Items.GOLDEN_APPLE));
+	            }
+	        }
+        }
+        
         this.captureDrops(true);
 
         ret.addAll(this.captureDrops(false));
         return ret;
     }
-	
-	private int getModifiedSeedChance(WoodMaterial wood, int fortune) {
-		//should never happen but fallback to vanilla if so.
-		int ch = 20;
-		int dec = ConfigurationHandler.seedDropFortuneDecrement;
-		int min = ConfigurationHandler.mapleChance;
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
-		switch(wood.getName()){
-			case "maple":
-				ch = ConfigurationHandler.mapleChance;
-			case "pine":
-				ch = ConfigurationHandler.pineChance;
-			case "willow":
-				ch = ConfigurationHandler.willowChance;
-			case "yew":
-				ch = ConfigurationHandler.yewChance;
-			case "ebony":
-				ch = ConfigurationHandler.ebonyChance;
-			case "fir":
-				ch = ConfigurationHandler.firChance;
-			case "bamboo":
-				ch = ConfigurationHandler.bambooChance;
-			case "rubber":
-				ch = ConfigurationHandler.rubberChance;
-		
-		}
-		return getModifiedChance(ch, fortune,dec,min);
+		if(!worldIn.isRemote){for(ItemStack item : this.getDrops(worldIn, pos, state, 0)){
+			
+			EntityItem entityitem = new EntityItem(worldIn, pos.getX()+ 0.5+ facing.getFrontOffsetX()*0.7, pos.getY() + 0.5+facing.getFrontOffsetY()*0.7, pos.getZ() + 0.5+ facing.getFrontOffsetZ()*0.7, item);
+			entityitem.motionX *= 0.2;
+			entityitem.motionY = 0;
+			entityitem.motionZ *= 0.2;
+			worldIn.spawnEntity(entityitem);
+		}}
+		worldIn.setBlockState(pos, state.withProperty(FRUITING, false), 2);
+		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
+
 
 	private int getModifiedChance(int chance, int fortune,int decrement,int minchance){
         if (fortune > 0)
@@ -177,38 +226,28 @@ public class BlockWoodLeaves extends BlockLeaves implements IOreDictionaryEntry{
 
 @Override
 	public String getOreDictionaryName() {
-		return "leaves" + this.wood.getCapitalizedName();
+		return "leavesFruit" + this.wood.getCapitalizedName();
 	}
 @Override
 public IBlockState getStateFromMeta(int meta)
 {
-    return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf(meta > 0));
+    return this.getDefaultState().withProperty(FRUITING, meta%2 ==1).withProperty(DECAYABLE, meta == 2||meta == 3||meta == 6||meta == 7).withProperty(CHECK_DECAY, meta > 3);
 }
 
-/**
- * Convert the BlockState into the correct metadata value
- */
 @Override
 public int getMetaFromState(IBlockState state)
 {
     int i = 0;
-
-    if (!((Boolean)state.getValue(DECAYABLE)).booleanValue())
-    {
-        i |= 1;
-    }
-
-    if (((Boolean)state.getValue(CHECK_DECAY)).booleanValue())
-    {
-        i |= 2;
-    }
-
+    i += state.getValue(FRUITING)? 1:0;
+    i += state.getValue(DECAYABLE)? 2:0;
+    i += state.getValue(CHECK_DECAY)? 4:0;
     return i;
 }
+
 @Override
 protected BlockStateContainer createBlockState()
 {
-    return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+    return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE,FRUITING});
 }
 
 @Override

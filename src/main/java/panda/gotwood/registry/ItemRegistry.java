@@ -37,6 +37,7 @@ public class ItemRegistry {
 	public static final Item ebony_seed = new ItemSeed(WoodMaterials.ebony);
 	public static final Item fir_seed = new ItemSeed(WoodMaterials.fir);
 	public static final Item bamboo_seed = new ItemSeed(WoodMaterials.bamboo);
+	public static final Item rubber_seed = new ItemSeed(WoodMaterials.rubber);
 	
 	public static final Item oak_seed = new ItemSeed(WoodMaterials.oak);
 	public static final Item birch_seed = new ItemSeed(WoodMaterials.birch);
@@ -93,6 +94,7 @@ public class ItemRegistry {
 		list.add(ebony_seed);
 		list.add(dates);
 		list.add(bamboo_seed);
+		list.add(rubber_seed);
 		list.add(maple_sap);
 		list.add(rubber_sap);
 		

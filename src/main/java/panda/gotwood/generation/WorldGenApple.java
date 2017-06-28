@@ -2,14 +2,9 @@ package panda.gotwood.generation;
 
 import java.util.Random;
 
-
-
-
-
-
-
-
+import panda.gotwood.blocks.BlockFruitingLeaves;
 import panda.gotwood.blocks.BlockWoodLeaves;
+import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.registry.BlockRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -121,7 +116,7 @@ public class WorldGenApple extends WorldGenAbstractTree
 
                                     if (state.getBlock().isAir(state, worldIn, blockpos) || state.getBlock().isLeaves(state, worldIn, blockpos) || state.getMaterial() == Material.VINE)
                                     {
-                                        this.setBlockAndNotifyAdequately(worldIn, blockpos, this.metaLeaves);
+                                        this.setBlockAndNotifyAdequately(worldIn, blockpos, this.metaLeaves.withProperty(BlockFruitingLeaves.FRUITING, rand.nextInt(ConfigurationHandler.appleFruitingGenChance)==0));
                                     }
                                 }
                             }

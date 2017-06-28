@@ -46,6 +46,12 @@ public class ConfigurationHandler {
 
 	public static int bambooChance;
 
+	public static int appleFruitingChance;
+
+	public static int appleFruitingGenChance;
+
+	public static int rubberChance;
+
 	
 	
 	
@@ -62,7 +68,7 @@ public class ConfigurationHandler {
 			jungleChance = config.getInt("jungleSeedChance", "Drops", 60, 1, 32767, "");
 			acaciaChance = config.getInt("acaciaSeedChance", "Drops", 30, 1, 32767, "");
 			darkoakChance = config.getInt("darkoakSeedChance", "Drops", 30, 1, 32767, "");
-			appleChance = config.getInt("appleChance", "Drops", 23, 1, 32767, "");
+			appleChance = config.getInt("appleChance", "Drops", 6, 1, 32767, "");
 			mapleChance = config.getInt("mapleSeedChance", "Drops", 30, 1, 32767, "");
 			pineChance = config.getInt("pineSeedChance", "Drops", 27, 1, 32767, "");
 			willowChance = config.getInt("willowSeedChance", "Drops", 52, 1, 32767, "");
@@ -70,7 +76,8 @@ public class ConfigurationHandler {
 			ebonyChance = config.getInt("ebonySeedChance", "Drops", 27, 1, 32767, "");
 			firChance = config.getInt("firSeedChance", "Drops", 34, 1, 32767, "");
 			bambooChance = config.getInt("bambooSeedChance", "Drops", 10, 1, 32767, "");
-			goldenDropChance = config.getInt("goldenAppleChance", "Drops", 1600, 1, 32767, "");
+			rubberChance = config.getInt("rubberSeedChance", "Drops", 38, 1, 32767, "");
+			goldenDropChance = config.getInt("goldenAppleChance", "Drops", 80, 1, 32767, "");
 			goldenDropFortuneDecrement = config.getInt("goldenAppleFortuneDecrement", "Drops", 60, 1, 32767, "Must be less than the chance");
 			goldenDropMinChance = config.getInt("goldenAppleMinChance", "Drops", 400, 1, 32767, "Must be less than the chance");
 			appleDropFortuneDecrement = config.getInt("appleFortuneDecrement", "Drops", 2, 1, 32767, "Must be less than the chance");
@@ -79,7 +86,8 @@ public class ConfigurationHandler {
 			seedDropMinChance = config.getInt("seedFortuneDecrement", "Drops", 10, 1, 32767, "Must be less than every seed chance. Effects all tree seed chances");
 			removeAppleDrops = config.getBoolean("removeAppleDrops", "Drops", true, "Make apple trees the only natural source of apples besides loot");
 			config.addCustomCategoryComment("Generation", "Tweaks for tree generation");
-		
+			appleFruitingChance = config.getInt("appleFruitingChance", "Drops", 8, 1, 32767, "");
+			appleFruitingGenChance = config.getInt("appleFruitingGenerationChance", "Drops", 12, 1, 32767, "");
 		config.addCustomCategoryComment("Misc", "Misc Tweaks");
 		numStairs = config.getInt("NumStairsCrafting", "Misc", 4, 1, 8, "");
 		retrieveSaplingsMode = config.getInt("goldenAppleChance", "Misc", 1, 0, 2, "0: Can't get sapling items normally/n1:Shear or silktouch a sapling block/n 2:Place a seed in a crafting grid");

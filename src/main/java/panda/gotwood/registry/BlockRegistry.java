@@ -9,6 +9,7 @@ import panda.gotwood.blocks.BlockBambooFence;
 import panda.gotwood.blocks.BlockBambooLog;
 import panda.gotwood.blocks.BlockDates;
 import panda.gotwood.blocks.BlockDoubleSlab;
+import panda.gotwood.blocks.BlockFruitingLeaves;
 import panda.gotwood.blocks.BlockHalfSlab;
 import panda.gotwood.blocks.BlockPalmLeaves;
 import panda.gotwood.blocks.BlockPlanks;
@@ -38,7 +39,7 @@ public class BlockRegistry {
 	public static final Block apple_planks = new BlockPlanks(WoodMaterials.apple);
 	public static final BlockDoor apple_door = new BlockWoodDoor(WoodMaterials.apple);
 	public static final Block apple_trapdoor = new BlockWoodTrapdoor(WoodMaterials.apple);
-	public static final Block apple_leaves = new BlockWoodLeaves(WoodMaterials.apple);
+	public static final Block apple_leaves = new BlockFruitingLeaves(WoodMaterials.apple);
 	public static final Block apple_sapling = new BlockWoodSapling(WoodMaterials.apple);
 	public static final Block apple_gate = new BlockWoodFenceGate(WoodMaterials.apple);
 	//public static final BlockSlab apple_slab = new BlockHalfSlab(WoodMaterials.apple);
