@@ -6,13 +6,16 @@ buildscript {
             name = 'gradle'
             url 'https://plugins.gradle.org/m2/'
         }
+	
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+	classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: "maven-publish"
+apply plugin: 'org.sonarqube'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 description = "Got Wood?"
