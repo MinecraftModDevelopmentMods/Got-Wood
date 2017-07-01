@@ -4,12 +4,6 @@ import java.util.Random;
 
 import panda.gotwood.blocks.BlockWoodLeaves;
 import panda.gotwood.registry.BlockRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -20,9 +14,9 @@ public class WorldGenPine extends WorldGenAbstractTree
 	private static final IBlockState TRUNK = BlockRegistry.pine_log.getDefaultState();
     private static final IBlockState LEAF = BlockRegistry.pine_leaves.getDefaultState().withProperty(BlockWoodLeaves.DECAYABLE, Boolean.valueOf(true));
 
-    public WorldGenPine(boolean p_i2025_1_)
+    public WorldGenPine(boolean bool)
     {
-        super(p_i2025_1_);
+        super(bool);
     }
 
     public boolean generate(World worldIn, Random rand, BlockPos position)
@@ -48,7 +42,7 @@ public class WorldGenPine extends WorldGenAbstractTree
                     j1 = l;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.MutableBlockPos blockposmutableblockpos = new BlockPos.MutableBlockPos();
 
                 for (int k1 = position.getX() - j1; k1 <= position.getX() + j1 && flag; ++k1)
                 {
@@ -56,9 +50,9 @@ public class WorldGenPine extends WorldGenAbstractTree
                     {
                         if (i1 >= 0 && i1 < worldIn.getHeight())
                         {
-                            IBlockState state = worldIn.getBlockState(blockpos$mutableblockpos.setPos(k1, i1, l1));
+                            IBlockState state = worldIn.getBlockState(blockposmutableblockpos.setPos(k1, i1, l1));
 
-                            if (!state.getBlock().isAir(state, worldIn, blockpos$mutableblockpos.setPos(k1, i1, l1)) && !state.getBlock().isLeaves(state, worldIn, blockpos$mutableblockpos.setPos(k1, i1, l1)))
+                            if (!state.getBlock().isAir(state, worldIn, blockposmutableblockpos.setPos(k1, i1, l1)) && !state.getBlock().isLeaves(state, worldIn, blockposmutableblockpos.setPos(k1, i1, l1)))
                             {
                                 flag = false;
                             }

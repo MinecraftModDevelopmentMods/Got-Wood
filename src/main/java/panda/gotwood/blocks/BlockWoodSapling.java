@@ -1,6 +1,5 @@
 package panda.gotwood.blocks;
 
-import java.util.List;
 import java.util.Random;
 
 import panda.gotwood.generation.WorldGenApple;
@@ -17,35 +16,22 @@ import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 import panda.gotwood.util.WoodMaterials;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, IGrowable, IPlantable 
 {
@@ -64,7 +50,8 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        this.setRegistryName(wood.getName()+"_sapling");
 	        
 	    }
-
+	    
+	    @Override
 	    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	    {
 	        return SAPLING_AABB;
@@ -82,7 +69,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        return random.nextBoolean() ? 2:1;
 	    }
 
-
+	    @Override
 	    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	    {
 	        if (!worldIn.isRemote)
@@ -99,7 +86,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 
 	    public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	    {
-	        if (((Integer)state.getValue(STAGE)).intValue() == 0)
+	        if (state.getValue(STAGE) == 0)
 	        {
 	            worldIn.setBlockState(pos, this.getStateFromMeta(1), 4);
 	        }
@@ -109,37 +96,18 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        }
 	    }
 
-	    //TODO
 	    public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	    {
 	        
 	    	if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
 	        
-	    	WorldGenerator worldgenerator = (WorldGenerator)( new WorldGenApple(true));///apple
+	    	WorldGenerator worldgenerator;
 	        int i = 0;
 	        int j = 0;
-	        boolean flag = false;
+	        boolean flag = false; // for bamboo spreading
 
 	        switch (wood.getName())
 	        {
-	            /*case SPRUCE:
-	                label114:
-	                if (!flag)
-	                {
-	                    i = 0;
-	                    j = 0;
-	                    worldgenerator = new WorldGenTaiga2(true);
-	                }
-
-	                break;
-	            case BIRCH:
-	                worldgenerator = new WorldGenBirchTree(true, false);
-	                break;
-					*/
-	        case "apple":
-	        	//already handled
-	        	worldgenerator = new WorldGenApple(true);
-                break;
 	        case "maple":
 	        	worldgenerator = new WorldGenMaple(true);
                 break;
@@ -166,10 +134,9 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
                 break;
 	        case "rubber":
 	        	worldgenerator = new WorldGenRubber(true);
-                break;
-	            
-	            	
-	            	
+                break;  	
+            default:
+                worldgenerator =  new WorldGenApple(true);
 	        }
 
 	        IBlockState iblockstate2 = Blocks.AIR.getDefaultState();
@@ -203,10 +170,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	    }
 
 
-	    /**
-	     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-	     * returns the metadata of the dropped item based on the old metadata of the block.
-	     */
+	    @Override
 	    public int damageDropped(IBlockState state)
 	    {
 	        return 0;
@@ -224,9 +188,6 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        return state;
 	    }
 
-	    /**
-	     * Whether this IGrowable can grow
-	     */
 	    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
 	    {
 	        return true;
@@ -242,25 +203,22 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	        this.grow(worldIn, pos, state, rand);
 	    }
 
-	    /**
-	     * Convert the given metadata into a BlockState for this Block
-	     */
+	    @Override
 	    public IBlockState getStateFromMeta(int meta)
 	    {
 	        return this.getDefaultState().withProperty(STAGE, Integer.valueOf(meta));
 	    }
 
-	    /**
-	     * Convert the BlockState into the correct metadata value
-	     */
+	    @Override
 	    public int getMetaFromState(IBlockState state)
 	    { 
-	        return ((Integer)state.getValue(STAGE)).intValue();
+	        return state.getValue(STAGE);
 	    }
-
+	    
+	    @Override
 	    protected BlockStateContainer createBlockState()
 	    {
-	        return new BlockStateContainer(this, new IProperty[] {STAGE});
+	        return new BlockStateContainer(this, STAGE);
 	    }
 	    
 	    public WoodMaterial getWoodMaterial() {

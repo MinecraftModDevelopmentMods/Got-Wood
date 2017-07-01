@@ -86,8 +86,6 @@ public class WorldGenMaple extends WorldGenAbstractTree
 				if (state.getBlock().canSustainPlant(state, worldIn, position.down(), net.minecraft.util.EnumFacing.UP, (net.minecraft.block.BlockSapling)net.minecraft.init.Blocks.SAPLING) && position.getY() < worldIn.getHeight() - i - 1)
 				{
 					this.setDirtAt(worldIn, position.down());
-					int k2 = 3;
-					int l2 = 0;
 
 					for (int i3 = position.getY() - 3 + i; i3 <= position.getY() + i; ++i3)
 					{
@@ -338,7 +336,7 @@ public class WorldGenMaple extends WorldGenAbstractTree
 				k = 1;
 			}
 
-			BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+			BlockPos.MutableBlockPos blockposmutableblockpos = new BlockPos.MutableBlockPos();
 
 			for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
 			{
@@ -346,7 +344,7 @@ public class WorldGenMaple extends WorldGenAbstractTree
 				{
 					if (j >= 0 && j < worldIn.getHeight())
 					{
-						if (!this.isReplaceable(worldIn,blockpos$mutableblockpos.setPos(l, j, i1)))
+						if (!this.isReplaceable(worldIn,blockposmutableblockpos.setPos(l, j, i1)))
 						{
 							return false;
 						}

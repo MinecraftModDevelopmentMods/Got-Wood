@@ -22,15 +22,15 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenerator implements IWorldGenerator{
-	private int MIN=-1,MAX=-1,numTrees=-1,randX=-1,randZ=-1;
+	//private int min=-1,max=-1,numTrees=-1,
 
 	private void makeTree(WorldGenAbstractTree tree,int chunkX, int chunkZ,Random random, World world,int min, int max){
-		int randX,randZ;
+
 		int num = min + random.nextInt(max - min);
 		for(int i = 0; i < num; i++)
 		{
-			randX = chunkX*16 +8+ random.nextInt(16);
-			randZ = chunkZ*16 +8+ random.nextInt(16);
+			int randX = chunkX*16 +8+ random.nextInt(16);
+			int randZ = chunkZ*16 +8+ random.nextInt(16);
 			tree.generate(world, random, world.getHeight(new BlockPos(randX,0,randZ)));
 		}
 	}
@@ -77,11 +77,9 @@ public class WorldGenerator implements IWorldGenerator{
 				makeTree(fir,chunkX,chunkZ,random, world,0,3);
 			}
 			
-			if(biome instanceof BiomeMesa)
+			if(biome instanceof BiomeMesa && random.nextBoolean())
 			{
-				if(random.nextBoolean()){
-					makeTree(ebony,chunkX,chunkZ,random, world,1,3);
-				}
+				makeTree(ebony,chunkX,chunkZ,random, world,1,3);
 			}
 			
 			if(biome instanceof BiomePlains)
@@ -89,11 +87,9 @@ public class WorldGenerator implements IWorldGenerator{
 				makeTree(apple,chunkX,chunkZ,random, world,0,1);
 			}
 			
-			if(biome instanceof BiomeRiver)
+			if(biome instanceof BiomeRiver && random.nextInt(3)==0)
 			{
-				if(random.nextInt(3)==0){
-					makeTree(yew,chunkX,chunkZ,random, world,0,3);
-				}
+				makeTree(yew,chunkX,chunkZ,random, world,0,3);
 			}
 			
 			if(biome instanceof BiomeSavanna)

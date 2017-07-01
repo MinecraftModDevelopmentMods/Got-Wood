@@ -1,12 +1,9 @@
 package panda.gotwood.events;
 
-import java.util.Iterator;
-
 import panda.gotwood.registry.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -16,7 +13,6 @@ import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockBreakHandler {
 	EntityItem entityitem = null;
@@ -89,7 +85,7 @@ public class BlockBreakHandler {
 				for(int i=0;i<s;i++){
 					if(event.getDrops().get(i).getItem() == Items.APPLE){
 						event.getDrops().remove(i);
-					};
+					}
 				}
 				//Acacia
 				if(theblock.getMetaFromState(event.getState())==8){
@@ -110,13 +106,14 @@ public class BlockBreakHandler {
 	}
 	
 	private int getModifiedChance(int chance, int fortune){
+		int modifiedChance = chance;
 	        if (fortune > 0)
 	        {
-	            chance -= ConfigurationHandler.seedDropFortuneDecrement << fortune;
-	            if (chance < 10){
-	            	chance = 10;
+	        	modifiedChance -= ConfigurationHandler.seedDropFortuneDecrement << fortune;
+	            if (modifiedChance < 10){
+	            	modifiedChance = 10;
 	            }
 	        }
-	        return chance;
+	        return modifiedChance;
 	}
 }

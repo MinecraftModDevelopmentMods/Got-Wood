@@ -6,19 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-
-
-
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.FMLLog;
-
 public abstract class WoodMaterials {
 
 	private static Map<String, WoodMaterial> allMaterials = new HashMap<>();
-	protected static List<WoodMaterial> materials = new LinkedList<WoodMaterial>();
+	protected static List<WoodMaterial> materials = new LinkedList<>();
 
 	public static WoodMaterial apple;
 	public static WoodMaterial maple;

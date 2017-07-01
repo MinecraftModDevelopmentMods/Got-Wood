@@ -5,12 +5,7 @@ import java.util.Random;
 import panda.gotwood.blocks.BlockWoodLeaves;
 import panda.gotwood.registry.BlockRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockVine;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -53,7 +48,7 @@ public class WorldGenYew extends WorldGenAbstractTree
                     k = 3;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.MutableBlockPos blockposmutableblockpos = new BlockPos.MutableBlockPos();
 
                 for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
                 {
@@ -61,10 +56,10 @@ public class WorldGenYew extends WorldGenAbstractTree
                     {
                         if (j >= 0 && j < 256)
                         {
-                            IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos.setPos(l, j, i1));
+                            IBlockState iblockstate = worldIn.getBlockState(blockposmutableblockpos.setPos(l, j, i1));
                             Block block = iblockstate.getBlock();
 
-                            if (!iblockstate.getBlock().isAir(iblockstate, worldIn, blockpos$mutableblockpos.setPos(l, j, i1)) && !iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+                            if (!iblockstate.getBlock().isAir(iblockstate, worldIn, blockposmutableblockpos.setPos(l, j, i1)) && !iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockposmutableblockpos.setPos(l, j, i1)))
                             {
                                 if (block != net.minecraft.init.Blocks.WATER && block != net.minecraft.init.Blocks.FLOWING_WATER)
                                 {
@@ -165,11 +160,5 @@ public class WorldGenYew extends WorldGenAbstractTree
         {
             return false;
         }
-    }
-
-    private boolean isAir(World world, BlockPos pos)
-    {
-        IBlockState state = world.getBlockState(pos);
-        return state.getBlock().isAir(state, world, pos);
     }
 }

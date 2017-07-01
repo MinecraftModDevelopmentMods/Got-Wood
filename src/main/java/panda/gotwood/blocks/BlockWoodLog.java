@@ -1,27 +1,15 @@
 package panda.gotwood.blocks;
 
-import java.util.List;
-
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 
-import com.google.common.base.Predicate;
-
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockWoodLog extends BlockLog implements IOreDictionaryEntry 
 {
@@ -50,9 +38,10 @@ public class BlockWoodLog extends BlockLog implements IOreDictionaryEntry
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
+        return new BlockStateContainer(this, LOG_AXIS);
     }
     
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         IBlockState iblockstate = this.getDefaultState();
@@ -78,7 +67,7 @@ public class BlockWoodLog extends BlockLog implements IOreDictionaryEntry
     /**
      * Convert the BlockState into the correct metadata value
      */
-    @SuppressWarnings("incomplete-switch")
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
@@ -86,13 +75,17 @@ public class BlockWoodLog extends BlockLog implements IOreDictionaryEntry
         switch ((BlockLog.EnumAxis)state.getValue(LOG_AXIS))
         {
             case X:
-                i |= 0;
+                i = 0;
                 break;
             case Z:
                 i |= 1;
                 break;
             case NONE:
                 i |= 2;
+                break;
+            default:
+            	i = 0;
+            	break;
         }
 
         return i;

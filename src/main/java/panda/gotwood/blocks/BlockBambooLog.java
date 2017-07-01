@@ -1,31 +1,28 @@
 package panda.gotwood.blocks;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockWall;
+
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
+
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
+
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -61,6 +58,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 	@Override public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
 	{ return true; }
 	
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return state == this.getDefaultState()? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D):new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
@@ -100,7 +98,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
     @Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos,
 			IBlockState state, int fortune) {
-    	List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+    	List<ItemStack> ret = new java.util.ArrayList<>();
     	ret.add(new ItemStack(ItemRegistry.bamboo_pole));
 		return ret;
 	}
@@ -112,9 +110,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
     }
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state,
-			boolean isClient) {
-		// TODO Auto-generated method stub
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state,boolean isClient) {
 		return false;
 	}
 	
@@ -145,8 +141,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 	
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
-        int i = 1;
-        int j = 2;
+
         int k = pos.getX();
         int l = pos.getY();
         int i1 = pos.getZ();
@@ -173,9 +168,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
     }
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,
-			IBlockState state) {
-		// TODO Auto-generated method stub
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,IBlockState state) {
 		return false;
 	}
 
@@ -184,6 +177,7 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
@@ -218,14 +212,16 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
     /**
      * Convert the BlockState into the correct metadata value
      */
+	@Override
     public int getMetaFromState(IBlockState state)
     {
-        return state.getValue(LEAVES)==true?1:0;
+        return state.getValue(LEAVES)?1:0;
     }
     
+	@Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {LEAVES});
+        return new BlockStateContainer(this, LEAVES);
     }
 
 }

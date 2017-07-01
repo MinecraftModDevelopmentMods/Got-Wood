@@ -8,7 +8,6 @@ import panda.gotwood.GotWood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockSlab;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 
 public class WoodMaterial {
@@ -26,21 +25,9 @@ public class WoodMaterial {
 	 * 10.
 	 */
 	public final float strength;
-
-	/**
-	 * String used to identify items and blocks using this material
-	 */
 	final String identifier;
-
 	final String titleName;
-
 	private final String enumName;
-
-	private int[] cache = null;
-
-	/**
-	 * The resistance the material has against explosions.
-	 */
 	private float blastResistance;
 
 
@@ -109,10 +96,11 @@ public class WoodMaterial {
 	public boolean equals(Object o) {
 		if (o == this)
 			return true;
-		if ((o.hashCode() == this.hashCode()) && (o instanceof WoodMaterial)) {
+		if(o != null && (o.hashCode() == this.hashCode()) && (o instanceof WoodMaterial)) {
 			final WoodMaterial other = (WoodMaterial) o;
 			return this.identifier.equals(other.identifier);
 		}
+		
 		return false;
 	}
 	

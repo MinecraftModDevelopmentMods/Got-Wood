@@ -1,21 +1,11 @@
 package panda.gotwood.generation;
 
 import java.util.Random;
-
-
-
-
-
-
-
-
 import panda.gotwood.blocks.BlockWoodLeaves;
 import panda.gotwood.blocks.SappyLog;
 import panda.gotwood.registry.BlockRegistry;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -31,14 +21,14 @@ public class WorldGenRubber extends WorldGenAbstractTree
     /** The metadata value of the leaves to use in tree generation. */
     private final IBlockState metaLeaves;
 
-    public WorldGenRubber(boolean p_i2027_1_)
+    public WorldGenRubber(boolean bool)
     {
-        this(p_i2027_1_, 6, DEFAULT_TRUNK, DEFAULT_LEAF);
+        this(bool, 6, DEFAULT_TRUNK, DEFAULT_LEAF);
     }
 
-    public WorldGenRubber(boolean p_i46446_1_, int height, IBlockState metawood, IBlockState metaleaves)
+    public WorldGenRubber(boolean bool, int height, IBlockState metawood, IBlockState metaleaves)
     {
-        super(p_i46446_1_);
+        super(bool);
         this.minTreeHeight = height;
         this.metaWood = metawood;
         this.metaLeaves = metaleaves;
@@ -67,7 +57,7 @@ public class WorldGenRubber extends WorldGenAbstractTree
                     k = 2;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.MutableBlockPos blockposmutableblockpos = new BlockPos.MutableBlockPos();
 
                 for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
                 {
@@ -75,7 +65,7 @@ public class WorldGenRubber extends WorldGenAbstractTree
                     {
                         if (j >= 0 && j < worldIn.getHeight())
                         {
-                            if (!this.isReplaceable(worldIn,blockpos$mutableblockpos.setPos(l, j, i1)))
+                            if (!this.isReplaceable(worldIn,blockposmutableblockpos.setPos(l, j, i1)))
                             {
                                 flag = false;
                             }
@@ -99,8 +89,6 @@ public class WorldGenRubber extends WorldGenAbstractTree
                 if (state.getBlock().canSustainPlant(state, worldIn, position.down(), net.minecraft.util.EnumFacing.UP, (net.minecraft.block.BlockSapling)net.minecraft.init.Blocks.SAPLING) && position.getY() < worldIn.getHeight() - i - 1)
                 {
                     this.setDirtAt(worldIn, position.down());
-                    int k2 = 3;
-                    int l2 = 0;
 
                     for (int i3 = position.getY() - 3 + i; i3 <= position.getY() + i; ++i3)
                     {

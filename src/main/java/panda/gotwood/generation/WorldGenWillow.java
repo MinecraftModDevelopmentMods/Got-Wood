@@ -5,9 +5,6 @@ import java.util.Random;
 import panda.gotwood.blocks.BlockWoodLeaves;
 import panda.gotwood.registry.BlockRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -32,7 +29,7 @@ public class WorldGenWillow extends WorldGenAbstractTree
 
         for (i = rand.nextInt(4) + 5; worldIn.getBlockState(position.down()).getMaterial() == Material.WATER; position = position.down())
         {
-            ;
+            //Increment
         }
 
         boolean flag = true;
@@ -53,7 +50,7 @@ public class WorldGenWillow extends WorldGenAbstractTree
                     k = 3;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.MutableBlockPos blockposmutableblockpos = new BlockPos.MutableBlockPos();
 
                 for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
                 {
@@ -61,10 +58,10 @@ public class WorldGenWillow extends WorldGenAbstractTree
                     {
                         if (j >= 0 && j < 256)
                         {
-                            IBlockState iblockstate = worldIn.getBlockState(blockpos$mutableblockpos.setPos(l, j, i1));
+                            IBlockState iblockstate = worldIn.getBlockState(blockposmutableblockpos.setPos(l, j, i1));
                             Block block = iblockstate.getBlock();
 
-                            if (!iblockstate.getBlock().isAir(iblockstate, worldIn, blockpos$mutableblockpos.setPos(l, j, i1)) && !iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+                            if (!iblockstate.getBlock().isAir(iblockstate, worldIn, blockposmutableblockpos.setPos(l, j, i1)) && !iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockposmutableblockpos.setPos(l, j, i1)))
                             {
                                 if (block != net.minecraft.init.Blocks.WATER && block != net.minecraft.init.Blocks.FLOWING_WATER)
                                 {
@@ -141,20 +138,20 @@ public class WorldGenWillow extends WorldGenAbstractTree
                     {
                         int k2 = i2 - (position.getY() + i);
                         int i3 = 2 - k2 / 2;
-                        BlockPos.MutableBlockPos blockpos$mutableblockpos1 = new BlockPos.MutableBlockPos();
+                        BlockPos.MutableBlockPos blockposmutableblockpos1 = new BlockPos.MutableBlockPos();
 
                         for (int l3 = position.getX() - i3; l3 <= position.getX() + i3; ++l3)
                         {
                             for (int j4 = position.getZ() - i3; j4 <= position.getZ() + i3; ++j4)
                             {
-                                blockpos$mutableblockpos1.setPos(l3, i2, j4);
+                                blockposmutableblockpos1.setPos(l3, i2, j4);
 
-                                if (worldIn.getBlockState(blockpos$mutableblockpos1).getMaterial() == Material.LEAVES)
+                                if (worldIn.getBlockState(blockposmutableblockpos1).getMaterial() == Material.LEAVES)
                                 {
-                                    BlockPos blockpos3 = blockpos$mutableblockpos1.west();
-                                    BlockPos blockpos4 = blockpos$mutableblockpos1.east();
-                                    BlockPos blockpos1 = blockpos$mutableblockpos1.north();
-                                    BlockPos blockpos2 = blockpos$mutableblockpos1.south();
+                                    BlockPos blockpos3 = blockposmutableblockpos1.west();
+                                    BlockPos blockpos4 = blockposmutableblockpos1.east();
+                                    BlockPos blockpos1 = blockposmutableblockpos1.north();
+                                    BlockPos blockpos2 = blockposmutableblockpos1.south();
 
                                     if (rand.nextInt(4) == 0 && isAir(worldIn, blockpos3))
                                     {

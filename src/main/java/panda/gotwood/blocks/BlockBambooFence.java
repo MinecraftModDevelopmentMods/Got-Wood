@@ -6,25 +6,18 @@ import javax.annotation.Nullable;
 
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class BlockBambooFence extends BlockFence implements IOreDictionaryEntry{
@@ -39,7 +32,6 @@ public class BlockBambooFence extends BlockFence implements IOreDictionaryEntry{
     public static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.625D, 0.0D, 0.375D, 1.0D, 1.5D, 0.625D);
 
 	public BlockBambooFence(WoodMaterial wood) {
-		//TODO maptypes
 		super(Material.WOOD,BlockPlanks.EnumType.OAK.getMapColor());
 		this.setSoundType(SoundType.WOOD);
 		this.wood = wood;
@@ -53,34 +45,34 @@ public class BlockBambooFence extends BlockFence implements IOreDictionaryEntry{
 	
 	 public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn)
 	    {
-	        state = state.getActualState(worldIn, pos);
+	        IBlockState actualstate = state.getActualState(worldIn, pos);
 	        addCollisionBoxToList(pos, entityBox, collidingBoxes, PILLAR_AABB);
 
-	        if (((Boolean)state.getValue(NORTH)).booleanValue())
+	        if (actualstate.getValue(NORTH))
 	        {
 	            addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_AABB);
 	        }
 
-	        if (((Boolean)state.getValue(EAST)).booleanValue())
+	        if (actualstate.getValue(EAST))
 	        {
 	            addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_AABB);
 	        }
 
-	        if (((Boolean)state.getValue(SOUTH)).booleanValue())
+	        if (actualstate.getValue(SOUTH))
 	        {
 	            addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_AABB);
 	        }
 
-	        if (((Boolean)state.getValue(WEST)).booleanValue())
+	        if (actualstate.getValue(WEST))
 	        {
 	            addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_AABB);
 	        }
 	    }
 
+	 	@Deprecated
 	    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	    {
-	        state = this.getActualState(state, source, pos);
-	        return BOUNDING_BOXES[getBoundingBoxIdx(state)];
+	        return BOUNDING_BOXES[getBoundingBoxIdx(this.getActualState(state, source, pos))];
 	    }
 
 	    /**
@@ -90,35 +82,28 @@ public class BlockBambooFence extends BlockFence implements IOreDictionaryEntry{
 	    {
 	        int i = 0;
 
-	        if (((Boolean)state.getValue(NORTH)).booleanValue())
+	        if (state.getValue(NORTH))
 	        {
 	            i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
 	        }
 
-	        if (((Boolean)state.getValue(EAST)).booleanValue())
+	        if (state.getValue(EAST))
 	        {
 	            i |= 1 << EnumFacing.EAST.getHorizontalIndex();
 	        }
 
-	        if (((Boolean)state.getValue(SOUTH)).booleanValue())
+	        if (state.getValue(SOUTH))
 	        {
 	            i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
 	        }
 
-	        if (((Boolean)state.getValue(WEST)).booleanValue())
+	        if (state.getValue(WEST))
 	        {
 	            i |= 1 << EnumFacing.WEST.getHorizontalIndex();
 	        }
 
 	        return i;
 	    }
-
-	/*@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
-		list.add(new ItemStack(itemIn, 1, BlockFence..EnumType.NORMAL.getMetadata()));
-	}*/
-
 
 	public WoodMaterial getWoodMaterial() {
 		return this.wood;

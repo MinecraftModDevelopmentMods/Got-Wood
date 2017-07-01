@@ -6,36 +6,24 @@ import java.util.List;
 import panda.gotwood.GotWood;
 import panda.gotwood.blocks.BlockWoodDoor;
 import panda.gotwood.blocks.SpecialFire;
-import panda.gotwood.blocks.tileentities.TileTreeTap;
 import panda.gotwood.events.BlockBreakHandler;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.events.FireHandler;
-import panda.gotwood.items.itemblocks.ItemWoodDoor;
 import panda.gotwood.util.FuelHandler;
 import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.TreeTapRenderer;
 import panda.gotwood.util.WoodMaterials;
-import panda.gotwood.util.renderProxy;
+import panda.gotwood.util.RenderProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.RecipeSorter;
-import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public final class MasterRegistrar {
 	
@@ -47,7 +35,7 @@ public final class MasterRegistrar {
 			if (k instanceof Block) {
 				Block block = (Block) k;
 				GameRegistry.register(block);
-				BlockRegistry.blockRegistry.put(block.getRegistryName().getResourcePath(), block);
+				BlockRegistry.Registry.put(block.getRegistryName().getResourcePath(), block);
 				if(!(k instanceof SpecialFire)&& !(k instanceof BlockWoodDoor)){
 					((Block) k).setCreativeTab(GotWood.TreeTab);
 				}
@@ -58,7 +46,7 @@ public final class MasterRegistrar {
 			} else if (k instanceof Item) {
 				Item item = (Item) k;
 				GameRegistry.register((Item) k);
-				ItemRegistry.itemRegistry.put(item.getRegistryName().getResourcePath(), item);
+				ItemRegistry.Registry.put(item.getRegistryName().getResourcePath(), item);
 				((Item) k).setCreativeTab(GotWood.TreeTab);		
 				((Item) k).setUnlocalizedName(GotWood.MODID + "." + ((Item) k).getRegistryName().getResourcePath());
 			}
@@ -109,7 +97,7 @@ public final class MasterRegistrar {
 		RecipeRegistry.init();
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		if(e.getSide() == Side.CLIENT){
-			renderProxy.init();
+			RenderProxy.init();
 		}
 	}
 }

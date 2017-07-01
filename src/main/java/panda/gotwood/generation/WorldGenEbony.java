@@ -4,12 +4,6 @@ import java.util.Random;
 
 import panda.gotwood.blocks.BlockWoodLeaves;
 import panda.gotwood.registry.BlockRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockNewLeaf;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -47,7 +41,7 @@ public class WorldGenEbony extends WorldGenAbstractTree
                     k = 2;
                 }
 
-                BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+                BlockPos.MutableBlockPos blockposmutableblockpos = new BlockPos.MutableBlockPos();
 
                 for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
                 {
@@ -55,7 +49,7 @@ public class WorldGenEbony extends WorldGenAbstractTree
                     {
                         if (j >= 0 && j < 256)
                         {
-                            if (!this.isReplaceable(worldIn,blockpos$mutableblockpos.setPos(l, j, i1)))
+                            if (!this.isReplaceable(worldIn,blockposmutableblockpos.setPos(l, j, i1)))
                             {
                                 flag = false;
                             }
@@ -146,7 +140,7 @@ public class WorldGenEbony extends WorldGenAbstractTree
                         int k4 = 1 + rand.nextInt(3);
                         k1 = 0;
 
-                        for (int l4 = l3; l4 < i && k4 > 0; --k4)
+                        for (int l4 = l3; l4 < i && k4 > 0; --k4,++l4)
                         {
                             if (l4 >= 1)
                             {
@@ -163,7 +157,7 @@ public class WorldGenEbony extends WorldGenAbstractTree
                                 }
                             }
 
-                            ++l4;
+                           
                         }
 
                         if (k1 > 0)

@@ -19,7 +19,6 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockTNT;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
@@ -30,7 +29,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -40,7 +38,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -54,10 +51,7 @@ public class SpecialFire extends BlockFire {
     private final Map<Block, Integer> encouragements = Maps.<Block, Integer>newIdentityHashMap();
     private final Map<Block, Integer> flammabilities = Maps.<Block, Integer>newIdentityHashMap();
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
+    @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !((BlockFire) BlockRegistry.specialfire).canCatchFire(worldIn, pos.down(), EnumFacing.UP))
@@ -73,7 +67,10 @@ public class SpecialFire extends BlockFire {
 
     public SpecialFire()
     {
-        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)).withProperty(UPPER, Boolean.valueOf(false)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0)
+        		.withProperty(NORTH, false).withProperty(EAST, false)
+        		.withProperty(SOUTH, false).withProperty(WEST, false)
+        		.withProperty(UPPER, false));
         this.setTickRandomly(true);
         this.setHardness(0.0F);
         this.setLightLevel(1.0F);
@@ -137,15 +134,14 @@ public class SpecialFire extends BlockFire {
         ((BlockFire) BlockRegistry.specialfire).setFireInfo(Blocks.COAL_BLOCK, 5, 5);
         ((BlockFire) BlockRegistry.specialfire).setFireInfo(Blocks.HAY_BLOCK, 60, 20);
         ((BlockFire) BlockRegistry.specialfire).setFireInfo(Blocks.CARPET, 60, 20);
-       // ReflectionHelper.getPrivateValue(BlockFire.class, Blocks.FIRE, "encouragements");
-        //ReflectionHelper.getPrivateValue(BlockFire.class, Blocks.FIRE, "flammabilities");
     }
 
+	@Override
     public void setFireInfo(Block blockIn, int encouragement, int flammability)
     {
         if (blockIn == Blocks.AIR) throw new IllegalArgumentException("Tried to set air on fire... This is bad.");
-        this.encouragements.put(blockIn, Integer.valueOf(encouragement));
-        this.flammabilities.put(blockIn, Integer.valueOf(flammability));
+        this.encouragements.put(blockIn, encouragement);
+        this.flammabilities.put(blockIn, flammability);
     }
 
     @Nullable
@@ -157,11 +153,13 @@ public class SpecialFire extends BlockFire {
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
-
+    
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -170,6 +168,7 @@ public class SpecialFire extends BlockFire {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random random)
     {
         return 0;
@@ -178,6 +177,7 @@ public class SpecialFire extends BlockFire {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World worldIn)
     {
         return 30;
@@ -196,7 +196,7 @@ public class SpecialFire extends BlockFire {
             Block block = worldIn.getBlockState(pos.down()).getBlock();
             boolean flag = block.isFireSource(worldIn, pos.down(), EnumFacing.UP);
 
-            int i = ((Integer)state.getValue(AGE)).intValue();
+            int i = state.getValue(AGE);
 
             if (!flag && worldIn.isRaining() && this.canDie(worldIn, pos) && rand.nextFloat() < 0.2F + (float)i * 0.03F)
             {
@@ -282,7 +282,7 @@ public class SpecialFire extends BlockFire {
                                             i2 = 15;
                                         }
 
-                                        worldIn.setBlockState(blockpos, state.withProperty(AGE, Integer.valueOf(i2)), 3);
+                                        worldIn.setBlockState(blockpos, state.withProperty(AGE, i2), 3);
                                     }
                                 }
                             }
@@ -292,12 +292,14 @@ public class SpecialFire extends BlockFire {
             }
         }
     }
-
+    
+    @Override
     protected boolean canDie(World worldIn, BlockPos pos)
     {
         return worldIn.isRainingAt(pos) || worldIn.isRainingAt(pos.west()) || worldIn.isRainingAt(pos.east()) || worldIn.isRainingAt(pos.north()) || worldIn.isRainingAt(pos.south());
     }
 
+    @Override
     public boolean requiresUpdates()
     {
         return false;
@@ -340,7 +342,7 @@ public class SpecialFire extends BlockFire {
                     j = 15;
                 }
 
-                worldIn.setBlockState(pos, this.getDefaultState().withProperty(AGE, Integer.valueOf(j)), 3);
+                worldIn.setBlockState(pos, this.getDefaultState().withProperty(AGE, j), 3);
             }
             else
             {
@@ -358,7 +360,7 @@ public class SpecialFire extends BlockFire {
             		    if (fireDrops.hasFireDrops()){
             		    	///use NonNullList for 1.11
             		    	//also add an event that allows the modification of that same list.
-            		        List<ItemStack> drops = new ArrayList<ItemStack>();
+            		        List<ItemStack> drops = new ArrayList<>();
             		        fireDrops.addFireDrops(drops, random);
             		        for (ItemStack drop : drops){
             		            EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
@@ -372,7 +374,7 @@ public class SpecialFire extends BlockFire {
 
             if (iblockstate.getBlock() == Blocks.TNT)
             {
-                Blocks.TNT.onBlockDestroyedByPlayer(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, Boolean.valueOf(true)));
+                Blocks.TNT.onBlockDestroyedByPlayer(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, true));
             }
         }
     }
@@ -413,6 +415,7 @@ public class SpecialFire extends BlockFire {
      * Returns if this block is collidable. Only used by fire, although stairs return that of the block that the stair
      * is made of (though nobody's going to make fire stairs, right?)
      */
+    @Override
     public boolean isCollidable()
     {
         return false;
@@ -422,11 +425,13 @@ public class SpecialFire extends BlockFire {
      * Checks if the block can be caught on fire
      */
      // Use canCatchFire with face sensitive version below
+    @Override
     public boolean canCatchFire(IBlockAccess worldIn, BlockPos pos)
     {
         return canCatchFire(worldIn, pos, EnumFacing.UP);
     }
-
+    
+    @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         return worldIn.getBlockState(pos.down()).isFullyOpaque() || this.canNeighborCatchFire(worldIn, pos);
@@ -444,7 +449,8 @@ public class SpecialFire extends BlockFire {
             worldIn.setBlockToAir(pos);
         }
     }
-
+    
+    @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         if (worldIn.provider.getDimensionType().getId() > 0 || !Blocks.PORTAL.trySpawnPortal(worldIn, pos))
@@ -477,7 +483,7 @@ public class SpecialFire extends BlockFire {
                     double d3 = (double)pos.getX() + rand.nextDouble() * 0.10000000149011612D;
                     double d8 = (double)pos.getY() + rand.nextDouble();
                     double d13 = (double)pos.getZ() + rand.nextDouble();
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d3, d8, d13, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d3, d8, d13, 0.0D, 0.0D, 0.0D, 0);
                 }
             }
 
@@ -488,7 +494,7 @@ public class SpecialFire extends BlockFire {
                     double d4 = (double)(pos.getX() + 1) - rand.nextDouble() * 0.10000000149011612D;
                     double d9 = (double)pos.getY() + rand.nextDouble();
                     double d14 = (double)pos.getZ() + rand.nextDouble();
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d4, d9, d14, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d4, d9, d14, 0.0D, 0.0D, 0.0D, 0);
                 }
             }
 
@@ -499,7 +505,7 @@ public class SpecialFire extends BlockFire {
                     double d5 = (double)pos.getX() + rand.nextDouble();
                     double d10 = (double)pos.getY() + rand.nextDouble();
                     double d15 = (double)pos.getZ() + rand.nextDouble() * 0.10000000149011612D;
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d5, d10, d15, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d5, d10, d15, 0.0D, 0.0D, 0.0D, 0);
                 }
             }
 
@@ -510,7 +516,7 @@ public class SpecialFire extends BlockFire {
                     double d6 = (double)pos.getX() + rand.nextDouble();
                     double d11 = (double)pos.getY() + rand.nextDouble();
                     double d16 = (double)(pos.getZ() + 1) - rand.nextDouble() * 0.10000000149011612D;
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d6, d11, d16, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d6, d11, d16, 0.0D, 0.0D, 0.0D, 0);
                 }
             }
 
@@ -521,7 +527,7 @@ public class SpecialFire extends BlockFire {
                     double d7 = (double)pos.getX() + rand.nextDouble();
                     double d12 = (double)(pos.getY() + 1) - rand.nextDouble() * 0.10000000149011612D;
                     double d17 = (double)pos.getZ() + rand.nextDouble();
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d12, d17, 0.0D, 0.0D, 0.0D, new int[0]);
+                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d12, d17, 0.0D, 0.0D, 0.0D, 0);
                 }
             }
         }
@@ -532,46 +538,42 @@ public class SpecialFire extends BlockFire {
                 double d0 = (double)pos.getX() + rand.nextDouble();
                 double d1 = (double)pos.getY() + rand.nextDouble() * 0.5D + 0.5D;
                 double d2 = (double)pos.getZ() + rand.nextDouble();
-                worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
+                worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D, 0);
             }
         }
     }
 
-    /**
-     * Get the MapColor for this Block and the given BlockState
-     */
     public MapColor getMapColor(IBlockState state)
     {
         return MapColor.TNT;
     }
-
+    
+    @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.CUTOUT;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(AGE, Integer.valueOf(meta));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
-        return ((Integer)state.getValue(AGE)).intValue();
+        return state.getValue(AGE);
     }
-
+    
+    @Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {AGE, NORTH, EAST, SOUTH, WEST, UPPER});
     }
     
+    @Override
     public boolean canCatchFire(IBlockAccess world, BlockPos pos, EnumFacing face)
     {
         return world.getBlockState(pos).getBlock().isFlammable(world, pos, face);

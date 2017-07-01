@@ -33,12 +33,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import panda.gotwood.blocks.tileentities.TileTreeTap;
-import panda.gotwood.registry.BlockRegistry;
 
 
 public class BlockTreeTap extends BlockContainer {
 
-	public static int FLUIDPERTICK = 0;
+	private static int FLUIDPERTICK = 0;
 	
 	public static final PropertyBool HASBUCKET = PropertyBool.create("hasbucket");
 	
@@ -50,37 +49,34 @@ public class BlockTreeTap extends BlockContainer {
   });
 
   @Override
-public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-	super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-	if(worldIn.isRemote) {
-	      return false;
-	    }
-	if(this.hasTileEntity(this.getDefaultState())){
-		if(playerIn.getActiveHand() != null){
-		ItemStack stack = playerIn.getHeldItem(playerIn.getActiveHand());
-		if(stack != null){
-			System.out.println("yep");
-			if(stack.getItem() == Items.BUCKET){
-				if(!stack.isEmpty()){
-					stack.shrink(1);
+  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	  super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+	  if(worldIn.isRemote) {
+		  return false;
+	  }
+	  if(this.hasTileEntity(this.getDefaultState()) && playerIn.getActiveHand() != null){
+		  ItemStack stack = playerIn.getHeldItem(playerIn.getActiveHand());
+		  if(stack != null){
+			  System.out.println("yep");
+			  if(stack.getItem() == Items.BUCKET && !stack.isEmpty()){
+				  stack.shrink(1);
 
-					TileEntity te = worldIn.getTileEntity(pos);
-					if(te instanceof TileTreeTap){
-						((TileTreeTap)te).hasBucket = true;
-						worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(HASBUCKET, true), 3);
-						return true;
-					}
-				}
-			}
-		}
-		}
-	}
-	return false;
-}
+				  TileEntity te = worldIn.getTileEntity(pos);
+				  if(te instanceof TileTreeTap){
+					  ((TileTreeTap)te).hasBucket = true;
+					  worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(HASBUCKET, true), 3);
+					  return true;
+				  }
+			  }
+		  }
+
+	  }
+	  return false;
+  }
 
 @Override
 public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
-	
+	//Use later
 }
 
 public BlockTreeTap() {
@@ -209,7 +205,7 @@ public BlockTreeTap() {
 
   @Override
 public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-	  this.FLUIDPERTICK = getAmountPerTick(worldIn,pos,state.getValue(FACING));
+	  FLUIDPERTICK = getAmountPerTick(worldIn,pos,state.getValue(FACING));
 	super.onBlockAdded(worldIn, pos, state);
 }
 

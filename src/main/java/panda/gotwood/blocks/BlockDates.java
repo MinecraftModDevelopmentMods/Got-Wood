@@ -6,8 +6,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -17,8 +15,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -42,11 +38,12 @@ public class BlockDates extends BlockHorizontal implements IGrowable
     public BlockDates()
     {
         super(Material.PLANTS);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(AGE, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(AGE, 0));
         this.setTickRandomly(true);
         this.setRegistryName("block_dates");
     }
-
+    
+    @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         if (!this.canBlockStay(worldIn, pos, state))
@@ -55,7 +52,7 @@ public class BlockDates extends BlockHorizontal implements IGrowable
         }
         else
         {
-            int i = ((Integer)state.getValue(AGE)).intValue();
+            int i = state.getValue(AGE).intValue();
 
             if (i < 2 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0))
             {
@@ -67,60 +64,51 @@ public class BlockDates extends BlockHorizontal implements IGrowable
 
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
-        pos = pos.offset((EnumFacing)state.getValue(FACING));
-        IBlockState iblockstate = worldIn.getBlockState(pos);
-        return iblockstate.getBlock() == BlockRegistry.palm_log || worldIn.getBlockState(pos.up()) == BlockRegistry.palm_log;
+        BlockPos offset = pos.offset((EnumFacing)state.getValue(FACING));
+        IBlockState iblockstate = worldIn.getBlockState(offset);
+        return iblockstate.getBlock() == BlockRegistry.palm_log || worldIn.getBlockState(offset.up()) == BlockRegistry.palm_log;
     }
-
+    
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
+
+    @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
-
+    
+    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return new AxisAlignedBB(0, 0, 0, 1,1,1);
     }
 
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+    @Override
     public IBlockState withRotation(IBlockState state, Rotation rot)
     {
         return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
     }
 
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
+    @Override
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
         return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
     }
 
-    /**
-     * Called by ItemBlocks after a block is set in the world, to allow post-place logic
-     */
+    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
     {
         EnumFacing enumfacing = EnumFacing.fromAngle((double)placer.rotationYaw);
         worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
     }
 
-    /**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
+
+
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         if (!facing.getAxis().isHorizontal())
@@ -130,6 +118,7 @@ public class BlockDates extends BlockHorizontal implements IGrowable
 
         return this.getDefaultState().withProperty(FACING, facing.getOpposite()).withProperty(AGE, Integer.valueOf(0));
     }
+
 
     /**
      * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
@@ -147,7 +136,6 @@ public class BlockDates extends BlockHorizontal implements IGrowable
     private void dropBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-       // this.dropBlockAsItem(worldIn, pos, state, 0);
     }
     
     @Nullable
@@ -156,9 +144,7 @@ public class BlockDates extends BlockHorizontal implements IGrowable
     	 return null;
     }
 
-    /**
-     * Spawns this Block's drops into the World as EntityItems.
-     */
+    @Override
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
     {
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
@@ -168,7 +154,7 @@ public class BlockDates extends BlockHorizontal implements IGrowable
     public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
     {
         java.util.List<ItemStack> dropped = super.getDrops(world, pos, state, fortune);
-        int i = ((Integer)state.getValue(AGE)).intValue();
+        int i = state.getValue(AGE);
 
         	if(i==2){
         		Random rand = world instanceof World ? ((World)world).rand : RANDOM;
@@ -181,16 +167,14 @@ public class BlockDates extends BlockHorizontal implements IGrowable
 
     @Override
 	public boolean canDropFromExplosion(Explosion explosionIn) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
+	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
         return new ItemStack(ItemRegistry.dates);
@@ -201,7 +185,7 @@ public class BlockDates extends BlockHorizontal implements IGrowable
      */
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {
-        return ((Integer)state.getValue(AGE)).intValue() < 2;
+        return state.getValue(AGE) < 2;
     }
 
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
@@ -211,10 +195,11 @@ public class BlockDates extends BlockHorizontal implements IGrowable
 
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
-        worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(((Integer)state.getValue(AGE)).intValue() + 1)), 2);
+        worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(state.getValue(AGE) + 1)), 2);
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.CUTOUT;
@@ -227,25 +212,23 @@ public class BlockDates extends BlockHorizontal implements IGrowable
         return null;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta)).withProperty(AGE, Integer.valueOf((meta & 15) >> 2));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         int i = 0;
-        i = i | ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
-        i = i | ((Integer)state.getValue(AGE)).intValue() << 2;
+        i = i | state.getValue(FACING).getHorizontalIndex();
+        i = i | state.getValue(AGE) << 2;
         return i;
     }
+    
 
+	@Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {FACING, AGE});

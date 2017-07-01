@@ -5,8 +5,7 @@ import javax.annotation.Nonnull;
 import org.lwjgl.opengl.GL11;
 
 import panda.gotwood.blocks.tileentities.TileTreeTap;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -16,7 +15,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+
 
 public class TreeTapRenderer extends TileEntitySpecialRenderer<TileTreeTap> {
 //FROM TIC
@@ -31,8 +30,7 @@ public class TreeTapRenderer extends TileEntitySpecialRenderer<TileTreeTap> {
 
 	    // check how far into the 2nd block we want to render
 	    float yMin = 0;
-	    IBlockState state = te.getWorld().getBlockState(te.getPos().down());
-	    Block block = state.getBlock();
+
 
 
 	    yMin = -0.0001f;

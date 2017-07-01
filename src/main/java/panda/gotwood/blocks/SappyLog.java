@@ -13,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import panda.gotwood.registry.ItemRegistry;
-import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 
 public class SappyLog extends BlockWoodLog {
@@ -65,20 +64,20 @@ public class SappyLog extends BlockWoodLog {
 	    /**
 	     * Convert the BlockState into the correct metadata value
 	     */
-	    @SuppressWarnings("incomplete-switch")
+	    @Override
 	    public int getMetaFromState(IBlockState state)
 	    {
 	        int i = 0;
 
-	        switch ((BlockLog.EnumAxis)state.getValue(LOG_AXIS))
+	        switch (state.getValue(LOG_AXIS))
 	        {
 	            case X:
-	                i |= 0;
+	                i = 0;
 	                break;
 	            case Z:
 	                i |= 1;
 	                break;
-	            case NONE:
+	            default:
 	                i |= 2;
 	        }
 	        

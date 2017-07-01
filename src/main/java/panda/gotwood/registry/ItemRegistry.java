@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import panda.gotwood.blocks.BlockPlanks;
 import panda.gotwood.items.ItemBase;
 import panda.gotwood.items.ItemDates;
 import panda.gotwood.items.ItemSeed;
@@ -47,31 +46,11 @@ public class ItemRegistry {
 	public static final Item acacia_seed = new ItemSeed(WoodMaterials.acacia);
 	/*
 	public static final Item maple_slab;
-	public static final Item maple_seed;
-	
-	
 	public static final Item pine_slab;
-	public static final Item pine_seed;
-	
-	
 	public static final Item willow_slab;
-	public static final Item willow_seed;
-	
-	
 	public static final Item yew_slab;
-	public static final Item yew_seed;
-	
-	
 	public static final Item ebony_slab;
-	public static final Item ebony_seed;
-	
-	
 	public static final Item fir_slab;
-	public static final Item fir_seed;
-	
-	
-	
-	
 	*/
 	
 	public static final Item ash = new ItemBase().setRegistryName("ash");
@@ -84,7 +63,7 @@ public class ItemRegistry {
 	
 	
 	public static final List<Item> getItemList() {
-		List<Item> list = new ArrayList<Item>();
+		List<Item> list = new ArrayList<>();
 		list.add(apple_seed);
 		list.add(maple_seed);
 		list.add(pine_seed);
@@ -129,9 +108,9 @@ public class ItemRegistry {
 		return list;
 	}
 	
-static final Map<String,Item> itemRegistry = new HashMap<>();
+static final Map<String,Item> Registry = new HashMap<>();
 	
 	public static Item getItemByName(String name) {
-		return itemRegistry.get(name);
+		return Registry.get(name);
 	}
 }

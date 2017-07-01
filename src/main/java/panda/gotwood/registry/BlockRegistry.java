@@ -34,7 +34,7 @@ public class BlockRegistry {
 	/*
 	 * Declare items here and then subsequently add them to getList(); They will be automatically moved to registration and model loading.
 	 */
-	//this.setRegistryName("log_"+wood.getName());
+
 	public static final Block apple_log = new BlockWoodLog(WoodMaterials.apple);
 	public static final Block apple_planks = new BlockPlanks(WoodMaterials.apple);
 	public static final BlockDoor apple_door = new BlockWoodDoor(WoodMaterials.apple);
@@ -150,7 +150,7 @@ public class BlockRegistry {
 	public static final Block rubber_leaves = new BlockWoodLeaves(WoodMaterials.rubber);
 	public static final Block rubber_sapling = new BlockWoodSapling(WoodMaterials.rubber);
 	public static final List<Block> getBlockList() {
-		List<Block> list = new ArrayList<Block>();
+		List<Block> list = new ArrayList<>();
 		list.add(specialfire);
 
 		list.add(apple_sapling);
@@ -252,9 +252,9 @@ public class BlockRegistry {
 
 		return list;
 	}
-	static final Map<String, Block> blockRegistry = new HashMap<>();
+	static final Map<String, Block> Registry = new HashMap<>();
 	
 	public static Block getBlockByName(String name) {
-		return blockRegistry.get(name);
+		return Registry.get(name);
 	}
 }

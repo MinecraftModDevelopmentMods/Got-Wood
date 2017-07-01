@@ -41,9 +41,9 @@ public class GotWood
 
 	public static final String NAME = "Got Wood?";
 	@SidedProxy(serverSide = "panda.gotwood.proxy.ProxyServer", clientSide = "panda.gotwood.proxy.ProxyClient")
-	public static CommonProxy proxy;
+	public static CommonProxy Commonproxy;
 
-	public static ProxyClient PROXY = null;
+	public static ProxyClient Clientproxy = null;
 	
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event)

@@ -6,8 +6,6 @@ import panda.gotwood.util.WoodMaterial;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,7 +26,7 @@ public class BlockWoodDoor extends BlockDoor  {
 	
 	private final WoodMaterial wood;
 
-	public Item doorItem;
+	private Item doorItem;
 
 
 	public BlockWoodDoor(WoodMaterial wood) {
@@ -40,15 +38,12 @@ public class BlockWoodDoor extends BlockDoor  {
 		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
 		this.disableStats();
 		this.setRegistryName(wood.getName()+"_door");
-		//this.setDoorItem(door);
 	}
 	
 	
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target,
-			World world, BlockPos pos, EntityPlayer player) {
-		// TODO Auto-generated method stub
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target,World world, BlockPos pos, EntityPlayer player) {
 		return new ItemStack(getDoorItem());
 	}
 	
@@ -56,14 +51,11 @@ public class BlockWoodDoor extends BlockDoor  {
 		this.doorItem = door;
 	}
 
-
-
 	private Item getDoorItem() {
 		if (this.doorItem == null) {
 			FMLLog.severe("getting item for door: %s, %s", this.getRegistryName().getResourceDomain(), this.wood.getName() + "_door");
 			this.doorItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getResourceDomain(), this.wood.getName() + "_door"));
 		}
-
 		return this.doorItem;
 	}
 
@@ -88,10 +80,10 @@ public class BlockWoodDoor extends BlockDoor  {
         {
             return false;
         }
-            state = iblockstate.cycleProperty(OPEN);
-            worldIn.setBlockState(blockpos, state, 10);
+            IBlockState checkstate = iblockstate.cycleProperty(OPEN);
+            worldIn.setBlockState(blockpos, checkstate, 10);
             worldIn.markBlockRangeForRenderUpdate(blockpos, pos);
-            worldIn.playEvent(playerIn, ((Boolean)state.getValue(OPEN)).booleanValue() ? 1012 : 1006, pos, 0);
+            worldIn.playEvent(playerIn, checkstate.getValue(OPEN) ? 1012 : 1006, pos, 0);
             return true;
         
 	}

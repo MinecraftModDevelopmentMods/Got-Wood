@@ -4,15 +4,10 @@ package panda.gotwood.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fluids.FluidStack;
+
 
 import org.lwjgl.opengl.GL11;
 
@@ -21,7 +16,7 @@ public final class RenderUtil {
   private RenderUtil() {
   }
 
-  public static float FLUID_OFFSET = 0.005f;
+  public static final float FLUID_OFFSET = 0.005f;
 
   protected static Minecraft mc = Minecraft.getMinecraft();
 

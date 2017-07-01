@@ -2,13 +2,11 @@ package panda.gotwood.blocks;
 
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
-import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -36,12 +34,13 @@ public class BlockWoodTrapdoor extends BlockTrapDoor implements IOreDictionaryEn
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (this.wood.getToolHarvestLevel() > 1)
 			return true;
-		state = state.cycleProperty(BlockTrapDoor.OPEN);
-		worldIn.setBlockState(pos, state, 2);
-		worldIn.playEvent(playerIn, ((Boolean) state.getValue(BlockTrapDoor.OPEN)) ? 1012 : 1006, pos, 0);;
+		IBlockState newState = state.cycleProperty(BlockTrapDoor.OPEN);
+		worldIn.setBlockState(pos, newState, 2);
+		worldIn.playEvent(playerIn, newState.getValue(BlockTrapDoor.OPEN) ? 1012 : 1006, pos, 0);
 		return true;
 	}
-@Override
+	
+    @Override
 	public String getOreDictionaryName() {
 		return this.oreDict;
 	}

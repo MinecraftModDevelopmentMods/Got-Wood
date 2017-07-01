@@ -95,13 +95,6 @@ public class ConfigurationHandler {
 				//shear or silktouch sapling block
 				//seed in crafting grid
 		
-		//dL = dL.concat("corn:kernels,0,18;");
-		//dL = dL.concat("exnihiloomnia:silkworm,0,16-18;");
-		
-		//System.out.println(dL.toString());
-		//config.addCustomCategoryComment("Custom Seeds", "");
-		//mega = config.get("Custom Seeds", "List", dL, " ").getString().split(";");
-		
 		config.save();
 	}
 }
