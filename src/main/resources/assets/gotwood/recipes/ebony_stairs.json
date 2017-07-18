@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "gotwood:ebony_stairs",
+    "count": 4
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:ebony_planks"
+    }
+  }
+}

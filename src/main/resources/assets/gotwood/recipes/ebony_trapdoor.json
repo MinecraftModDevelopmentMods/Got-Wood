@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "gotwood:ebony_trapdoor",
+    "count": 2
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:ebony_planks"
+    }
+  }
+}

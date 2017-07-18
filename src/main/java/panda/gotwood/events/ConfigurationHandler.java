@@ -52,12 +52,12 @@ public class ConfigurationHandler {
 
 	public static int rubberChance;
 
-	
+	public static Configuration config;
 	
 	
 	
 	public static void init(FMLPreInitializationEvent event){
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		config = new Configuration(event.getSuggestedConfigurationFile());
 
 		config.load();
 

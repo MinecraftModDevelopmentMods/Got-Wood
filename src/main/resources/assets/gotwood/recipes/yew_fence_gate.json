@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "gotwood:yew_fence_gate"
+  },
+  "pattern": [
+    "s#s",
+    "s#s"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:yew_planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

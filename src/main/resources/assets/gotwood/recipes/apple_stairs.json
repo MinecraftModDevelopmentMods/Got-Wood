@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "gotwood:apple_stairs",
+    "count": 4
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:apple_planks"
+    }
+  }
+}

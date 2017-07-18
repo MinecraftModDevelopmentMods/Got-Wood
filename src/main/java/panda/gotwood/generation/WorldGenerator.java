@@ -16,7 +16,7 @@ import net.minecraft.world.biome.BiomeRiver;
 import net.minecraft.world.biome.BiomeSavanna;
 import net.minecraft.world.biome.BiomeSwamp;
 import net.minecraft.world.biome.BiomeTaiga;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -118,4 +118,6 @@ public class WorldGenerator implements IWorldGenerator{
 			}
 		}
 	}
+
+
 }

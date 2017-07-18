@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "gotwood:willow_door_item",
+    "count": 3
+  },
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:willow_planks"
+    }
+  }
+}

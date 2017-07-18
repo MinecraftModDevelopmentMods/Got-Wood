@@ -177,12 +177,6 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
 		// TODO Auto-generated method stub
 		
 	}
-	
-	@Override
-	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-    {
-        return true;
-    }
 
 	@Override
 	public String getOreDictionaryName() {

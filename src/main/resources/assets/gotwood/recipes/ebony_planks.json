@@ -1,0 +1,12 @@
+{
+  "result": {
+    "item": "gotwood:ebony_planks",
+    "count": 4
+  },
+  "ingredients": [
+    {
+      "item": "gotwood:ebony_log"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

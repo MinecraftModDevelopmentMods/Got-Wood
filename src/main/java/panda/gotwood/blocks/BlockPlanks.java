@@ -39,9 +39,11 @@ public class BlockPlanks extends Block implements IOreDictionaryEntry{
 
 
 	@Override
-	public MapColor getMapColor(final IBlockState state) {
+	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
 		return MapColor.WOOD;
-	}
+    }
+	
 
 	@Override
 	public boolean isFullBlock(IBlockState bs) {

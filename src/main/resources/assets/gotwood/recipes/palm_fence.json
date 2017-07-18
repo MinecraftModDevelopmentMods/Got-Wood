@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "gotwood:palm_fence",
+    "count": 3
+  },
+  "pattern": [
+    "#s#",
+    "#s#"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:palm_planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

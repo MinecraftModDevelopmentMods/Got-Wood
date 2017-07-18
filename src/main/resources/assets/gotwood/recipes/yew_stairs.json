@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "gotwood:yew_stairs",
+    "count": 4
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:yew_planks"
+    }
+  }
+}

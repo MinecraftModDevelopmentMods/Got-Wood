@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "gotwood:bamboo_fence_gate"
+  },
+  "pattern": [
+    "s#s",
+    "s#s"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:bamboo_planks"
+    },
+    "s": {
+      "item": "gotwood:bamboo_pole"
+    }
+  }
+}

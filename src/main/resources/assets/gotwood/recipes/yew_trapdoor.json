@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "gotwood:yew_trapdoor",
+    "count": 2
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:yew_planks"
+    }
+  }
+}
