@@ -2,14 +2,17 @@ package panda.gotwood.items;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -38,20 +41,29 @@ public class ItemSeed extends Item implements IOreDictionaryEntry, IPlantable{
 	@Override
     public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        IBlockState state = worldIn.getBlockState(pos);
         ItemStack heldItem = playerIn.getHeldItem(hand);
 		
 		if(heldItem.isEmpty()){
 			return super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 		}
-        if (facing == EnumFacing.UP && playerIn.canPlayerEdit(pos.offset(facing), facing, heldItem) && (state.getBlock()== net.minecraft.init.Blocks.GRASS ||state.getBlock()==net.minecraft.init.Blocks.DIRT|| state.getBlock()==net.minecraft.init.Blocks.FARMLAND) && worldIn.isAirBlock(pos.up()))
+		System.out.println(this.getSaplingState());
+        if (facing == EnumFacing.UP && playerIn.canPlayerEdit(pos.offset(facing), facing, heldItem) && worldIn.isAirBlock(pos.up()) &&
+        		 worldIn.getBlockState(pos).getBlock().canSustainPlant(worldIn.getBlockState(pos), worldIn, pos, facing, (IPlantable) this.getSaplingState().getBlock()))
         {
         	worldIn.setBlockState(pos.up(), this.getSaplingState());
+        	worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 1F, 1F);
         	heldItem.shrink(1);
             return EnumActionResult.SUCCESS;
         }
         else
         {
+        	System.out.println("else");
+        	if(playerIn.canPlayerEdit(pos.offset(facing), facing, heldItem) && worldIn.isAirBlock(pos.up()) && worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos)){
+        		worldIn.setBlockState(pos, this.getSaplingState());
+        		worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 1F, 1F);
+            	heldItem.shrink(1);
+                return EnumActionResult.SUCCESS;
+        	}
             return EnumActionResult.FAIL;
         }
     }

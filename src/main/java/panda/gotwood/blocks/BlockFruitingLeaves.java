@@ -17,11 +17,13 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -132,7 +134,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
 		if(!worldIn.isRemote){for(ItemStack item : this.getDrops(worldIn, pos, state, 0)){
-			
+			worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 0.6F, 0.8F / (worldIn.rand.nextFloat() * 0.4F + 0.8F));
 			EntityItem entityitem = new EntityItem(worldIn, pos.getX()+ 0.5+ facing.getFrontOffsetX()*0.7, pos.getY() + 0.5+facing.getFrontOffsetY()*0.7, pos.getZ() + 0.5+ facing.getFrontOffsetZ()*0.7, item);
 			entityitem.motionX *= 0.2;
 			entityitem.motionY = 0;

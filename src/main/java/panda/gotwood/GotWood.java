@@ -42,7 +42,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class GotWood
 {
 	public static final String MODID = "gotwood";
-	public static final String VERSION = "0.20.0";
+	public static final String VERSION = "0.22.3";
 
 	public static final String NAME = "Got Wood?";
 	@SidedProxy(serverSide = "panda.gotwood.proxy.ProxyServer", clientSide = "panda.gotwood.proxy.ProxyClient")
