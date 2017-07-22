@@ -32,12 +32,22 @@ public class BlockBreakHandler {
 				
 				if (theblock instanceof BlockSapling)
 				{
-					if((!(event.getHarvester().getHeldItemMainhand().getItem() instanceof ItemShears) && ConfigurationHandler.retrieveSaplingsMode == 1) || ConfigurationHandler.retrieveSaplingsMode ==0){
-						if(Block.getBlockFromItem(event.getDrops().get(i).getItem()) instanceof BlockBush){
+					if(event.getHarvester() != net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((net.minecraft.world.WorldServer)event.getWorld())){
+						if(event.getHarvester() != null){
+						if(!event.getHarvester().getHeldItemMainhand().isEmpty()){
+						if((!(event.getHarvester().getHeldItemMainhand().getItem() instanceof ItemShears) && ConfigurationHandler.retrieveSaplingsMode == 1) || ConfigurationHandler.retrieveSaplingsMode ==0){
+							if(Block.getBlockFromItem(event.getDrops().get(i).getItem()) instanceof BlockBush){
+								event.getDrops().remove(i);
+							}
+							event.getDrops().add(new ItemStack(Items.STICK,event.getWorld().rand.nextBoolean()? 2:1));
+						}	}
+					}
+					}else{
+						if(Block.getBlockFromItem(event.getDrops().get(i).getItem()) instanceof BlockBush && (ConfigurationHandler.retrieveSaplingsMode == 1 || ConfigurationHandler.retrieveSaplingsMode ==0 )){
 							event.getDrops().remove(i);
 						}
 						event.getDrops().add(new ItemStack(Items.STICK,event.getWorld().rand.nextBoolean()? 2:1));
-					}	
+					}
 				}
 			}
 			
