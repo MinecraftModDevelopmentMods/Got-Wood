@@ -40,6 +40,7 @@ public abstract class BlockWoodSlab extends BlockSlab {
 			iblockstate = iblockstate.withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
 		}
 		this.setDefaultState(iblockstate.withProperty(VARIANT, BlockWoodSlab.Variant.DEFAULT));
+		this.useNeighborBrightness = !this.isDouble();
 	}
 
 	@Override
@@ -86,7 +87,6 @@ public abstract class BlockWoodSlab extends BlockSlab {
 			FMLLog.severe("getting item for slab: %s, %s", this.getRegistryName().getResourceDomain(), this.wood.getName() + "_slab");
 			this.slabItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getResourceDomain(), this.wood.getName() + "_slab"));
 		}
-
 		return this.slabItem;
 	}
 
@@ -100,6 +100,10 @@ public abstract class BlockWoodSlab extends BlockSlab {
 		return new ItemStack(this.getSlabItem());
 	}
 
+	public WoodMaterial getWoodMaterial() {
+		return this.wood;
+	}
+
 	public enum Variant implements IStringSerializable {
 		DEFAULT;
 
@@ -107,9 +111,5 @@ public abstract class BlockWoodSlab extends BlockSlab {
 		public String getName() {
 			return "default";
 		}
-	}
-
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
 	}
 }

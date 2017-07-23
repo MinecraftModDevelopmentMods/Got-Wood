@@ -22,7 +22,7 @@ import panda.gotwood.util.WoodMaterial;
 public final class BlockBambooFence extends BlockFence implements IOreDictionaryEntry {
 	private final WoodMaterial wood;
 
-	protected static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[] {
+	private static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[] {
 		new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D),
 		new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 1.0D),
 		new AxisAlignedBB(0.0D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D),

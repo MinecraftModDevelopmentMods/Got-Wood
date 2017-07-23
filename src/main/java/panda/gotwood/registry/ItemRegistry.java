@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import panda.gotwood.item.ItemDates;
 import panda.gotwood.item.ItemSeed;
 import panda.gotwood.item.ItemWoodDoor;
+import panda.gotwood.item.ItemWoodSlab;
 import panda.gotwood.util.WoodMaterials;
 
 public final class ItemRegistry {
@@ -33,7 +34,6 @@ public final class ItemRegistry {
 
 	public static final Item palm_door = new ItemWoodDoor(BlockRegistry.palm_door, WoodMaterials.palm);
 
-	//public static final Item apple_slab = new ItemWoodSlab(WoodMaterials.apple,BlockRegistry.apple_planks,BlockRegistry.apple_slab,BlockRegistry.double_apple_slab);
 	public static final Item apple_seed = new ItemSeed(WoodMaterials.apple);
 
 	public static final Item maple_seed = new ItemSeed(WoodMaterials.maple);
@@ -63,14 +63,20 @@ public final class ItemRegistry {
 	public static final Item jungle_seed = new ItemSeed(WoodMaterials.jungle);
 
 	public static final Item acacia_seed = new ItemSeed(WoodMaterials.acacia);
-	/*
-	public static final Item maple_slab;
-	public static final Item pine_slab;
-	public static final Item willow_slab;
-	public static final Item yew_slab;
-	public static final Item ebony_slab;
-	public static final Item fir_slab;
-	*/
+
+	public static final Item apple_slab = new ItemWoodSlab(WoodMaterials.apple, BlockRegistry.apple_slab, BlockRegistry.double_apple_slab);
+
+	public static final Item maple_slab = new ItemWoodSlab(WoodMaterials.maple, BlockRegistry.maple_slab, BlockRegistry.double_maple_slab);
+
+	public static final Item pine_slab = new ItemWoodSlab(WoodMaterials.pine, BlockRegistry.pine_slab, BlockRegistry.double_pine_slab);
+
+	public static final Item willow_slab = new ItemWoodSlab(WoodMaterials.willow, BlockRegistry.willow_slab, BlockRegistry.double_willow_slab);
+
+	public static final Item yew_slab = new ItemWoodSlab(WoodMaterials.yew, BlockRegistry.yew_slab, BlockRegistry.double_yew_slab);
+
+	public static final Item ebony_slab = new ItemWoodSlab(WoodMaterials.ebony, BlockRegistry.ebony_slab, BlockRegistry.double_ebony_slab);
+
+	public static final Item fir_slab = new ItemWoodSlab(WoodMaterials.fir, BlockRegistry.fir_slab, BlockRegistry.double_fir_slab);
 
 	public static final Item ash = new Item().setRegistryName("ash");
 
@@ -84,7 +90,7 @@ public final class ItemRegistry {
 
 	public static final Item rubber_sap = new Item().setRegistryName("rubber_sap").setMaxStackSize(1);
 
-	public static final List<Item> getItemList() {
+	public static List<Item> getItemList() {
 		List<Item> list = new ArrayList<>();
 		list.add(apple_seed);
 		list.add(maple_seed);
@@ -115,6 +121,14 @@ public final class ItemRegistry {
 		list.add(jungle_seed);
 		list.add(acacia_seed);
 		list.add(spruce_seed);
+
+		list.add(apple_slab);
+		list.add(maple_slab);
+		list.add(pine_slab);
+		list.add(willow_slab);
+		list.add(yew_slab);
+		list.add(ebony_slab);
+		list.add(fir_slab);
 
 		list.add(bamboo_charcoal);
 		list.add(bamboo_pole);

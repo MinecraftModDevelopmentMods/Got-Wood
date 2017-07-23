@@ -7,13 +7,18 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockSlab;
 
 import panda.gotwood.block.BlockBambooFence;
 import panda.gotwood.block.BlockBambooLog;
 import panda.gotwood.block.BlockDates;
+import panda.gotwood.block.BlockDoubleSlab;
 import panda.gotwood.block.BlockFruitingLeaves;
+import panda.gotwood.block.BlockHalfSlab;
 import panda.gotwood.block.BlockPalmLeaves;
 import panda.gotwood.block.BlockPlanks;
+import panda.gotwood.block.BlockSappyLog;
+import panda.gotwood.block.BlockSpecialFire;
 import panda.gotwood.block.BlockTreeTap;
 import panda.gotwood.block.BlockWoodDoor;
 import panda.gotwood.block.BlockWoodFence;
@@ -23,8 +28,6 @@ import panda.gotwood.block.BlockWoodLog;
 import panda.gotwood.block.BlockWoodSapling;
 import panda.gotwood.block.BlockWoodStairs;
 import panda.gotwood.block.BlockWoodTrapdoor;
-import panda.gotwood.block.BlockSappyLog;
-import panda.gotwood.block.BlockSpecialFire;
 import panda.gotwood.util.WoodMaterials;
 
 public final class BlockRegistry {
@@ -47,8 +50,10 @@ public final class BlockRegistry {
 
 	public static final Block apple_gate = new BlockWoodFenceGate(WoodMaterials.apple);
 
-	//public static final BlockSlab apple_slab = new BlockHalfSlab(WoodMaterials.apple);
-	//public static final BlockSlab double_apple_slab = new BlockDoubleSlab(WoodMaterials.apple);
+	public static final BlockSlab apple_slab = new BlockHalfSlab(WoodMaterials.apple);
+
+	public static final BlockSlab double_apple_slab = new BlockDoubleSlab(WoodMaterials.apple);
+
 	public static final Block apple_stairs = new BlockWoodStairs(WoodMaterials.apple, apple_planks);
 
 	public static final Block apple_fence = new BlockWoodFence(WoodMaterials.apple);
@@ -67,8 +72,10 @@ public final class BlockRegistry {
 
 	public static final Block maple_gate = new BlockWoodFenceGate(WoodMaterials.maple);
 
-	//public static final BlockSlab maple_slab;
-	//public static final BlockSlab double_maple_slab;
+	public static final BlockSlab maple_slab = new BlockHalfSlab(WoodMaterials.maple);
+
+	public static final BlockSlab double_maple_slab = new BlockDoubleSlab(WoodMaterials.maple);
+
 	public static final Block maple_stairs = new BlockWoodStairs(WoodMaterials.maple, maple_planks);
 
 	public static final Block maple_fence = new BlockWoodFence(WoodMaterials.maple);
@@ -87,8 +94,10 @@ public final class BlockRegistry {
 
 	public static final Block pine_gate = new BlockWoodFenceGate(WoodMaterials.pine);
 
-	//public static final BlockSlab pine_slab;
-	//public static final BlockSlab double_pine_slab;
+	public static final BlockSlab pine_slab = new BlockHalfSlab(WoodMaterials.pine);
+
+	public static final BlockSlab double_pine_slab = new BlockDoubleSlab(WoodMaterials.pine);
+
 	public static final Block pine_stairs = new BlockWoodStairs(WoodMaterials.pine, pine_planks);
 
 	public static final Block pine_fence = new BlockWoodFence(WoodMaterials.pine);
@@ -107,8 +116,10 @@ public final class BlockRegistry {
 
 	public static final Block willow_gate = new BlockWoodFenceGate(WoodMaterials.willow);
 
-	//public static final BlockSlab willow_slab;
-	//public static final BlockSlab double_willow_slab;
+	public static final BlockSlab willow_slab = new BlockHalfSlab(WoodMaterials.willow);
+
+	public static final BlockSlab double_willow_slab = new BlockDoubleSlab(WoodMaterials.willow);
+
 	public static final Block willow_stairs = new BlockWoodStairs(WoodMaterials.willow, willow_planks);
 
 	public static final Block willow_fence = new BlockWoodFence(WoodMaterials.willow);
@@ -127,8 +138,10 @@ public final class BlockRegistry {
 
 	public static final Block yew_gate = new BlockWoodFenceGate(WoodMaterials.yew);
 
-	//public static final BlockSlab yew_slab;
-	//public static final BlockSlab double_yew_slab;
+	public static final BlockSlab yew_slab = new BlockHalfSlab(WoodMaterials.yew);
+
+	public static final BlockSlab double_yew_slab = new BlockDoubleSlab(WoodMaterials.yew);
+
 	public static final Block yew_stairs = new BlockWoodStairs(WoodMaterials.yew, yew_planks);
 
 	public static final Block yew_fence = new BlockWoodFence(WoodMaterials.yew);
@@ -147,8 +160,10 @@ public final class BlockRegistry {
 
 	public static final Block ebony_gate = new BlockWoodFenceGate(WoodMaterials.ebony);
 
-	//public static final BlockSlab ebony_slab;
-	//public static final BlockSlab double_ebony_slab;
+	public static final BlockSlab ebony_slab = new BlockHalfSlab(WoodMaterials.ebony);
+
+	public static final BlockSlab double_ebony_slab = new BlockDoubleSlab(WoodMaterials.ebony);
+
 	public static final Block ebony_stairs = new BlockWoodStairs(WoodMaterials.ebony, ebony_planks);
 
 	public static final Block ebony_fence = new BlockWoodFence(WoodMaterials.ebony);
@@ -167,8 +182,10 @@ public final class BlockRegistry {
 
 	public static final Block fir_gate = new BlockWoodFenceGate(WoodMaterials.fir);
 
-	//public static final BlockSlab fir_slab;
-	//public static final BlockSlab double_fir_slab;
+	public static final BlockSlab fir_slab = new BlockHalfSlab(WoodMaterials.fir);
+
+	public static final BlockSlab double_fir_slab = new BlockDoubleSlab(WoodMaterials.fir);
+
 	public static final Block fir_stairs = new BlockWoodStairs(WoodMaterials.fir, fir_planks);
 
 	public static final Block fir_fence = new BlockWoodFence(WoodMaterials.fir);
@@ -209,8 +226,10 @@ public final class BlockRegistry {
 
 	public static final Block palm_gate = new BlockWoodFenceGate(WoodMaterials.palm);
 
-	//public static final BlockSlab palm_slab;
-	//public static final BlockSlab double_palm_slab;
+	public static final BlockSlab palm_slab = new BlockHalfSlab(WoodMaterials.palm);
+
+	public static final BlockSlab double_palm_slab = new BlockDoubleSlab(WoodMaterials.palm);
+
 	public static final Block palm_stairs = new BlockWoodStairs(WoodMaterials.palm, palm_planks);
 
 	public static final Block palm_fence = new BlockWoodFence(WoodMaterials.palm);
@@ -223,7 +242,7 @@ public final class BlockRegistry {
 
 	public static final Block rubber_sapling = new BlockWoodSapling(WoodMaterials.rubber);
 
-	public static final List<Block> getBlockList() {
+	public static List<Block> getBlockList() {
 		List<Block> list = new ArrayList<>();
 		list.add(specialfire);
 
@@ -319,6 +338,21 @@ public final class BlockRegistry {
 		list.add(rubber_log);
 		list.add(rubber_leaves);
 		list.add(rubber_sapling);
+
+		list.add(apple_slab);
+		list.add(double_apple_slab);
+		list.add(maple_slab);
+		list.add(double_maple_slab);
+		list.add(pine_slab);
+		list.add(double_pine_slab);
+		list.add(willow_slab);
+		list.add(double_willow_slab);
+		list.add(yew_slab);
+		list.add(double_yew_slab);
+		list.add(ebony_slab);
+		list.add(double_ebony_slab);
+		list.add(fir_slab);
+		list.add(double_fir_slab);
 
 		list.add(dates_block);
 

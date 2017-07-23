@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
@@ -17,8 +16,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
 import panda.gotwood.GotWood;
-import panda.gotwood.block.BlockWoodDoor;
+import panda.gotwood.block.BlockDoubleSlab;
 import panda.gotwood.block.BlockSpecialFire;
+import panda.gotwood.block.BlockWoodDoor;
 import panda.gotwood.events.BlockBreakHandler;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.events.FireHandler;
@@ -41,7 +41,7 @@ public final class MasterRegistrar {
 					((Block) k).setCreativeTab(GotWood.TREE_TAB);
 				}
 				block.setUnlocalizedName(GotWood.ID + "." + block.getRegistryName().getResourcePath());
-				if (Item.getItemFromBlock(block).equals(Items.AIR)) {
+				if (!(k instanceof BlockDoubleSlab) && !ForgeRegistries.ITEMS.containsKey(block.getRegistryName())) {
 					ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
 				}
 			} else if (k instanceof Item) {
@@ -83,8 +83,9 @@ public final class MasterRegistrar {
 		MinecraftForge.EVENT_BUS.register(new BlockBreakHandler());
 		MinecraftForge.EVENT_BUS.register(new FireHandler());
 		WoodMaterials.init();
-		register(e, BlockRegistry.getBlockList());
+		List<Block> blocks = BlockRegistry.getBlockList();
 		register(e, ItemRegistry.getItemList());
+		register(e, blocks);
 		RecipeRegistry.init();
 		GameRegistry.registerFuelHandler(new FuelHandler());
 	}
