@@ -9,30 +9,41 @@ import java.util.Map;
 public abstract class WoodMaterials {
 
 	private static Map<String, WoodMaterial> allMaterials = new HashMap<>();
+
 	protected static List<WoodMaterial> materials = new LinkedList<>();
 
 	public static WoodMaterial apple;
+
 	public static WoodMaterial maple;
+
 	public static WoodMaterial pine;
+
 	public static WoodMaterial willow;
+
 	public static WoodMaterial yew;
+
 	public static WoodMaterial ebony;
+
 	public static WoodMaterial fir;
-	
+
 	public static WoodMaterial bamboo;
+
 	public static WoodMaterial rubber;
+
 	public static WoodMaterial palm;
-	
-	
+
 	//Vanilla woods
 	public static WoodMaterial oak;
+
 	public static WoodMaterial spruce;
+
 	public static WoodMaterial darkOak;
+
 	public static WoodMaterial jungle;
+
 	public static WoodMaterial acacia;
+
 	public static WoodMaterial birch;
-
-
 
 	private static boolean initDone = false;
 
@@ -43,7 +54,6 @@ public abstract class WoodMaterials {
 		if (initDone)
 			return;
 
-
 		apple = addMaterial("apple", 3, 2);
 		maple = addMaterial("maple", 3, 2);
 		pine = addMaterial("pine", 3, 2);
@@ -51,20 +61,17 @@ public abstract class WoodMaterials {
 		yew = addMaterial("yew", 3, 2);
 		ebony = addMaterial("ebony", 3, 2);
 		fir = addMaterial("fir", 3, 2);
-		
+
 		bamboo = addMaterial("bamboo", 3, 2);
 		rubber = addMaterial("rubber", 3, 2);
 		palm = addMaterial("palm", 3, 2);
-		
-		oak = addMaterial("oak", 3,        2, 0);
-		spruce = addMaterial("spruce",3,   2, 1);
-		birch = addMaterial("birch", 3,    2, 2);
-		jungle = addMaterial("jungle", 3,  2, 3);
-		acacia = addMaterial("acacia", 3,  2, 4);
-		darkOak = addMaterial("dark_oak",3,2, 5);
-		
-		
 
+		oak = addMaterial("oak", 3, 2, 0);
+		spruce = addMaterial("spruce", 3, 2, 1);
+		birch = addMaterial("birch", 3, 2, 2);
+		jungle = addMaterial("jungle", 3, 2, 3);
+		acacia = addMaterial("acacia", 3, 2, 4);
+		darkOak = addMaterial("dark_oak", 3, 2, 5);
 
 		initDone = true;
 	}
@@ -76,9 +83,9 @@ public abstract class WoodMaterials {
 		materials.add(m);
 		return m;
 	}
-	
+
 	protected static WoodMaterial addMaterial(String name, double hardness, double strength) {
-		final WoodMaterial m = new WoodMaterial(name, (float) hardness, (float) strength,0);
+		final WoodMaterial m = new WoodMaterial(name, (float) hardness, (float) strength, 0);
 		registerMaterial(name, m);
 
 		materials.add(m);
@@ -89,8 +96,7 @@ public abstract class WoodMaterials {
 
 		allMaterials.put(name, m);
 	}
-	
-	
+
 	public static Collection<WoodMaterial> getAllWoods() {
 		return allMaterials.values();
 	}

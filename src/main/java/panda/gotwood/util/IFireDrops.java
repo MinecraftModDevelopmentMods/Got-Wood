@@ -5,10 +5,10 @@ import java.util.Random;
 
 import net.minecraft.item.ItemStack;
 
-public interface IFireDrops{
-	
-	public abstract boolean hasFireDrops();
-	
-	public abstract List<ItemStack> addFireDrops(List<ItemStack> stacks,Random random);
-	
+public interface IFireDrops {
+
+	boolean hasFireDrops();
+
+	List<ItemStack> addFireDrops(List<ItemStack> stacks, Random random);
+
 }
