@@ -44,14 +44,11 @@ public class WorldGenPalm extends WorldGenAbstractTree {
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos) {
 		byte type = chooseTreeGenType(world);
-		if (type == 1) {
-			generateNormal(world, rand, pos);
-			return generateNormal(world, rand, pos);
-		} else if (type == 2) {
-			generateMini(world, rand, pos);
+		//TODO 3 and 2 do not work
+		System.out.println("type "+type);
+		if (type == 2) {
 			return generateMini(world, rand, pos);
 		} else if (type == 3) {
-			generateBig(world, rand, pos);
 			return generateBig(world, rand, pos);
 		} else
 			return generateNormal(world, rand, pos);
@@ -62,15 +59,17 @@ public class WorldGenPalm extends WorldGenAbstractTree {
 		boolean flag = true;
 
 		if (position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getHeight()) {
-
+			
 			flag = isAreaClear(worldIn, position, i);
 
 			if (!flag) {
 				return false;
 			} else {
+				
 				IBlockState state = worldIn.getBlockState(position.down());
 
-				if (state.getBlock().canSustainPlant(state, worldIn, position.down(), net.minecraft.util.EnumFacing.UP, (net.minecraft.block.BlockSapling) net.minecraft.init.Blocks.SAPLING) && position.getY() < worldIn.getHeight() - i - 1) {
+				if (state.getBlock().canSustainPlant(state, worldIn, position.down(), net.minecraft.util.EnumFacing.UP, net.minecraft.init.Blocks.DEADBUSH) && position.getY() < worldIn.getHeight() - i - 1) {
+					System.out.println("doot ");
 					this.setDirtAt(worldIn, position.down());
 
 					for (int i3 = position.getY() - 3 + i; i3 <= position.getY() + i; ++i3) {

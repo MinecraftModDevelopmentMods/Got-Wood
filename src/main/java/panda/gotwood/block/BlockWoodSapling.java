@@ -86,7 +86,7 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 	}
 
 	public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-
+		
 		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos))
 			return;
 
@@ -135,10 +135,12 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 			worldIn.setBlockState(pos.add(i, 0, j + 1), iblockstate2, 4);
 			worldIn.setBlockState(pos.add(i + 1, 0, j + 1), iblockstate2, 4);
 		} else {
-			worldIn.setBlockState(pos, iblockstate2, 4);
+			
+			worldIn.setBlockToAir(pos);
 		}
-
+		
 		if (!worldgenerator.generate(worldIn, rand, pos.add(i, 0, j))) {
+			
 			if (flag) {
 				worldIn.setBlockState(pos.add(i, 0, j), state, 4);
 				worldIn.setBlockState(pos.add(i + 1, 0, j), state, 4);
@@ -157,7 +159,8 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 
 	@Override
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-		return "palm".equals(wood.getName()) ? EnumPlantType.Desert : EnumPlantType.Plains;
+		
+		return wood.getName().equals("palm") ? EnumPlantType.Desert : EnumPlantType.Plains;
 	}
 
 	@Override
@@ -180,6 +183,12 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
 		this.grow(worldIn, pos, state, rand);
 	}
+	
+	@Override
+	protected boolean canSustainBush(IBlockState state)
+    {
+        return false;
+    }
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {

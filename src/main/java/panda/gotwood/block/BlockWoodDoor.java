@@ -42,14 +42,9 @@ public final class BlockWoodDoor extends BlockDoor {
 		return new ItemStack(getDoorItem());
 	}
 
-	public void setDoorItem(Item door) {
-		this.doorItem = door;
-	}
-
 	private Item getDoorItem() {
 		if (this.doorItem == null) {
-			FMLLog.severe("getting item for door: %s, %s", this.getRegistryName().getResourceDomain(), this.wood.getName() + "_door");
-			this.doorItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getResourceDomain(), this.wood.getName() + "_door"));
+			this.doorItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getResourceDomain(), this.wood.getName() + "_door_item"));
 		}
 		return this.doorItem;
 	}

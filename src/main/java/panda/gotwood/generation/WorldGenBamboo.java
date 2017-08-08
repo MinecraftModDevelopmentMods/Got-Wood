@@ -40,12 +40,14 @@ public class WorldGenBamboo extends WorldGenAbstractTree {
 	}
 
 	public boolean generate(World world, Random rand, BlockPos position) {
+		
 		int height = rand.nextInt(3) + this.minTreeHeight;
 		boolean flag = true;
 		int i = position.getX();
 		int j = position.getY();
 		int k = position.getZ();
-		if ((j >= 1) && (j + height + 1 <= this.maxTreeHeight)) {
+		
+		//if ((j >= 1) && (height + 1 <= this.maxTreeHeight)) {
 			for (int y = j; y <= j + 1 + height; y++) {
 				byte b0 = 0;
 				if (y >= j + height - 3) {
@@ -135,8 +137,8 @@ public class WorldGenBamboo extends WorldGenAbstractTree {
 				return true;
 			}
 			return false;
-		}
-		return false;
+		//}
+		//return false;
 	}
 
 	protected boolean func_150523_a(Block block) {

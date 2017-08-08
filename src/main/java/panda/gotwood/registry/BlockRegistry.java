@@ -211,6 +211,10 @@ public final class BlockRegistry {
 	public static final Block bamboo_fence = new BlockBambooFence(WoodMaterials.bamboo);
 
 	public static final Block bamboo_gate = new BlockWoodFenceGate(WoodMaterials.bamboo);
+	
+	public static final BlockSlab bamboo_slab = new BlockHalfSlab(WoodMaterials.bamboo);
+
+	public static final BlockSlab double_bamboo_slab = new BlockDoubleSlab(WoodMaterials.bamboo);
 
 	public static final Block palm_log = new BlockWoodLog(WoodMaterials.palm);
 
@@ -349,10 +353,14 @@ public final class BlockRegistry {
 		list.add(double_willow_slab);
 		list.add(yew_slab);
 		list.add(double_yew_slab);
-		list.add(ebony_slab);
-		list.add(double_ebony_slab);
 		list.add(fir_slab);
 		list.add(double_fir_slab);
+		list.add(ebony_slab);
+		list.add(double_ebony_slab);
+		list.add(bamboo_slab);
+		list.add(double_bamboo_slab);
+		list.add(palm_slab);
+		list.add(double_palm_slab);
 
 		list.add(dates_block);
 
