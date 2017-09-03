@@ -52,7 +52,7 @@ public final class RecipeRegistry {
 				}
 			}
 		}
-		GameRegistry.addSmelting(new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemRegistry.ash), 0.1f);
+		//GameRegistry.addSmelting(new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemRegistry.ash), 0.1f);
 		GameRegistry.addSmelting(new ItemStack(ItemRegistry.bamboo_pole), new ItemStack(ItemRegistry.bamboo_charcoal), 0.1f);
 
 	}

@@ -28,7 +28,7 @@ import panda.gotwood.registry.MasterRegistrar;
 public final class GotWood {
 	public static final String ID = "gotwood";
 
-	public static final String VERSION = "0.22.6";
+	public static final String VERSION = "0.24.0";
 
 	public static final String NAME = "Got Wood?";
 
