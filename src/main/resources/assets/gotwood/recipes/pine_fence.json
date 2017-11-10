@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "gotwood:pine_fence",
+    "count": 3
+  },
+  "pattern": [
+    "#s#",
+    "#s#"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "gotwood:pine_planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

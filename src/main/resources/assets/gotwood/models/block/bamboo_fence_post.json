@@ -1,5 +1,5 @@
 {
-    "parent": "gotwood:block/bamboo_post",
+    "parent": "gotwood:block/thick_post",
     "textures": {
         "texture": "gotwood:blocks/bamboo_post"
 ,"top": "gotwood:blocks/bamboo_post_top"

@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "gotwood:blocks/planks_palm",
+        "top": "gotwood:blocks/planks_palm",
+        "side": "gotwood:blocks/planks_palm"
+    }
+}

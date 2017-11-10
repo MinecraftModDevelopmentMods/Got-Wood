@@ -1,0 +1,11 @@
+{
+
+    "parent": "block/leaves",
+
+    "textures": {
+
+        "all": "gotwood:blocks/leaves_apple_fruit"
+
+    }
+
+}

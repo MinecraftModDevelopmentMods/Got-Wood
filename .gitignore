@@ -43,4 +43,5 @@ forge-1.10.2-12.18.3.2281-changelog.txt
 README.txt
 gradle/wrapper/gradle-wrapper.jar
 src/main/resources/mcmod.info
-src/main/resources/mcmod.info
+secret.json
+secret.txt

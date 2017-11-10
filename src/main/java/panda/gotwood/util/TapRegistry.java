@@ -9,7 +9,7 @@ public class TapRegistry {
 	public static FluidStack find(Block block) {
 		// TODO 
 		//Just return water for now
-		return new FluidStack(FluidRegistry.WATER,0);
+		return new FluidStack(FluidRegistry.WATER, 0);
 	}
 
 }

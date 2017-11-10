@@ -2,63 +2,27 @@ package panda.gotwood.util;
 
 import java.util.Locale;
 
+import net.minecraft.util.math.MathHelper;
+
 import org.apache.commons.lang3.StringUtils;
-
 import panda.gotwood.GotWood;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 
-public class WoodMaterial {
+public final class WoodMaterial {
+	private final float hardness;
 
-	/**
-	 * hardness on a scale from 0 to 10 (or more), where 0 is non-solid and
-	 * diamond is 10. For reference, wood is 3, stone is 5, iron is 8, diamond
-	 * is 10.
-	 */
-	public final float hardness;
+	private final float strength;
 
-	/**
-	 * durability on a scale from 0 to 10 (or more). For reference, leather is
-	 * 2.5, gold is 3, wood is 2, stone is 4, iron is 8, minecraft diamond is
-	 * 10.
-	 */
-	public final float strength;
+	private final String identifier;
 
-	/**
-	 * String used to identify items and blocks using this material
-	 */
-	final String identifier;
-
-	final String titleName;
+	private final String titleName;
 
 	private final String enumName;
 
-	private int[] cache = null;
-
-	/**
-	 * The resistance the material has against explosions.
-	 */
 	private float blastResistance;
 
-
-	
-	public Item door;
-	public Item slab;
-
-	public Block planks;
-	public BlockDoor doorBlock;
-	public BlockSlab double_slab;
-	public BlockSlab half_slab;
-	public Block log;
-	public Block stairs;
-	public Block trapdoor;
-	public Block fence;
 	public int meta;
 
-
+<<<<<<< HEAD
 	/**
 	 * @param name
 	 *            String used to identify items and blocks using this material
@@ -73,16 +37,18 @@ public class WoodMaterial {
 	 *            minecraft diamond is 10. Used for item durability calculations
 	 *            and blast resistance
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public WoodMaterial(String name, float hardness, float strength) {
-		this(name,hardness,strength,-1);
+		this(name, hardness, strength, -1);
 	}
-	
+
 	public WoodMaterial(String name, float hardness, float strength, int meta) {
 		this.hardness = hardness;
 		this.strength = strength;
 		this.identifier = name;
 		this.titleName = StringUtils.capitalize(name);
-		this.enumName = (GotWood.MODID + "_" + name).toUpperCase(Locale.ENGLISH);
+		this.enumName = (GotWood.ID + "_" + name).toUpperCase(Locale.ENGLISH);
 		this.blastResistance = 2.5f * this.strength;
 		this.meta = meta;
 	}
@@ -107,6 +73,7 @@ public class WoodMaterial {
 
 	@Override
 	public boolean equals(Object o) {
+<<<<<<< HEAD
 		if (o == this)
 			return true;
 		if ((o.hashCode() == this.hashCode()) && (o instanceof WoodMaterial)) {
@@ -149,74 +116,77 @@ public class WoodMaterial {
 		if (x > max)
 			return max;
 		return x;
+=======
+		return o == this || o instanceof WoodMaterial && this.identifier.equals(((WoodMaterial) o).identifier);
 	}
 
-	static float clamp(float x, float min, float max) {
-		if (x < min)
-			return min;
-		if (x > max)
-			return max;
-		return x;
+	public int getMeta() {
+		return this.meta;
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	}
 
-	static double clamp(double x, double min, double max) {
-		if (x < min)
-			return min;
-		if (x > max)
-			return max;
-		return x;
+	public int getToolHarvestLevel() {
+		return (int) (this.hardness / 3f);
 	}
 
+	public int getRequiredHarvestLevel() {
+		return (int) MathHelper.clamp(((0.9f * this.hardness) / 3f), -1, 3);
+	}
+
+<<<<<<< HEAD
 	/**
 	 * Gets the resistance of blocks made from this material to explosions
 	 * 
 	 * @return the blast resistance score
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public float getBlastResistance() {
 		return this.blastResistance;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Gets the number used to determine how quickly a block is mined with a
 	 * tool made from this material
 	 * 
 	 * @return the number used to determine how quickly a block is mined
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public float getToolEfficiency() {
 		return this.hardness;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Gets the hardness of the log block for this material
 	 * 
 	 * @return the hardness of the log block for this material
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public float getLogBlockHardness() {
 		return 2.0f * this.hardness;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Gets the hardness for planks made from this material
 	 * 
 	 * @return the hardness for planks made from this material
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public float getPlankBlockHardness() {
 		return 0.5f * this.hardness;
 	}
-
-
-	private float round(float number, int numDecimalPlaces) {
-		int x = 1;
-		for (int i = 0; i < numDecimalPlaces; i++)
-			x *= 10;
-		return (float) Math.round(number * x) / (float) x;
-	}
-
 
 	public String getEnumName() {
 		return this.enumName;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Sets the blast resistance of the material. Should only be used as a
 	 * builder method.
@@ -225,9 +195,10 @@ public class WoodMaterial {
 	 *            The resistance for the material.
 	 * @return An instance of the material, for quality of life.
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public WoodMaterial setBlastResistance(float resistance) {
 		this.blastResistance = resistance;
 		return this;
 	}
-
 }

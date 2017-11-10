@@ -1,110 +1,58 @@
 package panda.gotwood.registry;
 
-
-import java.util.Arrays;
-import java.util.List;
-
-import panda.gotwood.events.ConfigurationHandler;
-import panda.gotwood.util.WoodMaterial;
-import panda.gotwood.util.WoodMaterials;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import panda.gotwood.util.WoodMaterial;
+import panda.gotwood.util.WoodMaterials;
 
-public abstract class RecipeRegistry {
-	
+public final class RecipeRegistry {
+	private RecipeRegistry() {}
+
 	public static void init() {
-		
-		for (final WoodMaterial wood : WoodMaterials.getAllWoods()) {
-			if(wood == WoodMaterials.bamboo ){
-				final String baseName = wood.getName() + "_";
-				final String oreDictName = wood.getCapitalizedName();
-				final Item door = ItemRegistry.getItemByName(baseName + "door_item");
-				final Item pole = ItemRegistry.getItemByName(baseName + "pole");
-				final Block planks = BlockRegistry.getBlockByName(baseName + "planks");
-				final Block log = BlockRegistry.getBlockByName(baseName + "log");
-				final Block trapdoor = BlockRegistry.getBlockByName(baseName + "trapdoor");	
-				//final Item slab = ItemRegistry.getItemByName(baseName + "_slab");
-				final Block stairs = BlockRegistry.getBlockByName(baseName + "stairs");
-				final Block fence = BlockRegistry.getBlockByName(baseName + "fence");
-				final Block gate = BlockRegistry.getBlockByName(baseName + "fence_gate");
-				
-				System.out.println(baseName+"/"+door+"/"+planks+"/"+log+"/"+trapdoor+"/"+stairs+"/"+fence+"/"+gate);
-				//
-
-				if ((log != null)&& (planks != null)){
-					GameRegistry.addRecipe(new ItemStack(planks,2), new Object[] {"##", "##", '#', new ItemStack(pole)});
-					OreDictionary.registerOre("plankWood",planks);
-					//OreDictionary.registerOre("treeLeaves",BlockRegistry.getBlockByName(baseName + "leaves"));
+		for (WoodMaterial wood : WoodMaterials.getAllWoods()) {
+			if (wood == WoodMaterials.bamboo) {
+				String baseName = wood.getName() + "_";
+				Item door = ItemRegistry.getItemByName(baseName + "door_item");
+				Item pole = ItemRegistry.getItemByName(baseName + "pole");
+				Block planks = BlockRegistry.getBlockByName(baseName + "planks");
+				Block log = BlockRegistry.getBlockByName(baseName + "log");
+				Block trapdoor = BlockRegistry.getBlockByName(baseName + "trapdoor");
+				if ((log != null) && (planks != null)) {
+					OreDictionary.registerOre("plankWood", planks);
+					OreDictionary.registerOre("treeLeaves", BlockRegistry.getBlockByName(baseName + "leaves"));
 				}
-
 				if ((planks != null) && (door != null)) {
-					GameRegistry.addRecipe(new ItemStack(door,3), new Object[] {"##", "##", "##", '#', new ItemStack(pole)});
 					OreDictionary.registerOre("door", door);
 				}
 				if ((planks != null) && (trapdoor != null)) {
-					GameRegistry.addRecipe(new ItemStack(trapdoor,2), new Object[] {"###", "###", '#', new ItemStack(pole)});
 					OreDictionary.registerOre("trapdoor", trapdoor);
 				}
-
-				if (planks != null){
-					//GameRegistry.addRecipe(new ItemStack(slab,6), new Object[] {"###", '#', new ItemStack(planks)});
-					//GameRegistry.addRecipe(new ItemStack(planks), new Object[] {"#","#", '#', new ItemStack(slab)});
-					GameRegistry.addRecipe(new ItemStack(stairs,ConfigurationHandler.numStairs), new Object[] {"#  ", "## ", "###", '#', new ItemStack(pole)});
-					GameRegistry.addRecipe(new ItemStack(fence,3), new Object[] {"#s#", "#s#", '#', new ItemStack(planks),'s', new ItemStack(pole)});
-					GameRegistry.addRecipe(new ItemStack(gate), new Object[] {"s#s", "s#s", '#', new ItemStack(planks),'s', new ItemStack(pole)});
+			} else {
+				String baseName = wood.getName() + "_";
+				Item door = ItemRegistry.getItemByName(baseName + "door_item");
+				Block planks = BlockRegistry.getBlockByName(baseName + "planks");
+				Block log = BlockRegistry.getBlockByName(baseName + "log");
+				Block trapdoor = BlockRegistry.getBlockByName(baseName + "trapdoor");
+				//Item slab = ItemRegistry.getItemByName(baseName + "_slab");
+				if ((log != null) && (planks != null)) {
+					GameRegistry.addSmelting(log, new ItemStack(Items.COAL, 1, 1), 0.2f);
+					OreDictionary.registerOre("plankWood", planks);
+					OreDictionary.registerOre("treeLeaves", BlockRegistry.getBlockByName(baseName + "leaves"));
 				}
-			}else{
-			final String baseName = wood.getName() + "_";
-			final String oreDictName = wood.getCapitalizedName();
-			final Item door = ItemRegistry.getItemByName(baseName + "door_item");
-			final Block planks = BlockRegistry.getBlockByName(baseName + "planks");
-			final Block log = BlockRegistry.getBlockByName(baseName + "log");
-			final Block trapdoor = BlockRegistry.getBlockByName(baseName + "trapdoor");	
-			//final Item slab = ItemRegistry.getItemByName(baseName + "_slab");
-			final Block stairs = BlockRegistry.getBlockByName(baseName + "stairs");
-			final Block fence = BlockRegistry.getBlockByName(baseName + "fence");
-			final Block gate = BlockRegistry.getBlockByName(baseName + "fence_gate");
-			
-			System.out.println(baseName+"/"+door+"/"+planks+"/"+log+"/"+trapdoor+"/"+stairs+"/"+fence+"/"+gate);
-			//
-
-			if ((log != null)&& (planks != null)){
-				GameRegistry.addSmelting(log, new ItemStack(Items.COAL,1, 1), 0.2f);
-				GameRegistry.addShapelessRecipe(new ItemStack(planks,4), new ItemStack(log));
-				OreDictionary.registerOre("plankWood",planks);
-				//OreDictionary.registerOre("treeLeaves",BlockRegistry.getBlockByName(baseName + "leaves"));
-			}
-
-			if ((planks != null) && (door != null)) {
-				GameRegistry.addRecipe(new ItemStack(door,3), new Object[] {"##", "##", "##", '#', new ItemStack(planks)});
-				OreDictionary.registerOre("door", door);
-			}
-			if ((planks != null) && (trapdoor != null)) {
-				GameRegistry.addRecipe(new ItemStack(trapdoor,2), new Object[] {"###", "###", '#', new ItemStack(planks)});
-				OreDictionary.registerOre("trapdoor", trapdoor);
-			}
-
-			if (planks != null){
-				//GameRegistry.addRecipe(new ItemStack(slab,6), new Object[] {"###", '#', new ItemStack(planks)});
-				//GameRegistry.addRecipe(new ItemStack(planks), new Object[] {"#","#", '#', new ItemStack(slab)});
-				GameRegistry.addRecipe(new ItemStack(stairs,ConfigurationHandler.numStairs), new Object[] {"#  ", "## ", "###", '#', new ItemStack(planks)});
-				GameRegistry.addRecipe(new ItemStack(fence,3), new Object[] {"#s#", "#s#", '#', new ItemStack(planks),'s', new ItemStack(Items.STICK)});
-				GameRegistry.addRecipe(new ItemStack(gate), new Object[] {"s#s", "s#s", '#', new ItemStack(planks),'s', new ItemStack(Items.STICK)});
-			}
+				if ((planks != null) && (door != null)) {
+					OreDictionary.registerOre("door", door);
+				}
+				if ((planks != null) && (trapdoor != null)) {
+					OreDictionary.registerOre("trapdoor", trapdoor);
+				}
 			}
 		}
+<<<<<<< HEAD
 		
 		
 		
@@ -137,32 +85,46 @@ public abstract class RecipeRegistry {
 	 * @param oreDictEntries
 	 * @param name
 	 */
+=======
+		//GameRegistry.addSmelting(new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemRegistry.ash), 0.1f);
+		GameRegistry.addSmelting(new ItemStack(ItemRegistry.bamboo_pole), new ItemStack(ItemRegistry.bamboo_charcoal), 0.1f);
+
+	}
+
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public static void addOredicts(String[] oreDictEntries, Block name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
+<<<<<<< HEAD
 	/**
 	 *
 	 * @param oreDictEntries
 	 * @param name
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public static void addOredicts(String[] oreDictEntries, Item name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
+<<<<<<< HEAD
 	/**
 	 *
 	 * @param oreDictEntries
 	 * @param itemStackName
 	 */
+=======
+>>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 	public static void addOredicts(String[] oreDictEntries, ItemStack itemStackName) {
 		// for(int i = 0; i < oreDictEntries.length; i++)
 		// 	OreDictionary.registerOre(oreDictEntries[i], itemStackName);
-		for (final String oreDictEntry : oreDictEntries)
+		for (final String oreDictEntry : oreDictEntries) {
 			OreDictionary.registerOre(oreDictEntry, itemStackName);
+		}
 	}
 }
