@@ -1,14 +1,17 @@
 {
     "variants": {
-        "normal": { "model": "gotwood:apple_leaves" },
-	"check_decay=true,decayable=false,fruit=false": { "model": "gotwood:apple_leaves" },
-	"check_decay=true,decayable=true,fruit=false": { "model": "gotwood:apple_leaves" },
-	"check_decay=false,decayable=false,fruit=false": { "model": "gotwood:apple_leaves" },
-	"check_decay=false,decayable=true,fruit=false": { "model": "gotwood:apple_leaves" },
-
-	"check_decay=true,decayable=false,fruit=true": { "model": "gotwood:apple_leaves_fruit" },
-	"check_decay=true,decayable=true,fruit=true": { "model": "gotwood:apple_leaves_fruit" },
-	"check_decay=false,decayable=false,fruit=true": { "model": "gotwood:apple_leaves_fruit" },
-	"check_decay=false,decayable=true,fruit=true": { "model": "gotwood:apple_leaves_fruit" }
-    }
+        "normal": { "model": "gotwood:fir_leaves" },
+		"check_decay=true,decayable=false,fruit=0": { "model": "gotwood:apple_leaves" },
+		"check_decay=true,decayable=true,fruit=0": { "model": "gotwood:apple_leaves" },
+		"check_decay=false,decayable=false,fruit=0": { "model": "gotwood:apple_leaves" },
+		"check_decay=false,decayable=true,fruit=0": { "model": "gotwood:apple_leaves" },
+		"check_decay=true,decayable=false,fruit=1": { "model": "gotwood:apple_leaves_flowering" },
+		"check_decay=true,decayable=true,fruit=1": { "model": "gotwood:apple_leaves_flowering" },
+		"check_decay=false,decayable=false,fruit=1": { "model": "gotwood:apple_leaves_flowering" },
+		"check_decay=false,decayable=true,fruit=1": { "model": "gotwood:apple_leaves_flowering" },
+		"check_decay=true,decayable=false,fruit=2": { "model": "gotwood:apple_leaves_fruit" },
+		"check_decay=true,decayable=true,fruit=2": { "model": "gotwood:apple_leaves_fruit" },
+		"check_decay=false,decayable=false,fruit=2": { "model": "gotwood:apple_leaves_fruit" },
+		"check_decay=false,decayable=true,fruit=2": { "model": "gotwood:apple_leaves_fruit" }
+		}
 }

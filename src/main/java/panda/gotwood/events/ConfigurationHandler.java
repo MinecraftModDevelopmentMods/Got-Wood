@@ -67,7 +67,7 @@ public final class ConfigurationHandler {
 	public static int appleFruitingGenChance;
 
 	public static int rubberChance;
-
+	public static boolean allowBonemealFruitSaplings;
 	public static Configuration config;
 
 	public static void init(FMLPreInitializationEvent event) {
@@ -108,7 +108,7 @@ public final class ConfigurationHandler {
 		//can't get saplings
 		//shear or silktouch sapling block
 		//seed in crafting grid
-
+		allowBonemealFruitSaplings = config.getBoolean("allowBonemealFruitSaplings", "Drops", true, "Allow fruit trees to be bonemealed");
 		config.save();
 	}
 }

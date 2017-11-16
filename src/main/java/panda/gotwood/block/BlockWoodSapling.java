@@ -34,12 +34,12 @@ import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 import panda.gotwood.util.WoodMaterials;
 
-public final class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, IGrowable, IPlantable {
+public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, IGrowable, IPlantable {
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
-	private static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
+	protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0.0D, 0.1, 0.9, 0.8, 0.9D);
 
-	private final WoodMaterial wood;
+	protected final WoodMaterial wood;
 
 	public BlockWoodSapling(WoodMaterial wood) {
 		this.wood = wood;
@@ -96,9 +96,6 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 		boolean flag = false; // for bamboo spreading
 
 		switch (wood.getName()) {
-			case "maple":
-				worldgenerator = new WorldGenMaple(true);
-				break;
 			case "willow":
 				worldgenerator = new WorldGenWillow();
 				break;
@@ -124,7 +121,7 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 				worldgenerator = new WorldGenRubber(true);
 				break;
 			default:
-				worldgenerator = new WorldGenApple(true);
+				worldgenerator = new WorldGenMaple(true);
 		}
 
 		IBlockState iblockstate2 = Blocks.AIR.getDefaultState();
@@ -177,7 +174,7 @@ public final class BlockWoodSapling extends BlockBush implements IOreDictionaryE
 	}
 
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return true;//(double)worldIn.rand.nextFloat() < 0.45D
+		return (double)worldIn.rand.nextFloat() < 0.45D;//
 	}
 
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {

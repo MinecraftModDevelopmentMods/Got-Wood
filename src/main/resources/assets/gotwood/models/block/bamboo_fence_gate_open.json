@@ -1,5 +1,5 @@
 {
-    "parent": "block/fence_gate_open",
+    "parent": "gotwood:block/fence_gate_open_down",
     "textures": {
         "texture": "gotwood:blocks/planks_bamboo"
     }

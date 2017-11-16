@@ -1,6 +1,37 @@
 {
-    "variants": {
-        "stage=0": { "model": "gotwood:apple_sapling" },
-        "stage=1": { "model": "gotwood:apple_sapling" }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cross",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+      "stage": {
+      "0": {
+        "textures": {
+          "cross":"gotwood:blocks/sapling_apple_0"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross":"gotwood:blocks/sapling_apple_1"
+        }
+      },
+      "2": {
+	"model": "gotwood:crossoneandhalf",
+        "textures": {
+          "cross":"gotwood:blocks/sapling_apple_2"
+        }
+      },
+      "3": {
+        "textures": {
+          "cross":"gotwood:blocks/sapling_apple_3"
+        }
+      },
+      "4": {
+        "textures": {
+          "cross":"gotwood:blocks/sapling_apple_4"
+        }
+      }
     }
+  }
 }

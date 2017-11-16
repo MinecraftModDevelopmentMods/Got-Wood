@@ -48,7 +48,6 @@ public class ItemSeed extends Item implements IOreDictionaryEntry, IPlantable {
 			heldItem.shrink(1);
 			return EnumActionResult.SUCCESS;
 		} else {
-			System.out.println("else");
 			if (playerIn.canPlayerEdit(pos.offset(facing), facing, heldItem) && worldIn.isAirBlock(pos.up()) && worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos)) {
 				worldIn.setBlockState(pos, this.getSaplingState());
 				worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 1F, 1F);
