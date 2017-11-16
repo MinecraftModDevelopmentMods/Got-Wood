@@ -4,23 +4,23 @@ import javax.annotation.Nonnull;
 
 import org.lwjgl.opengl.GL11;
 
-import panda.gotwood.blocks.tileentities.TileTreeTap;
+import panda.gotwood.block.entity.TileEntityTreeTap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
 
-public class TreeTapRenderer extends TileEntitySpecialRenderer<TileTreeTap> {
+public class TreeTapRenderer extends TileEntitySpecialRenderer<TileEntityTreeTap> {
 //FROM TIC
 	  @Override
-	  public void renderTileEntityAt(@Nonnull TileTreeTap te, double x, double y, double z, float partialTicks, int destroyStage) {
+	  public void renderTileEntityAt(@Nonnull TileEntityTreeTap te, double x, double y, double z, float partialTicks, int destroyStage) {
 
 		  if(te.sapInBucket == null || !te.hasBucket) {
 	      return;
@@ -41,7 +41,7 @@ public class TreeTapRenderer extends TileEntitySpecialRenderer<TileTreeTap> {
 	      RenderUtil.pre(x, y, z);
 
 	      Tessellator tessellator = Tessellator.getInstance();
-	      VertexBuffer renderer = tessellator.getBuffer();
+	      BufferBuilder renderer = tessellator.getBuffer();
 	      renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 	      Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 	      int color = te.sapInBucket.getFluid().getColor(te.sapInBucket);

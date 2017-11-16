@@ -26,30 +26,16 @@ public class WorldGenerator implements IWorldGenerator {
 	private void makeTree(WorldGenAbstractTree tree, int chunkX, int chunkZ, Random random, World world, int min, int max) {
 
 		int num = min + random.nextInt(max - min);
-<<<<<<< HEAD
-		for(int i = 0; i < num; i++)
-		{
-			randX = chunkX*16 + random.nextInt(16);
-			randZ = chunkZ*16 + random.nextInt(16);
-			tree.generate(world, random, world.getHeight(new BlockPos(randX,0,randZ)));
-=======
 		for (int i = 0; i < num; i++) {
 			int randX = chunkX * 16 + 8 + random.nextInt(16);
 			int randZ = chunkZ * 16 + 8 + random.nextInt(16);
 			tree.generate(world, random, world.getHeight(new BlockPos(randX, 0, randZ)));
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 		}
 	}
 
 	@Override
-<<<<<<< HEAD
-	public void generate(Random random, int chunkX, int chunkZ, World world,IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		
-		if(world.provider.getDimension()==0){
-=======
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		if (world.provider.getDimension() == 0) {
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 
 			WorldGenAbstractTree apple = new WorldGenApple(false);
 			WorldGenAbstractTree maple = new WorldGenMaple(false);
@@ -112,12 +98,9 @@ public class WorldGenerator implements IWorldGenerator {
 				makeTree(pine, chunkX, chunkZ, random, world, 0, 3);
 				makeTree(fir, chunkX, chunkZ, random, world, 1, 4);
 			}
-<<<<<<< HEAD
-=======
 			if (biome instanceof BiomeJungle) {
 				makeTree(rubber, chunkX, chunkZ, random, world, 0, 3);
 			}
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 		}
 	}
 

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
+import panda.gotwood.block.BlockWoodLog;
 
 public class SappyLog extends BlockWoodLog {
 

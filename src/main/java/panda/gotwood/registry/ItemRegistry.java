@@ -104,12 +104,7 @@ public final class ItemRegistry {
 		list.add(rubber_seed);
 		list.add(maple_sap);
 		list.add(rubber_sap);
-<<<<<<< HEAD
-		
-		
-=======
 
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 		list.add(apple_door);
 		list.add(maple_door);
 		list.add(pine_door);

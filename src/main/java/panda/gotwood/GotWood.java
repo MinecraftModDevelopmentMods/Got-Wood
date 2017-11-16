@@ -23,14 +23,12 @@ import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.registry.MasterRegistrar;
 
-@Mod(modid = GotWood.ID, name = GotWood.NAME, version = GotWood.VERSION)
-@Mod.EventBusSubscriber
-public final class GotWood {
-	public static final String ID = "gotwood";
+@Mod(modid = GotWood.MODID, name = GotWood.NAME, version = GotWood.VERSION)
 
 public class GotWood
 {
 	public static final String MODID = "gotwood";
+    public static final String ID = MODID;  // lots of use of "GotWood.ID" still in the code-base, Panda
 	public static final String VERSION = "0.26.0";
 
 	public static final String NAME = "Got Wood?";
@@ -76,5 +74,5 @@ public class GotWood
 		public ItemStack getTabIconItem() {
 			return new ItemStack(ItemRegistry.oak_seed);
 		}
-	};
+	    };
 }
