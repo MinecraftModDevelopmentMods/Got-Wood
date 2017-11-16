@@ -98,7 +98,7 @@ public class WorldGenApple extends WorldGenAbstractTree {
 									state = worldIn.getBlockState(blockpos);
 
 									if (state.getBlock().isAir(state, worldIn, blockpos) || state.getBlock().isLeaves(state, worldIn, blockpos) || state.getMaterial() == Material.VINE) {
-										this.setBlockAndNotifyAdequately(worldIn, blockpos, this.metaLeaves.withProperty(BlockFruitingLeaves.FRUITING, rand.nextInt(ConfigurationHandler.appleFruitingGenChance) == 0));
+										this.setBlockAndNotifyAdequately(worldIn, blockpos, this.metaLeaves.withProperty(BlockFruitingLeaves.FRUITING, rand.nextInt(ConfigurationHandler.appleFruitingGenChance) == 0?rand.nextInt(1)+1:0));
 									}
 								}
 							}

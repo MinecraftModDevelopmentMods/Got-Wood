@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import panda.gotwood.blocks.tileentities.TileTreeTap;
+import panda.gotwood.block.entity.TileEntityTreeTap;
 import panda.gotwood.registry.BlockRegistry;
 
 

@@ -1,13 +1,19 @@
 package panda.gotwood.block;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -30,70 +36,88 @@ import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 import panda.gotwood.util.WoodMaterials;
 
+
 public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEntry {
+	
+
 	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
 
 	public static final PropertyBool CHECK_DECAY = PropertyBool.create("check_decay");
 
-	public static final PropertyBool FRUITING = PropertyBool.create("fruit");
+	public static final PropertyInteger FRUITING = PropertyInteger.create("fruit",0,2);
 
 	final WoodMaterial wood;
 
 	public BlockFruitingLeaves(WoodMaterial wood) {
 		this.wood = wood;
 		Blocks.FIRE.setFireInfo(this, 30, 60);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false).withProperty(FRUITING, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false).withProperty(FRUITING, 0));
 		this.setRegistryName(wood.getName() + "_leaves");
 		this.setTickRandomly(true);
 	}
+	
+	
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Items.AIR;
 	}
+	
+	@Override
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
+			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return this.getDefaultState();
+	}
 
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
 		super.randomTick(worldIn, pos, state, random);
-		if (state.getValue(FRUITING)) {
+		if (state.getValue(FRUITING) == 2) {
 			return;
+		}
+		
+		if (state.getValue(FRUITING) == 1) {
+			worldIn.setBlockState(pos, state.cycleProperty(FRUITING), 2);
 		}
 
 		if (state.getValue(DECAYABLE) && random.nextInt(ConfigurationHandler.appleFruitingChance) == 0) {
+			
+			
+			
 			int adjacent = 0;
 			if (worldIn.getBlockState(pos.up()).getBlock() == this) {
-				if (worldIn.getBlockState(pos.up()).getValue(FRUITING)) {
+				if (worldIn.getBlockState(pos.up()).getValue(FRUITING) >0) {
 					adjacent++;
 				}
 			}
 			if (worldIn.getBlockState(pos.down()).getBlock() == this) {
-				if (worldIn.getBlockState(pos.down()).getValue(FRUITING)) {
+				if (worldIn.getBlockState(pos.down()).getValue(FRUITING)>0) {
 					adjacent++;
 				}
 			}
 			if (worldIn.getBlockState(pos.east()).getBlock() == this) {
-				if (worldIn.getBlockState(pos.east()).getValue(FRUITING)) {
+				if (worldIn.getBlockState(pos.east()).getValue(FRUITING)>0) {
 					adjacent++;
 				}
 			}
 			if (worldIn.getBlockState(pos.south()).getBlock() == this) {
-				if (worldIn.getBlockState(pos.south()).getValue(FRUITING)) {
+				if (worldIn.getBlockState(pos.south()).getValue(FRUITING)>0) {
 					adjacent++;
 				}
 			}
 			if (worldIn.getBlockState(pos.north()).getBlock() == this) {
-				if (worldIn.getBlockState(pos.north()).getValue(FRUITING)) {
+				if (worldIn.getBlockState(pos.north()).getValue(FRUITING)>0) {
 					adjacent++;
 				}
 			}
 			if (worldIn.getBlockState(pos.west()).getBlock() == this) {
-				if (worldIn.getBlockState(pos.west()).getValue(FRUITING)) {
+				if (worldIn.getBlockState(pos.west()).getValue(FRUITING)>0) {
 					adjacent++;
 				}
 			}
 
-			if (adjacent <= 2) {
-				worldIn.setBlockState(pos, state.withProperty(FRUITING, true), 2);
+			if (adjacent <= 1) {
+				worldIn.setBlockState(pos, state.withProperty(FRUITING, 1), 2);
 			}
 		}
 
@@ -104,7 +128,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 		java.util.List<ItemStack> ret = new java.util.ArrayList<>();
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 		int chance = -1;
-		if (state.getValue(FRUITING)) {
+		if (state.getValue(FRUITING) == 2) {
 			if (wood == WoodMaterials.apple) {//Allow for other fruit trees later
 				chance = getModifiedChance(ConfigurationHandler.appleChance, fortune, ConfigurationHandler.appleDropFortuneDecrement, ConfigurationHandler.appleDropMinChance);
 
@@ -130,17 +154,21 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
-		if (!worldIn.isRemote) {
-			for (ItemStack item : this.getDrops(worldIn, pos, state, 0)) {
+		if (!worldIn.isRemote ) {
+			if( state.getValue(FRUITING) == 2){
+			  for (ItemStack item : this.getDrops(worldIn, pos, state, 0)) {
 				worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 0.6F, 0.8F / (worldIn.rand.nextFloat() * 0.4F + 0.8F));
 				EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5 + facing.getFrontOffsetX() * 0.7, pos.getY() + 0.5 + facing.getFrontOffsetY() * 0.7, pos.getZ() + 0.5 + facing.getFrontOffsetZ() * 0.7, item);
 				entityitem.motionX *= 0.2;
 				entityitem.motionY = 0;
 				entityitem.motionZ *= 0.2;
 				worldIn.spawnEntity(entityitem);
+				worldIn.setBlockState(pos, state.withProperty(FRUITING, 0), 2);
+			  }
 			}
+			
 		}
-		worldIn.setBlockState(pos, state.withProperty(FRUITING, false), 2);
+		
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 
@@ -208,15 +236,15 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FRUITING, meta % 2 == 1).withProperty(DECAYABLE, meta == 2 || meta == 3 || meta == 6 || meta == 7).withProperty(CHECK_DECAY, meta > 3);
+		return this.getDefaultState().withProperty(DECAYABLE, meta % 2 == 1).withProperty(CHECK_DECAY, meta<6).withProperty(FRUITING, Arrays.asList(0,1,10,11).contains(meta)?Arrays.asList(2,3,8,9).contains(meta)?2:1:0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int i = 0;
-		i += state.getValue(FRUITING) ? 1 : 0;
-		i += state.getValue(DECAYABLE) ? 2 : 0;
-		i += state.getValue(CHECK_DECAY) ? 4 : 0;
+		i += state.getValue(DECAYABLE)?1:0;
+		i += state.getValue(CHECK_DECAY) ? 0 : 6;
+		i += state.getValue(FRUITING)*2;
 		return i;
 	}
 
@@ -229,5 +257,6 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 	public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
 		return java.util.Arrays.asList(new ItemStack(this, 1));
 	}
+
 
 }

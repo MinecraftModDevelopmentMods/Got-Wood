@@ -2,19 +2,11 @@ package panda.gotwood;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-<<<<<<< HEAD
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.Loader;
-=======
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -31,19 +23,13 @@ import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.registry.MasterRegistrar;
 
-@Mod(modid = GotWood.ID, name = GotWood.NAME, version = GotWood.VERSION)
-@Mod.EventBusSubscriber
-public final class GotWood {
-	public static final String ID = "gotwood";
+@Mod(modid = GotWood.MODID, name = GotWood.NAME, version = GotWood.VERSION)
 
-<<<<<<< HEAD
 public class GotWood
 {
 	public static final String MODID = "gotwood";
-	public static final String VERSION = "0.16.3";
-=======
-	public static final String VERSION = "0.24.0";
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
+    public static final String ID = MODID;  // lots of use of "GotWood.ID" still in the code-base, Panda
+	public static final String VERSION = "0.26.0";
 
 	public static final String NAME = "Got Wood?";
 
@@ -79,26 +65,14 @@ public class GotWood
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
-<<<<<<< HEAD
-		((SpecialFire)BlockRegistry.specialfire).init();
-		GameRegistry.registerTileEntity(TileTreeTap.class, "gotwood:tree_tap");
-	}  
-	
-	public static final CreativeTabs TreeTab = new CreativeTabs(GotWood.MODID) {
-	    @Override public Item getTabIconItem() {
-	        return ItemRegistry.oak_seed;
-	    }
-	};
-=======
 		BlockRegistry.specialfire.initInfo();
 		GameRegistry.registerTileEntity(TileEntityTreeTap.class, "gotwood:tree_tap");
 	}
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 
 	public static final CreativeTabs TREE_TAB = new CreativeTabs(GotWood.ID) {
 		@Override
 		public ItemStack getTabIconItem() {
 			return new ItemStack(ItemRegistry.oak_seed);
 		}
-	};
+	    };
 }

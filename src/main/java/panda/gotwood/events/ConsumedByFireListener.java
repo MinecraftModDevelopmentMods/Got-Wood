@@ -56,9 +56,6 @@ public final class ConsumedByFireListener implements IWorldEventListener {
 	@Override
 	public void sendBlockBreakProgress(int breakerId, BlockPos pos, int progress) {}
 
-<<<<<<< HEAD
-=======
 	@Override
 	public void spawnParticle(int one, boolean two, boolean three, double four, double five, double six, double seven, double eight, double nine, int... ten) {}
->>>>>>> 87abbf6cf6d1218e06bd1a18365c8d25836ce6dc
 }
