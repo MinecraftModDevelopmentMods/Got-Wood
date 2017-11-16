@@ -13,6 +13,7 @@ import panda.gotwood.block.BlockBambooFence;
 import panda.gotwood.block.BlockBambooLog;
 import panda.gotwood.block.BlockDates;
 import panda.gotwood.block.BlockDoubleSlab;
+import panda.gotwood.block.BlockFruitSapling;
 import panda.gotwood.block.BlockFruitingLeaves;
 import panda.gotwood.block.BlockHalfSlab;
 import panda.gotwood.block.BlockPalmLeaves;
@@ -46,7 +47,7 @@ public final class BlockRegistry {
 
 	public static final Block apple_leaves = new BlockFruitingLeaves(WoodMaterials.apple);
 
-	public static final Block apple_sapling = new BlockWoodSapling(WoodMaterials.apple);
+	public static final Block apple_sapling = new BlockFruitSapling(WoodMaterials.apple);
 
 	public static final Block apple_gate = new BlockWoodFenceGate(WoodMaterials.apple);
 
