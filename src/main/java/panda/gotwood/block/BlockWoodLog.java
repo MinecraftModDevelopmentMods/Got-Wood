@@ -1,5 +1,8 @@
 package panda.gotwood.block;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -8,23 +11,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
-
-public class BlockWoodLog extends BlockLog implements IOreDictionaryEntry {
+public class BlockWoodLog extends BlockLog implements IMMDObject  {
 	public static final PropertyEnum<BlockLog.EnumAxis> LOG_AXIS = PropertyEnum.create("axis", BlockLog.EnumAxis.class);
 
-	private final WoodMaterial wood;
+	private final MMDMaterial material;
 
-	public BlockWoodLog(WoodMaterial wood) {
+	public BlockWoodLog(MMDMaterial material) {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 		Blocks.FIRE.setFireInfo(this, 5, 5);
-		this.wood = wood;
-		this.blockHardness = wood.getPlankBlockHardness();
-		this.blockResistance = wood.getBlastResistance();
-		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
-		this.setRegistryName(wood.getName() + "_log");
-
+		this.material = material;
+		this.blockHardness = this.material.getBlockHardness();
+		this.blockResistance = this.material.getBlastResistance();
+		this.setHarvestLevel("axe", this.material.getRequiredHarvestLevel());
 	}
 
 	@Override
@@ -80,13 +78,9 @@ public class BlockWoodLog extends BlockLog implements IOreDictionaryEntry {
 		return i;
 	}
 
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
-	}
-
 	@Override
-	public String getOreDictionaryName() {
-		return "log" + this.wood.getCapitalizedName();
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
 }

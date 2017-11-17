@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -32,12 +35,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import panda.gotwood.events.ConfigurationHandler;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
-import panda.gotwood.util.WoodMaterials;
+import panda.gotwood.util.MaterialNames;
 
 
-public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEntry {
+public class BlockFruitingLeaves extends BlockLeaves implements IMMDObject {
 	
 
 	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
@@ -46,13 +47,12 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 
 	public static final PropertyInteger FRUITING = PropertyInteger.create("fruit",0,2);
 
-	final WoodMaterial wood;
+	private final MMDMaterial material;
 
-	public BlockFruitingLeaves(WoodMaterial wood) {
-		this.wood = wood;
+	public BlockFruitingLeaves(MMDMaterial material) {
+		this.material = material;
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false).withProperty(FRUITING, 0));
-		this.setRegistryName(wood.getName() + "_leaves");
 		this.setTickRandomly(true);
 	}
 	
@@ -129,7 +129,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 		int chance = -1;
 		if (state.getValue(FRUITING) == 2) {
-			if (wood == WoodMaterials.apple) {//Allow for other fruit trees later
+			if (material.getName() == MaterialNames.APPLE) {//Allow for other fruit trees later
 				chance = getModifiedChance(ConfigurationHandler.appleChance, fortune, ConfigurationHandler.appleDropFortuneDecrement, ConfigurationHandler.appleDropMinChance);
 
 				ret.add(new ItemStack(Items.APPLE));
@@ -225,14 +225,6 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 		return null;
 	}
 
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
-	}
-
-	@Override
-	public String getOreDictionaryName() {
-		return "leavesFruit" + this.wood.getCapitalizedName();
-	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
@@ -256,6 +248,11 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
 		return java.util.Arrays.asList(new ItemStack(this, 1));
+	}
+	
+	@Override
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
 

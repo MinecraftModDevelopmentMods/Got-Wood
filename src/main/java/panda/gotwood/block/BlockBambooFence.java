@@ -3,6 +3,9 @@ package panda.gotwood.block;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -16,11 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
 
-public final class BlockBambooFence extends BlockFence implements IOreDictionaryEntry {
-	private final WoodMaterial wood;
+public final class BlockBambooFence extends BlockFence implements IMMDObject  {
+	private final MMDMaterial material;
 
 	private static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[] {
 		new AxisAlignedBB(0.375D, 0.0D, 0.375D, 0.625D, 1.0D, 0.625D),
@@ -51,15 +52,14 @@ public final class BlockBambooFence extends BlockFence implements IOreDictionary
 
 	public static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.625D, 0.0D, 0.375D, 1.0D, 1.5D, 0.625D);
 
-	public BlockBambooFence(WoodMaterial wood) {
+	public BlockBambooFence(MMDMaterial material) {
 		super(Material.WOOD, BlockPlanks.EnumType.OAK.getMapColor());
 		this.setSoundType(SoundType.WOOD);
-		this.wood = wood;
-		this.blockHardness = wood.getPlankBlockHardness();
-		this.blockResistance = wood.getBlastResistance();
-		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
+		this.material = material;
+		this.blockHardness = this.material.getBlockHardness();
+		this.blockResistance = this.material.getBlastResistance();
+		this.setHarvestLevel("axe", this.material.getRequiredHarvestLevel());
 		Blocks.FIRE.setFireInfo(this, 5, 20);
-		this.setRegistryName(wood.getName() + "_fence");
 	}
 
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
@@ -110,12 +110,8 @@ public final class BlockBambooFence extends BlockFence implements IOreDictionary
 		return i;
 	}
 
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
-	}
-
 	@Override
-	public String getOreDictionaryName() {
-		return "fence" + this.wood.getCapitalizedName();
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 }

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -24,21 +27,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.util.IFireDrops;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
-import panda.gotwood.util.WoodMaterials;
+import panda.gotwood.util.MaterialNames;
 
-public final class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable, IFireDrops {
+public final class BlockBambooLog extends Block implements IMMDObject , IGrowable, IFireDrops {
 	public static final PropertyBool LEAVES = PropertyBool.create("leaves");
 
-	public BlockBambooLog(WoodMaterial wood) {
+	private final MMDMaterial material;
+	
+	public BlockBambooLog(MMDMaterial material) {
 		super(Material.WOOD);
+		this.material = material;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LEAVES, false));
-		this.blockHardness = wood.getPlankBlockHardness();
-		this.blockResistance = wood.getBlastResistance();
-		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
-		this.setRegistryName(wood.getName() + "_log");
-
+		this.blockHardness = this.material.getBlockHardness();
+		this.blockResistance = this.material.getBlastResistance();
+		this.setHarvestLevel("axe", this.material.getRequiredHarvestLevel());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -142,10 +144,6 @@ public final class BlockBambooLog extends Block implements IOreDictionaryEntry, 
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {}
 
-	@Override
-	public String getOreDictionaryName() {
-		return "log" + WoodMaterials.bamboo.getCapitalizedName();
-	}
 
 	@Override
 	public boolean hasFireDrops() {
@@ -174,6 +172,11 @@ public final class BlockBambooLog extends Block implements IOreDictionaryEntry, 
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, LEAVES);
+	}
+	
+	@Override
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
 }

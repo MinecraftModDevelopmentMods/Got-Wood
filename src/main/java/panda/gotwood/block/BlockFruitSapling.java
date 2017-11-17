@@ -2,6 +2,9 @@ package panda.gotwood.block;
 
 import java.util.Random;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -18,23 +21,21 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.IPlantable;
 import panda.gotwood.events.ConfigurationHandler;
 import panda.gotwood.generation.WorldGenApple;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
 
-public class BlockFruitSapling extends BlockBush implements IOreDictionaryEntry, IGrowable, IPlantable{
+
+public class BlockFruitSapling extends BlockBush implements IGrowable, IPlantable, IMMDObject {
 
     public static final PropertyInteger AGE = PropertyInteger.create("stage", 0, 4);
     protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0.0D, 0.1, 0.9, 0.8, 0.9D);
-    protected final WoodMaterial wood;
+    protected final MMDMaterial material;
     
-    public BlockFruitSapling(WoodMaterial wood)
+    public BlockFruitSapling(MMDMaterial material)
     {
-    	this.wood = wood;
+    	this.material = material;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0));
 		this.setTickRandomly(true);
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.PLANT);
-		this.setRegistryName(wood.getName() + "_sapling");
     }
     
     @Override
@@ -122,7 +123,7 @@ public class BlockFruitSapling extends BlockBush implements IOreDictionaryEntry,
         
         WorldGenerator worldgenerator;
 
-		switch (wood.getName()) {
+		switch (material.getName()) {
 			case "banana":
 			default:
 				worldgenerator = new WorldGenApple(true);
@@ -176,12 +177,10 @@ public class BlockFruitSapling extends BlockBush implements IOreDictionaryEntry,
     {
         return new BlockStateContainer(this,AGE);
     }
-    public WoodMaterial getWoodMaterial() {
-		return this.wood;
+
+    @Override
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
-	@Override
-	public String getOreDictionaryName() {
-		return "saplingFruit";
-	}
 }

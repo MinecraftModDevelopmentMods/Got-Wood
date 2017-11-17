@@ -2,6 +2,9 @@ package panda.gotwood.block;
 
 import java.util.Random;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -30,25 +33,21 @@ import panda.gotwood.generation.WorldGenRubber;
 import panda.gotwood.generation.WorldGenWillow;
 import panda.gotwood.generation.WorldGenYew;
 import panda.gotwood.registry.BlockRegistry;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
-import panda.gotwood.util.WoodMaterials;
+import panda.gotwood.util.MaterialNames;
 
-public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, IGrowable, IPlantable {
+public class BlockWoodSapling extends BlockBush implements IGrowable, IPlantable,IMMDObject  {
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
 	protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.1, 0.0D, 0.1, 0.9, 0.8, 0.9D);
 
-	protected final WoodMaterial wood;
+	protected final MMDMaterial material;
 
-	public BlockWoodSapling(WoodMaterial wood) {
-		this.wood = wood;
+	public BlockWoodSapling(MMDMaterial material) {
+		this.material = material;
 		this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
 		this.setTickRandomly(true);
 		this.setHardness(0.0F);
 		this.setSoundType(SoundType.PLANT);
-		this.setRegistryName(wood.getName() + "_sapling");
-
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return wood == WoodMaterials.bamboo ? Item.getItemFromBlock(BlockRegistry.bamboo_sapling) : Items.STICK;
+		return material.getName() == MaterialNames.BAMBOO ? Item.getItemFromBlock(BlockRegistry.bamboo_sapling) : Items.STICK;
 	}
 
 	@Override
@@ -95,7 +94,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 		int j = 0;
 		boolean flag = false; // for bamboo spreading
 
-		switch (wood.getName()) {
+		switch (material.getName()) {
 			case "willow":
 				worldgenerator = new WorldGenWillow();
 				break;
@@ -157,7 +156,7 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 	@Override
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
 		
-		return wood.getName().equals("palm") ? EnumPlantType.Desert : EnumPlantType.Plains;
+		return material.getName().equals("palm") ? EnumPlantType.Desert : EnumPlantType.Plains;
 	}
 
 	@Override
@@ -202,13 +201,9 @@ public class BlockWoodSapling extends BlockBush implements IOreDictionaryEntry, 
 		return new BlockStateContainer(this, STAGE);
 	}
 
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
-	}
-
 	@Override
-	public String getOreDictionaryName() {
-		return "sapling" + this.wood.getCapitalizedName();
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
 }

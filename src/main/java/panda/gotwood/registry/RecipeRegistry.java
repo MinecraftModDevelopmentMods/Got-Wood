@@ -8,14 +8,14 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 import panda.gotwood.util.WoodMaterial;
-import panda.gotwood.util.WoodMaterials;
+import panda.gotwood.util.MaterialNames;
 
 public final class RecipeRegistry {
 	private RecipeRegistry() {}
 
 	public static void init() {
-		for (WoodMaterial wood : WoodMaterials.getAllWoods()) {
-			if (wood == WoodMaterials.bamboo) {
+		for (WoodMaterial wood : MaterialNames.getAllWoods()) {
+			if (wood == MaterialNames.bamboo) {
 				String baseName = wood.getName() + "_";
 				Item door = ItemRegistry.getItemByName(baseName + "door_item");
 				Item pole = ItemRegistry.getItemByName(baseName + "pole");

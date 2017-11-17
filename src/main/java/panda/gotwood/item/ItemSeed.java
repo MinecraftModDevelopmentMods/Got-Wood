@@ -1,5 +1,8 @@
 package panda.gotwood.item;
 
+import com.mcmoddev.lib.item.GenericMMDItem;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,19 +22,16 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
 import panda.gotwood.GotWood;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
-import panda.gotwood.util.WoodMaterials;
+import panda.gotwood.util.MaterialNames;
 
-public class ItemSeed extends Item implements IOreDictionaryEntry, IPlantable {
-	private final WoodMaterial wood;
+public class ItemSeed extends GenericMMDItem  implements IPlantable {
+
 
 	public final IBlockState sapling;
 
-	public ItemSeed(WoodMaterial wood) {
-		this.wood = wood;
+	public ItemSeed(MMDMaterial material) {
+		super(material);
 		this.sapling = getSaplingState();
-		this.setRegistryName(wood.getName() + "_seed");
 	}
 
 	@Override
@@ -59,15 +59,10 @@ public class ItemSeed extends Item implements IOreDictionaryEntry, IPlantable {
 	}
 
 	private IBlockState getSaplingState() {
-		if (wood == WoodMaterials.acacia || wood == WoodMaterials.birch || wood == WoodMaterials.darkOak || wood == WoodMaterials.jungle || wood == WoodMaterials.oak || wood == WoodMaterials.spruce) {
-			return Blocks.SAPLING.getStateFromMeta(wood.getMeta());
+		if (this.getMMDMaterial().getName() == MaterialNames.ACACIA || this.getMMDMaterial().getName() == MaterialNames.BIRCH || this.getMMDMaterial().getName() == MaterialNames.DARKOAK || this.getMMDMaterial().getName() == MaterialNames.JUNGLE || this.getMMDMaterial().getName() == MaterialNames.OAK || this.getMMDMaterial().getName() == MaterialNames.SPRUCE) {
+			return Blocks.SAPLING.getStateFromMeta(wood.getMeta());//TODO
 		} else
-			return Block.REGISTRY.getObject(new ResourceLocation(GotWood.ID, wood + "_sapling")).getDefaultState();
-	}
-
-	@Override
-	public String getOreDictionaryName() {
-		return "seed" + this.wood.getCapitalizedName();
+			return Block.REGISTRY.getObject(new ResourceLocation(GotWood.MODID, this.getMMDMaterial().getName() + "_sapling")).getDefaultState();
 	}
 
 	@Override

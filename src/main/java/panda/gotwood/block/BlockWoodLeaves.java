@@ -3,6 +3,9 @@ package panda.gotwood.block;
 import java.util.List;
 import java.util.Random;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.PropertyBool;
@@ -25,27 +28,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import panda.gotwood.GotWood;
 import panda.gotwood.events.ConfigurationHandler;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
 
-public final class BlockWoodLeaves extends BlockLeaves implements IOreDictionaryEntry {
+//TODO
+public final class BlockWoodLeaves extends BlockLeaves implements IMMDObject  {
 	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
 
 	public static final PropertyBool CHECK_DECAY = PropertyBool.create("check_decay");
 
-	private final WoodMaterial wood;
+	private final MMDMaterial material;
 
-	public BlockWoodLeaves(WoodMaterial wood) {
-		this.wood = wood;
+	public BlockWoodLeaves(MMDMaterial material) {
+		this.material = material;
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false));
-		this.setRegistryName(wood.getName() + "_leaves");
 	}
 
 	//Should never be called for apple trees
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ForgeRegistries.ITEMS.getValue(new ResourceLocation(GotWood.ID, wood + "_seed"));
+		return ForgeRegistries.ITEMS.getValue(new ResourceLocation(GotWood.MODID, material + "_seed"));
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public final class BlockWoodLeaves extends BlockLeaves implements IOreDictionary
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
 		int chance = -1;
 		//20,2,10
-		chance = getModifiedSeedChance(this.wood, fortune);
+		chance = getModifiedSeedChance(this.material, fortune);
 		if (rand.nextInt(chance) == 0) {
 			ret.add(new ItemStack(getItemDropped(state, rand, fortune), 1, damageDropped(state)));
 		}
@@ -64,14 +65,14 @@ public final class BlockWoodLeaves extends BlockLeaves implements IOreDictionary
 		return ret;
 	}
 
-	private int getModifiedSeedChance(WoodMaterial wood, int fortune) {
+	private int getModifiedSeedChance(MMDMaterial material, int fortune) {
 		//should never happen but fall back to vanilla if so.
 
 		int dec = ConfigurationHandler.seedDropFortuneDecrement;
 		int min = ConfigurationHandler.mapleChance;
 		int ch;
 
-		switch (wood.getName()) {
+		switch (material.getName()) {
 			case "maple":
 				ch = ConfigurationHandler.mapleChance;
 				break;
@@ -154,15 +155,6 @@ public final class BlockWoodLeaves extends BlockLeaves implements IOreDictionary
 		return null;
 	}
 
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
-	}
-
-	@Override
-	public String getOreDictionaryName() {
-		return "leaves" + this.wood.getCapitalizedName();
-	}
-
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf(meta > 0));
@@ -197,6 +189,11 @@ public final class BlockWoodLeaves extends BlockLeaves implements IOreDictionary
 	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
 			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		return this.getDefaultState();
+	}
+	
+	@Override
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
 }

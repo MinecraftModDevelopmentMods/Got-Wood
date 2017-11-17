@@ -64,8 +64,22 @@ minecraft {
     mappings = "snapshot_20171116"
 //  makeObfSourceJar = false
 }
-
-dependencies {}
+repositories {
+maven {
+        name 'MMD'
+        url 'https://maven.mcmoddev.com/'
+    }
+	maven { // CoFH
+    	name 'Covers Maven'
+    	url 'http://maven.covers1624.net'
+    }
+}
+dependencies {
+	compile "com.mcmoddev:BaseMetals:1.12-${bme_version}:deobf"
+	compile ("cofh:CoFHCore:${mc_version}-${cofhcore_version}:deobf") {
+    	exclude group: 'mezz.jei'
+    }
+}
 
 processResources {
     inputs.property "version", project.version

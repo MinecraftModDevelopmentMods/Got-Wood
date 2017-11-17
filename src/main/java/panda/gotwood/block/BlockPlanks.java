@@ -1,5 +1,8 @@
 package panda.gotwood.block;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -9,32 +12,27 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
 
 /**
  * Metal Block
  */
-public final class BlockPlanks extends Block implements IOreDictionaryEntry {
-	private final WoodMaterial wood;
+public final class BlockPlanks extends Block implements IMMDObject  {
+	private final MMDMaterial material;
 
-	private final String oreDict;
 
-	public BlockPlanks(WoodMaterial wood) {
+	public BlockPlanks(MMDMaterial material) {
 		super(Material.WOOD);
+		this.material = material;
 		this.setSoundType(SoundType.WOOD);
 		this.fullBlock = true;
 		this.lightOpacity = 255;
 		this.translucent = false;
-		this.wood = wood;
-		this.oreDict = "plank" + wood.getCapitalizedName();
-		this.blockHardness = wood.getPlankBlockHardness();
-		this.blockResistance = wood.getBlastResistance();
-		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
+
+		this.blockHardness = this.material.getBlockHardness();
+		this.blockResistance = this.material.getBlastResistance();
+		this.setHarvestLevel("axe", this.material.getRequiredHarvestLevel());
 		this.setDefaultState(this.blockState.getBaseState());
 		Blocks.FIRE.setFireInfo(this, 5, 20);
-		this.setRegistryName(wood.getName() + "_planks");
-
 	}
 
 	@Override
@@ -73,11 +71,7 @@ public final class BlockPlanks extends Block implements IOreDictionaryEntry {
 	}
 
 	@Override
-	public String getOreDictionaryName() {
-		return this.oreDict;
-	}
-
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 }

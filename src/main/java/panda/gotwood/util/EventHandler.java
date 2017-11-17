@@ -1,20 +1,31 @@
-package panda.gotwood.events;
+package panda.gotwood.util;
+
+import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
+import panda.gotwood.events.ConfigurationHandler;
+import panda.gotwood.events.ConsumedByFireListener;
+import panda.gotwood.registry.BlockRegistry;
 import panda.gotwood.registry.ItemRegistry;
 
-public final class BlockBreakHandler {
+public class EventHandler {
 	@SubscribeEvent
 	public void onDrops(BlockEvent.HarvestDropsEvent event) {
 		Block theblock = event.getState().getBlock();
@@ -110,6 +121,55 @@ public final class BlockBreakHandler {
 		}
 	}
 
+	@SubscribeEvent
+	public void loadEvent(WorldEvent.Load event) {
+		World world = event.getWorld();
+		world.addEventListener(new ConsumedByFireListener());
+	}
+
+	@SubscribeEvent
+	public void onLeftClickEvent(PlayerInteractEvent.EntityInteract.LeftClickBlock event) {
+		if (event.getEntityPlayer().isCreative()) {
+			extinguishFire(null, event.getPos(), event.getFace(), event.getWorld());
+		} else {
+			IBlockState iblockstate = event.getWorld().getBlockState(event.getPos());
+			Block block = iblockstate.getBlock();
+			if (!iblockstate.getBlock().isAir(iblockstate, event.getWorld(), event.getPos())) {
+				block.onBlockClicked(event.getWorld(), event.getPos(), event.getEntityPlayer());
+				extinguishFire(null, event.getPos(), event.getFace(), event.getWorld());
+
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onRightClickEvent(PlayerInteractEvent.EntityInteract.RightClickBlock event) {
+		if (event.getEntityPlayer().isCreative()) {
+			extinguishFire(null, event.getPos(), event.getFace(), event.getWorld());
+		} else {
+			IBlockState iblockstate = event.getWorld().getBlockState(event.getPos());
+			Block block = iblockstate.getBlock();
+			if (!iblockstate.getBlock().isAir(iblockstate, event.getWorld(), event.getPos())) {
+				block.onBlockClicked(event.getWorld(), event.getPos(), event.getEntityPlayer());
+				extinguishFire(null, event.getPos(), event.getFace(), event.getWorld());
+			}
+		}
+	}
+
+	public boolean extinguishFire(@Nullable EntityPlayer player, BlockPos pos, EnumFacing side, World world) {
+		pos = pos.offset(side);
+		if (world.getBlockState(pos).getBlock() == BlockRegistry.specialfire) {
+			world.playEvent(player, 1009, pos, 0);
+			world.setBlockToAir(pos);
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
 	private int getModifiedChance(int chance, int fortune) {
 		int modifiedChance = chance;
 		if (fortune > 0) {
@@ -120,4 +180,5 @@ public final class BlockBreakHandler {
 		}
 		return modifiedChance;
 	}
+
 }

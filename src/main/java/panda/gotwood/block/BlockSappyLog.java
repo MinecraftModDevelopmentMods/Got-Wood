@@ -1,5 +1,7 @@
 package panda.gotwood.block;
 
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -13,13 +15,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import panda.gotwood.registry.ItemRegistry;
-import panda.gotwood.util.WoodMaterial;
 
 public class BlockSappyLog extends BlockWoodLog {
 	public static final PropertyInteger GENERATED = PropertyInteger.create("generated", 0, 1);
 
-	public BlockSappyLog(WoodMaterial wood) {
-		super(wood);
+	public BlockSappyLog(MMDMaterial material) {
+		super(material);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(GENERATED, 0).withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
 
 	}

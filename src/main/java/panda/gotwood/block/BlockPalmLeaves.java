@@ -3,6 +3,9 @@ package panda.gotwood.block;
 import java.util.List;
 import java.util.Random;
 
+import com.mcmoddev.lib.material.IMMDObject;
+import com.mcmoddev.lib.material.MMDMaterial;
+
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.PropertyBool;
@@ -25,21 +28,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import panda.gotwood.GotWood;
 import panda.gotwood.registry.BlockRegistry;
-import panda.gotwood.util.IOreDictionaryEntry;
-import panda.gotwood.util.WoodMaterial;
 
-public final class BlockPalmLeaves extends BlockLeaves implements IOreDictionaryEntry {
+
+public final class BlockPalmLeaves extends BlockLeaves implements IMMDObject {
 	public static final PropertyBool DECAYABLE = PropertyBool.create("decayable");
 
 	public static final PropertyBool CHECK_DECAY = PropertyBool.create("check_decay");
 
-	private final WoodMaterial wood;
+	private final  MMDMaterial material;
 
-	public BlockPalmLeaves(WoodMaterial wood) {
-		this.wood = wood;
+	public BlockPalmLeaves(MMDMaterial material) {
+		this.material = material;
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false));
-		this.setRegistryName(wood.getName() + "_leaves");
 	}
 	
 	@Override
@@ -74,8 +75,8 @@ public final class BlockPalmLeaves extends BlockLeaves implements IOreDictionary
 	//Should never be called for apple trees
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ForgeRegistries.ITEMS.getValue(new ResourceLocation(GotWood.ID, wood + "_seed"));
-	}
+		return ForgeRegistries.ITEMS.getValue(new ResourceLocation(GotWood.MODID, material + "_seed"));
+	}//TODO
 
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor() {
@@ -118,15 +119,6 @@ public final class BlockPalmLeaves extends BlockLeaves implements IOreDictionary
 		return null;
 	}
 
-	public WoodMaterial getWoodMaterial() {
-		return this.wood;
-	}
-
-	@Override
-	public String getOreDictionaryName() {
-		return "leaves" + this.wood.getCapitalizedName();
-	}
-
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf(meta > 0));
@@ -152,6 +144,11 @@ public final class BlockPalmLeaves extends BlockLeaves implements IOreDictionary
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
 		return java.util.Arrays.asList(new ItemStack(this, 1));
+	}
+	
+	@Override
+	public MMDMaterial getMMDMaterial() {
+		return this.material;
 	}
 
 }
