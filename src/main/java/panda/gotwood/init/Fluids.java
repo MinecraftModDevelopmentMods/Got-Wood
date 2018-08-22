@@ -1,6 +1,6 @@
 package panda.gotwood.init;
 
-import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.util.Config.Options;
 
 import panda.gotwood.util.MaterialNames;
 

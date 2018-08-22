@@ -13,7 +13,7 @@ import panda.gotwood.GotWood;
 
 //https://github.com/MinecraftModDevelopmentMods/BaseMetals/blob/1.12/src/main/java/com/mcmoddev/basemetals/util/Config.java
 
-public class Config extends com.mcmoddev.lib.util.ConfigBase {
+public class Config extends com.mcmoddev.lib.util.Config {
 
 	private static Configuration configuration;
 	private static final String CONFIG_FILE = "config/GotWood.cfg";

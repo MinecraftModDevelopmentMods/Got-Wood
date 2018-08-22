@@ -1,6 +1,6 @@
 package panda.gotwood.init;
 
-import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.util.Config.Options;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.init.MMDCreativeTab;
 import com.mcmoddev.lib.util.TabContainer;
