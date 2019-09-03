@@ -1,4 +1,3 @@
-@@ -0,0 +1,7 @@
 tile.gotwood.apple_slab.name=Apple Wood Slab
 tile.gotwood.apple_log.name=Apple Wood
 tile.gotwood.apple_planks.name=Apple Wood Planks
@@ -115,5 +114,3 @@ item.gotwood.bamboo_charcoal.name=Bamboo Charcoal
 item.gotwood.bamboo_pole.name=Bamboo Pole
 tile.gotwood.bamboo_slab.name=Bamboo Wood Slab
 tile.gotwood.palm_slab.name=Palm Wood Slab
-
-\ No newline at end of file

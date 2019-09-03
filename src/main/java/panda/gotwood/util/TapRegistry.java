@@ -7,9 +7,8 @@ import net.minecraftforge.fluids.FluidStack;
 public class TapRegistry {
 
 	public static FluidStack find(Block block) {
-		// TODO 
+		//TODO Find out what this was for/meant to do.
 		//Just return water for now
 		return new FluidStack(FluidRegistry.WATER, 0);
 	}
-
 }
