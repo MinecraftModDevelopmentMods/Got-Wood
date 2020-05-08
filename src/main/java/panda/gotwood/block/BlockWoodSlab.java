@@ -61,8 +61,8 @@ public abstract class BlockWoodSlab extends BlockSlab {
     }
 
     @Override
-    public String getUnlocalizedName(int meta) {
-        return super.getUnlocalizedName();
+    public String getTranslationKey(int meta) {
+        return super.getTranslationKey();
     }
 
     @Override
@@ -82,8 +82,8 @@ public abstract class BlockWoodSlab extends BlockSlab {
 
     private Item getSlabItem() {
         if (this.slabItem == null) {
-            FMLLog.severe("getting item for slab: %s, %s", this.getRegistryName().getResourceDomain(), this.wood.getName() + "_slab");
-            this.slabItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getResourceDomain(), this.wood.getName() + "_slab"));
+            FMLLog.severe("getting item for slab: %s, %s", this.getRegistryName().getNamespace(), this.wood.getName() + "_slab");
+            this.slabItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getNamespace(), this.wood.getName() + "_slab"));
         }
         return this.slabItem;
     }

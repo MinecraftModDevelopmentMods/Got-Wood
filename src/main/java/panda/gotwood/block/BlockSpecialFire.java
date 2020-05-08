@@ -75,8 +75,8 @@ public final class BlockSpecialFire extends BlockFire {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+        super.onEntityCollision(worldIn, pos, state, entityIn);
         if (!entityIn.isWet()) {
             entityIn.setFire(8);
         }
@@ -212,7 +212,7 @@ public final class BlockSpecialFire extends BlockFire {
                                 BlockPos blockpos = pos.add(k, i1, l);
                                 int k1 = this.getNeighborEncouragement(worldIn, blockpos);
                                 if (k1 > 0) {
-                                    int l1 = (k1 + 40 + worldIn.getDifficulty().getDifficultyId() * 7) / (i + 30);
+                                    int l1 = (k1 + 40 + worldIn.getDifficulty().getId() * 7) / (i + 30);
                                     if (flag1) {
                                         l1 /= 2;
                                     }
@@ -293,7 +293,7 @@ public final class BlockSpecialFire extends BlockFire {
             }
 
             if (iblockstate.getBlock() == Blocks.TNT) {
-                Blocks.TNT.onBlockDestroyedByPlayer(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, true));
+                Blocks.TNT.onPlayerDestroy(worldIn, pos, iblockstate.withProperty(BlockTNT.EXPLODE, true));
             }
         }
     }
@@ -417,7 +417,7 @@ public final class BlockSpecialFire extends BlockFire {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

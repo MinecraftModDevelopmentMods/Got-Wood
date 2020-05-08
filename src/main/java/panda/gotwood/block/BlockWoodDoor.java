@@ -42,7 +42,7 @@ public final class BlockWoodDoor extends BlockDoor {
 
     private Item getDoorItem() {
         if (this.doorItem == null) {
-            this.doorItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getResourceDomain(), this.wood.getName() + "_door_item"));
+            this.doorItem = Item.REGISTRY.getObject(new ResourceLocation(this.getRegistryName().getNamespace(), this.wood.getName() + "_door_item"));
         }
         return this.doorItem;
     }

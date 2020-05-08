@@ -33,7 +33,7 @@ public class GotWood {
 
     public static final CreativeTabs TREE_TAB = new CreativeTabs(GotWood.MODID) {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(ItemRegistry.oak_seed);
         }
     };

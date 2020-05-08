@@ -43,7 +43,7 @@ public final class BlockBambooLog extends Block implements IOreDictionaryEntry, 
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 

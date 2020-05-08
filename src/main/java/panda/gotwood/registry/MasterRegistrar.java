@@ -37,21 +37,21 @@ public final class MasterRegistrar {
             if (k instanceof Block) {
                 Block block = (Block) k;
                 ForgeRegistries.BLOCKS.register(block);
-                BlockRegistry.registry.put(block.getRegistryName().getResourcePath(), block);
+                BlockRegistry.registry.put(block.getRegistryName().getPath(), block);
                 if (!(k instanceof BlockSpecialFire) && !(k instanceof BlockWoodDoor)) {
                     ((Block) k).setCreativeTab(GotWood.TREE_TAB);
                 }
 
-                block.setUnlocalizedName(GotWood.MODID + "." + block.getRegistryName().getResourcePath());
+                block.setTranslationKey(GotWood.MODID + "." + block.getRegistryName().getPath());
                 if (!(k instanceof BlockDoubleSlab) && !ForgeRegistries.ITEMS.containsKey(block.getRegistryName())) {
                     ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
                 }
             } else if (k instanceof Item) {
                 Item item = (Item) k;
                 ForgeRegistries.ITEMS.register((Item) k);
-                ItemRegistry.registry.put(item.getRegistryName().getResourcePath(), item);
+                ItemRegistry.registry.put(item.getRegistryName().getPath(), item);
                 ((Item) k).setCreativeTab(GotWood.TREE_TAB);
-                ((Item) k).setUnlocalizedName(GotWood.MODID + "." + ((Item) k).getRegistryName().getResourcePath());
+                ((Item) k).setTranslationKey(GotWood.MODID + "." + ((Item) k).getRegistryName().getPath());
             }
         }
 
@@ -67,10 +67,10 @@ public final class MasterRegistrar {
             Item item = null;
             if (k instanceof Block) {
                 item = Item.getItemFromBlock((Block) k);
-                System.out.println(item.getRegistryName().getResourcePath());
+                System.out.println(item.getRegistryName().getPath());
             } else if (k instanceof Item) {
                 item = (Item) k;
-                System.out.println(item.getRegistryName().getResourcePath());
+                System.out.println(item.getRegistryName().getPath());
             }
 
             if (item != null) {

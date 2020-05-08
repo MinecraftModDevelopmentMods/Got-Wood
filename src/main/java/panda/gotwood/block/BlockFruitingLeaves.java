@@ -151,7 +151,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
             if (state.getValue(FRUITING) == 2) {
                 for (ItemStack item : this.getDrops(worldIn, pos, state, 0)) {
                     worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 0.6F, 0.8F / (worldIn.rand.nextFloat() * 0.4F + 0.8F));
-                    EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5 + facing.getFrontOffsetX() * 0.7, pos.getY() + 0.5 + facing.getFrontOffsetY() * 0.7, pos.getZ() + 0.5 + facing.getFrontOffsetZ() * 0.7, item);
+                    EntityItem entityitem = new EntityItem(worldIn, pos.getX() + 0.5 + facing.getXOffset() * 0.7, pos.getY() + 0.5 + facing.getYOffset() * 0.7, pos.getZ() + 0.5 + facing.getZOffset() * 0.7, item);
                     entityitem.motionX *= 0.2;
                     entityitem.motionY = 0;
                     entityitem.motionZ *= 0.2;
@@ -196,7 +196,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
