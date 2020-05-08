@@ -1,11 +1,7 @@
 package panda.gotwood.blocks;
 
 import com.google.common.collect.Maps;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockFire;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockTNT;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;

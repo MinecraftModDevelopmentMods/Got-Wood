@@ -40,6 +40,7 @@ public final class ConfigurationHandler {
     public static int rubberChance;
     public static boolean allowBonemealFruitSaplings;
     public static Configuration config;
+
     private ConfigurationHandler() {
     }
 

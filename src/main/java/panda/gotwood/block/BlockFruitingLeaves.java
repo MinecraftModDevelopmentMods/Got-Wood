@@ -39,8 +39,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
     public static final PropertyInteger FRUITING = PropertyInteger.create("fruit", 0, 2);
     final WoodMaterial wood;
 
-    public BlockFruitingLeaves(WoodMaterial wood)
-    {
+    public BlockFruitingLeaves(WoodMaterial wood) {
         this.wood = wood;
         Blocks.FIRE.setFireInfo(this, 30, 60);
         this.setDefaultState(this.blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false).withProperty(FRUITING, 0));
@@ -50,21 +49,18 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
 
 
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Items.AIR;
     }
 
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-                                            float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
-    {
+                                            float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return this.getDefaultState();
     }
 
     @Override
-    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
-    {
+    public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
         super.randomTick(worldIn, pos, state, random);
         if (state.getValue(FRUITING) == 2) {
             return;
@@ -119,8 +115,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
     }
 
     @Override
-    public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         java.util.List<ItemStack> ret = new java.util.ArrayList<>();
         Random rand = world instanceof World ? ((World) world).rand : new Random();
         int chance = -1;
@@ -145,8 +140,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (state.getValue(FRUITING) == 2) {
                 for (ItemStack item : this.getDrops(worldIn, pos, state, 0)) {
@@ -164,8 +158,7 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
-    private int getModifiedChance(int chance, int fortune, int decrement, int minchance)
-    {
+    private int getModifiedChance(int chance, int fortune, int decrement, int minchance) {
         int modifiedchance = chance;
         if (fortune > 0) {
             modifiedchance -= decrement << fortune;
@@ -177,74 +170,62 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
     }
 
     @SideOnly(Side.CLIENT)
-    public int getBlockColor()
-    {
+    public int getBlockColor() {
         return 16777215;
     }
 
     @SideOnly(Side.CLIENT)
-    public int getRenderColor(IBlockState state)
-    {
+    public int getRenderColor(IBlockState state) {
         return 16777215;
     }
 
     @SideOnly(Side.CLIENT)
-    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-    {
+    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass) {
         return 16777215;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockRenderLayer getRenderLayer()
-    {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return true;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isFoliage(IBlockAccess world, BlockPos pos)
-    {
+    public boolean isFoliage(IBlockAccess world, BlockPos pos) {
         return true;
     }
 
     @Override
-    public EnumType getWoodType(int meta)
-    {
+    public EnumType getWoodType(int meta) {
         return null;
     }
 
-    public WoodMaterial getWoodMaterial()
-    {
+    public WoodMaterial getWoodMaterial() {
         return this.wood;
     }
 
     @Override
-    public String getOreDictionaryName()
-    {
+    public String getOreDictionaryName() {
         return "leavesFruit" + this.wood.getCapitalizedName();
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(DECAYABLE, meta % 2 == 1).withProperty(CHECK_DECAY, meta < 6).withProperty(FRUITING, Arrays.asList(0, 1, 10, 11).contains(meta) ? Arrays.asList(2, 3, 8, 9).contains(meta) ? 2 : 1 : 0);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         int i = 0;
         i += state.getValue(DECAYABLE) ? 1 : 0;
         i += state.getValue(CHECK_DECAY) ? 0 : 6;
@@ -253,14 +234,12 @@ public class BlockFruitingLeaves extends BlockLeaves implements IOreDictionaryEn
     }
 
     @Override
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE, FRUITING);
     }
 
     @Override
-    public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
-    {
+    public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
         return java.util.Arrays.asList(new ItemStack(this, 1));
     }
 }

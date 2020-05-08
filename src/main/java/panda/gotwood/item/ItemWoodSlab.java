@@ -7,7 +7,7 @@ import panda.gotwood.util.WoodMaterial;
 
 public final class ItemWoodSlab extends ItemSlab implements IOreDictionaryEntry {
 
-	private final WoodMaterial wood;
+    private final WoodMaterial wood;
 
     public ItemWoodSlab(WoodMaterial wood, BlockSlab slab, BlockSlab doubleslab) {
         super(slab, slab, doubleslab);

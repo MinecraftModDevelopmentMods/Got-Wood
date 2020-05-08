@@ -21,12 +21,12 @@ import panda.gotwood.registry.ItemRegistry;
 import panda.gotwood.registry.MasterRegistrar;
 
 @Mod(
-		modid = GotWood.MODID,
-		name = GotWood.NAME,
-		version = GotWood.VERSION)
+        modid = GotWood.MODID,
+        name = GotWood.NAME,
+        version = GotWood.VERSION)
 public class GotWood {
 
-	//TODO Setup new gradle scripts and mod info -ProxyNeko
+    //TODO Setup new gradle scripts and mod info -ProxyNeko
     public static final String MODID = "gotwood";
     public static final String VERSION = "0.26.0";
     public static final String NAME = "Got Wood?";
