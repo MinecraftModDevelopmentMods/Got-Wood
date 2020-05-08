@@ -1,31 +1,17 @@
 package panda.gotwood.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockWall;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,133 +22,116 @@ import panda.gotwood.util.IFireDrops;
 import panda.gotwood.util.IOreDictionaryEntry;
 import panda.gotwood.util.WoodMaterial;
 
-public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable,IFireDrops{
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
-	public static final PropertyBool LEAVES = PropertyBool.create("leaves");
-	
-	public BlockBambooLog(WoodMaterial wood) {
-		super(Material.WOOD);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(LEAVES, Boolean.valueOf(false)));
-		this.blockHardness = wood.getPlankBlockHardness();
-		this.blockResistance = wood.getBlastResistance();
-		this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
-		this.setRegistryName(wood.getName()+"_log");
-		
-	}
-	
-	@SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.CUTOUT_MIPPED ;
+public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowable, IFireDrops {
+
+    public static final PropertyBool LEAVES = PropertyBool.create("leaves");
+
+    public BlockBambooLog(WoodMaterial wood) {
+        super(Material.WOOD);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(LEAVES, false));
+        this.blockHardness = wood.getPlankBlockHardness();
+        this.blockResistance = wood.getBlastResistance();
+        this.setHarvestLevel("axe", wood.getRequiredHarvestLevel());
+        this.setRegistryName(wood.getName() + "_log");
     }
-	
-	@Override public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
-	{ return true; }
-	
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return state == this.getDefaultState()? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D):new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
+    @Override
+    public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity) {
+        return true;
+    }
+
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return state == this.getDefaultState() ? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D) : new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
     }
 
     @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
-    {
-    	 return blockState == this.getDefaultState()? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D):new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+        return blockState == this.getDefaultState() ? new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D) : new AxisAlignedBB(0D, 0D, 0D, 1D, 1.0D, 1D);
     }
 
     @Override
-	public boolean canSustainLeaves(IBlockState state, IBlockAccess world,
-			BlockPos pos) {
-		return true;
-	}
-	public boolean isFullCube(IBlockState state)
-    {
+    public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
-    {
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return false;
     }
 
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
-    public boolean isOpaqueCube(IBlockState state)
-    {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-
-
     @Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos,
-			IBlockState state, int fortune) {
-    	List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
-    	ret.add(new ItemStack(ItemRegistry.bamboo_pole));
-		return ret;
-	}
-
-	@SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
-        return side == EnumFacing.DOWN ? super.shouldSideBeRendered(blockState, blockAccess, pos, side) : true;
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+        ret.add(new ItemStack(ItemRegistry.bamboo_pole));
+        return ret;
     }
 
-	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state,
-			boolean isClient) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
-		
-		
-		if(world.getBlockState(pos.north()).getBlock() == BlockRegistry.bamboo_leaves ||world.getBlockState(pos.west()).getBlock() == BlockRegistry.bamboo_leaves||world.getBlockState(pos.east()).getBlock() == BlockRegistry.bamboo_leaves|| world.getBlockState(pos.south()).getBlock() == BlockRegistry.bamboo_leaves){
-			world.setBlockState(pos, this.getDefaultState().withProperty(LEAVES, true),2);
-		}else{
-			world.setBlockState(pos, this.getDefaultState().withProperty(LEAVES, false),2);
-		}
-		
-		this.checkAndDropBlock(world, pos, state);
-		
-	}
-	
-	protected final void checkAndDropBlock(World world, BlockPos pos, IBlockState state) {
-		boolean flag = true;
-		if (world.getBlockState(pos.down()).getBlock() == this || world.getBlockState(pos.down()).isNormalCube())
-			flag = false;
-		else if (flag && !world.isRemote){
-			world.destroyBlock(pos, true);
-			breakBlock(world,pos,state);
-		}
-			
-	}
-	
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return side != EnumFacing.DOWN || super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
+
+    @Override
+    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (world.getBlockState(pos.north()).getBlock() == BlockRegistry.bamboo_leaves || world.getBlockState(pos.west()).getBlock() == BlockRegistry.bamboo_leaves || world.getBlockState(pos.east()).getBlock() == BlockRegistry.bamboo_leaves || world.getBlockState(pos.south()).getBlock() == BlockRegistry.bamboo_leaves) {
+            world.setBlockState(pos, this.getDefaultState().withProperty(LEAVES, true), 2);
+        } else {
+            world.setBlockState(pos, this.getDefaultState().withProperty(LEAVES, false), 2);
+        }
+        this.checkAndDropBlock(world, pos, state);
+    }
+
+    protected final void checkAndDropBlock(World world, BlockPos pos, IBlockState state) {
+        boolean flag = true;
+        if (world.getBlockState(pos.down()).getBlock() == this || world.getBlockState(pos.down()).isNormalCube()) {
+            flag = false;
+        } else if (flag && !world.isRemote) {
+            world.destroyBlock(pos, true);
+            breakBlock(world, pos, state);
+        }
+    }
+
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         int i = 1;
         int j = 2;
         int k = pos.getX();
         int l = pos.getY();
         int i1 = pos.getZ();
 
-        if (worldIn.isAreaLoaded(new BlockPos(k - 2, l - 2, i1 - 2), new BlockPos(k + 2, l + 2, i1 + 2)))
-        {
-            for (int j1 = -1; j1 <= 1; ++j1)
-            {
-                for (int k1 = -1; k1 <= 1; ++k1)
-                {
-                    for (int l1 = -1; l1 <= 1; ++l1)
-                    {
+        if (worldIn.isAreaLoaded(new BlockPos(k - 2, l - 2, i1 - 2), new BlockPos(k + 2, l + 2, i1 + 2))) {
+            for (int j1 = -1; j1 <= 1; ++j1) {
+                for (int k1 = -1; k1 <= 1; ++k1) {
+                    for (int l1 = -1; l1 <= 1; ++l1) {
                         BlockPos blockpos = pos.add(j1, k1, l1);
                         IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos))
-                        {
+                        if (iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos)) {
                             iblockstate.getBlock().beginLeavesDecay(iblockstate, worldIn, blockpos);
                         }
                     }
@@ -171,61 +140,54 @@ public class BlockBambooLog extends Block implements IOreDictionaryEntry, IGrowa
         }
     }
 
-	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos,
-			IBlockState state) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+        return false;
+    }
 
-	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-    {
+    @Override
+    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
 
-	@Override
-	public String getOreDictionaryName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean hasFireDrops() {
-		return true;
-	}
-	@Override
-	public List<ItemStack> addFireDrops(List<ItemStack> drops,Random random) {
-
-		if(random.nextBoolean()){
-			drops.add(new ItemStack(ItemRegistry.ash));
-		}else{
-			drops.add(new ItemStack(ItemRegistry.bamboo_charcoal));
-		}
-    	
-    	return drops;
-	}
-	
-	public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState().withProperty(LEAVES, Boolean.valueOf(meta == 1));
+    @Override
+    public String getOreDictionaryName() {
+        // TODO Auto-generated method stub
+        return null;
     }
-    
+
+    @Override
+    public boolean hasFireDrops() {
+        return true;
+    }
+
+    @Override
+    public List<ItemStack> addFireDrops(List<ItemStack> drops, Random random) {
+        if (random.nextBoolean()) {
+            drops.add(new ItemStack(ItemRegistry.ash));
+        } else {
+            drops.add(new ItemStack(ItemRegistry.bamboo_charcoal));
+        }
+        return drops;
+    }
+
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(LEAVES, meta == 1);
+    }
+
     /**
      * Convert the BlockState into the correct metadata value
      */
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(LEAVES)==true?1:0;
-    }
-    
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {LEAVES});
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(LEAVES) ? 1 : 0;
     }
 
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, LEAVES);
+    }
 }
