@@ -1,14 +1,13 @@
 package panda.gotwood.util;
 
+import net.minecraft.item.ItemStack;
+
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.item.ItemStack;
-
 public interface IFireDrops {
 
-	boolean hasFireDrops();
+    boolean hasFireDrops();
 
-	List<ItemStack> addFireDrops(List<ItemStack> stacks, Random random);
-
+    List<ItemStack> addFireDrops(List<ItemStack> stacks, Random random);
 }
